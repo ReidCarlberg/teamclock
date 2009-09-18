@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.calendar.TcCalendar" table="fstxcalendar">
+    <id name="id" 
+    	column="calId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+	<property name="ownerKey"
+		column="calOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+				
+	<property name="username"
+		column="calUsername"
+		type="string"
+		length="50"
+		not-null="true"
+		unique="false" />
+		
+	<property name="startDate"
+		column="calStartDate"
+		type="java.util.Date"
+		not-null="true"
+		unique="false" />
+		
+	<property name="endDate"
+		column="calEndDate"
+		type="java.util.Date"
+		not-null="true"
+		unique="false" />
+		
+	<property name="projectId"
+		column="calProjectId"
+		type="java.lang.Long"
+		not-null="false"
+		unique="false" />
+		
+	<property name="publicViewable"
+		column="calPublic"
+		type="boolean"
+		not-null="true"
+		unique="false" />
+		
+	<property name="description"
+		column="calDescription"
+		type="string"
+		length="65536"
+		not-null="false"
+		unique="false" />
+
+	<property name="complete"
+		column="calComplete"
+		type="java.lang.Boolean"
+		not-null="false" />		
+
+	<property name="type"
+		column="calTypeLuId"
+		type="java.lang.Long"
+		not-null="false"
+		unique="false" />
+		
+  </class>
+
+</hibernate-mapping>

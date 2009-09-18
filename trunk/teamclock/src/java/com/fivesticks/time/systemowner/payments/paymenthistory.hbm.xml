@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.systemowner.payments.PaymentHistory" table="paymenthistory">
+
+    <id name="id" 
+    	column="payhId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+		
+	<property name="ownerKey"
+		column="payhOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="true" />
+		
+	<property name="date" column="payhDate" type="java.util.Date" not-null="true" />
+
+	<property name="methodName" column="payhMethodName" type="string" length="25" not-null="true" unique="false" />
+	
+	<property name="transactionId" column="payhTransactionId" type="string" length="25" not-null="true" unique="false" />
+	
+	<property name="cvv2" column="payhCvv2" type="string" length="10" not-null="true" unique="false" />
+			
+	<property name="avs" column="payhAvs" type="string" length="10" not-null="true" unique="false" />
+
+	<property name="amount" column="payhAmount" type="java.lang.Double" not-null="true" />
+
+</class>
+
+</hibernate-mapping>

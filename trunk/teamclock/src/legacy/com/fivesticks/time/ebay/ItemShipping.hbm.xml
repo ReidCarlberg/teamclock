@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.ebay.ItemShipping" table="ebayitemshipping">
+    <id name="id" 
+    	column="eisId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+	<property name="ownerKey"
+		column="eisOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+		
+	<property name="ebayId"
+		column="eisItemId"
+		type="java.lang.Long"
+		not-null="false"
+		unique="false" />
+
+	<property name="length"
+		column="eisLength"
+		type="java.lang.Integer"
+		not-null="false"
+		unique="false" />
+	
+	<property name="width"
+		column="eisWidth"
+		type="java.lang.Integer"
+		not-null="false"
+		unique="false" />
+
+	<property name="height"
+		column="eisHeight"
+		type="java.lang.Integer"
+		not-null="false"
+		unique="false" />
+
+	<property name="boxId"
+		column="eisBoxId"
+		type="java.lang.Long"
+		not-null="false"
+		unique="false" />
+				
+	<property name="carrier"
+		column="eisCarrier"
+		type="java.lang.String"
+		length="20"		
+		not-null="false"
+		unique="false" />
+		
+	<property name="tracking"
+		column="eisTracking"
+		type="java.lang.String"
+		length="50"		
+		not-null="false"
+		unique="false" />
+
+	<property name="weight"
+		column="eisWeight"
+		type="java.lang.Double"
+		not-null="false"
+		unique="false" />
+		
+	<property name="handlingCharge"
+		column="eisHandlingCharge"
+		type="java.lang.Double"
+		not-null="false"
+		unique="false" />
+
+	<property name="shippingCost"
+		column="eisShippingCost"
+		type="java.lang.Double"
+		not-null="false"
+		unique="false" />
+		
+  </class>
+
+</hibernate-mapping>

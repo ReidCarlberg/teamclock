@@ -1,0 +1,214 @@
+
+#dashboard, #dashboard td, #dashboard th, #dashboard input, #dashboard select {
+	font-size: 10pt;
+	color: #333333;
+	vertical-align: top;
+}
+
+#dashboard {
+	padding: 0px;
+	margin: 0px;
+}
+
+#rightColumn p {
+	margin: 0px;
+	padding: 5px 5px 10px 0px;
+}
+
+#rightColumn .activityProjectKey, #rightColumn p.activityProjectKey {
+	color: #333;
+	font-weight: bold;
+}
+
+
+
+#rightColumn .header {
+	font-size: 8pt;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#rightColumn .calendarLabel {
+	font-size: 8pt;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#rightColumn ul {
+  list-style:outside;
+  list-style-type:none;
+  margin: 0;
+  padding: 0;
+}
+
+#rightColumn li {
+  font-size: 9px;
+  margin: 0;
+  padding: 0;
+}
+
+#dashboardToDo {
+	background-color: #fff;
+}
+
+#dashboardToDoDetail, #dashboardActivityDetail {
+	position: absolute;
+	display: none;
+	border: 2px solid #000000;
+	background-color: #ffff99;
+	top: 175px;
+	width: 500px;	
+	left: 50%;
+	margin-left: -200px;
+}
+
+
+#dashboardToDoDetail p, #dashboardToDoDetail td, #dashboardActivityDetail p, #dashboardActivityDetail td {
+	font-size: 12px;	
+}
+
+.dashboardToDo_Status {
+	background-color: #FFFF00;
+}
+
+.dashboardToDo_Alternate {
+	border-bottom: 1px solid #eee;
+}
+
+.dashboardToDo_Main {
+	background-color: #ffffff;
+}
+
+.dashboardToDo_Main_MouseOver {
+	background-color: #ffffcc;
+}
+
+
+#dashboard h3 {
+	MARGIN-BOTTOM: 0;
+	COLOR: #333333;
+}
+
+#dashboard th {
+	text-align: left;
+}
+
+ 
+.dashboardToDo_MainDetailDiv {
+	display:none;
+	margin-left:20px;
+	border-style:solid;
+	border-width:1px;
+	position:absolute;
+	z-index:3;
+	background-color:white;
+	width:350px;
+		
+}
+
+#addToDoForm , #todoUserForm {
+	margin: 0px;
+	padding: 0px;
+}
+
+#todoTable th, #todoTable td, #activityTable th, #activityTable td {
+	margin: 0px;
+	padding: 3px 0px 3px 0px;
+}
+
+
+#todoProjectContext {
+	width: 98%;
+	margin-top: 2%;
+	border: 3px solid #ff0;
+	background-color: #ffc;
+}
+
+#todoProjectContext table {
+	border-collapse: collapse;
+}
+
+#contextActivityListTable th, #contextActivityListTable  td {
+	text-align: left;
+	border-bottom: 2px solid #fff;
+	margin: 0px;
+	padding: 2px 0px 5px 0px;
+	color: #666;
+	font-size: 10pt;
+}
+
+#contextActivityListTable .dashboardToDo_Main_MouseOver {
+	background-color: #fff;
+}
+
+#delegatedTodoTableBody {
+	width: 98%;
+	margin-top: 1.0em;
+	border: 3px solid #669;
+	background-color: #e8f8f9;
+}
+
+#delegatedTodoTableBody .dashboardToDo_Status {
+	background-color: #b1cef4;
+}
+
+#delegatedTodoTableBody td, #delegatedTodoTableBody th {
+	color: #666;
+}
+
+#delegatedTodoTableBody .dashboardToDo_Main_MouseOver {
+	background-color: #b1cef4;
+}
+
+
+#dashboardAlerts {
+	color: #666;
+	font-size: 9px;
+}
+
+#timeClockStatusDiv {
+	padding: 0px 10px 0px 0px;
+	margin: 0px;
+	float:right;
+}
+
+.project, .nameFirst {
+	font-size: 18px;
+	color: #333;
+}
+
+.customer, .nameLast {
+	font-size: 14px;
+	color: #666;
+}
+
+.email {
+	color: #666;
+}
+
+.altPhone, .customerBalance {
+	font-size: 12px;
+	color: #999;
+}
+
+.choices {
+    background-color: #fff9bf;
+    color: black;
+    border: solid #000000;
+    border-width: 0px 1px 1px 1px;
+    font: 10px arial;
+    display: none;
+	position: absolute;
+	text-align: left;
+}
+
+.selected {
+    background-color: #003366;
+    color: white;
+    border: solid #CCCCCC;
+    border-width: 0px 1px 1px 1px;
+    font: 10px arial;
+    width: 100%;
+    text-align: left;
+}
+

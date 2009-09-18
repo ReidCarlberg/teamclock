@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.ebay.setup.forms.EbayForm" table="ebayforms">
+    <id name="id" 
+    	column="efId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+	<property name="ownerKey"
+		column="efOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+		
+	<property name="type"
+		column="efType"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />	
+
+	<property name="name"
+		column="efName"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />	
+		
+	<property name="form"
+		column="efForm"
+		type="string"
+		length="65536"
+		not-null="false"
+		unique="false" />
+
+	<property name="linebreak"
+		column="efLinebreak"
+		type="string"
+		length="200"
+		not-null="false"
+		unique="false" />
+		
+  </class>
+
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fstx.stdlib.authen.LoginHistory" table="loginhistory">
+  
+    <id name="id" column="lhId" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+	<property name="ownerKey"
+		column="lhOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+		
+	<property name="username" 
+			  column="lhUsername"
+			  type="string" 
+			  length="25"
+			  not-null="true" />
+			  
+	<property name="timestamp" 
+			  column="lhTimestamp" 
+			  type="java.util.Date" 
+			  length="50"  
+			  not-null="true" />
+			  
+	<!--
+			Type will be login or logout.
+	-->		  
+	<property name="type" 
+			  column="lhType" 
+			  type="string" 
+			  length="10" 
+			  not-null="true" />
+			  
+	<property name="location"
+		column="lhLocation"
+		type="string"
+		length="20"
+		not-null="false" />
+		
+
+  </class>
+
+</hibernate-mapping>

@@ -1,0 +1,212 @@
+           <result name="delete-success-ebay" type="chain">
+           		<param name="actionName">auctionListByFilter</param>
+           </result>
+           <result name="delete-success-ebay-image" type="chain">
+           		<param name="actionName">auctionItemDetail</param>
+           </result>
+           <result name="delete-success-ebay-setup-box" type="chain">
+           		<param name="actionName">auctionSetupBoxList</param>
+           </result>
+
+		<!--EBAY -->
+		<action name="auctionHome" class="com.fivesticks.time.ebay.xwork.EbayHomeAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/menu.jsp</result>							
+		</action>
+		
+		<action name="auctionCustomerList" class="com.fivesticks.time.ebay.xwork.ListEbayCustomersAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/customerList.jsp</result>							
+			<result name="success.detail" type="dispatcher">/WEB-INF/jsp/ebay/customerListDetail.jsp</result>				
+		</action>
+		
+		<action name="auctionCustomerStatementPrint" class="com.fivesticks.time.ebay.xwork.EbayCustomerStatementAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/customerStatement.jsp</result>							
+		</action>		
+
+		<action name="auctionCustomerModify" class="com.fivesticks.time.ebay.xwork.ModifyEbayCustomerAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/ebay/modifyCustomer.jsp</result>							
+			<result name="success" type="dispatcher">/auctionCustomerList.action</result>
+			<result name="success.added" type="dispatcher">/auctionListByFilter.action</result>
+		</action>
+
+		<!--RSC 2005-08-17-->
+		<action name="auctionCustomerViewAccount" class="com.fivesticks.time.ebay.xwork.ViewCustomerAccountTransactionsAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/ebay/modifyCustomer.jsp</result>							
+			<result name="success" type="chain">accttxnList</result>
+		</action>		
+		
+		<!--
+		RSC 2005-06-30 Not Using
+		<action name="auctionList" class="com.fivesticks.time.ebay.xwork.ListByCustomerAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/list.jsp</result>							
+		</action>
+		-->
+
+		<action name="auctionModify" class="com.fivesticks.time.ebay.xwork.ModifyAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="error" type="dispatcher">/auctionList.action</result>							
+			<result name="input" type="dispatcher">/WEB-INF/jsp/ebay/modify.jsp</result>							
+			<result name="success" type="dispatcher">/auctionListByFilter.action</result>							
+			<result name="success.detail" type="dispatcher">/auctionItemDetail.action</result>
+		</action>
+
+		<action name="auctionItemDetail" class="com.fivesticks.time.ebay.xwork.EbayItemViewDetailAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/auctionList.action</result>							
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/itemSummaryPage.jsp</result>							
+		</action>
+		
+		<action name="auctionItemImageSetCaption" class="com.fivesticks.time.ebay.xwork.ItemImageSetCaptionAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/auctionItemDetail.action</result>							
+		</action>		
+
+		<action name="auctionItemDetailToggleView" class="com.fivesticks.time.ebay.xwork.EbayItemViewDetailToggleStandardViewAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/auctionItemDetail.action</result>							
+		</action>
+		
+		<!-- RSC 2005-08-17
+		<action name="auctionListAll" class="com.fivesticks.time.ebay.xwork.ListAuctionItemsAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/itemList.jsp</result>							
+		</action>
+		-->
+		
+		<action name="auctionUpdateFilter" class="com.fivesticks.time.ebay.xwork.EbayItemUpdateListContextAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">auctionListByFilter.action</result>							
+		</action>		
+
+		<action name="auctionUpdateStatus" class="com.fivesticks.time.ebay.xwork.EbayItemUpdateStatusAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">auctionListByFilter.action</result>							
+		</action>		
+				
+		<action name="auctionListByFilter" class="com.fivesticks.time.ebay.xwork.EbayItemListByContextAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/itemListByContext.jsp</result>							
+		</action>		
+		
+		<action name="auctionListByFilterPrint" class="com.fivesticks.time.ebay.xwork.EbayItemListByContextAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/printableItemListByContext.jsp</result>							
+		</action>		
+		
+		<action name="auctionItemShippingModify" class="com.fivesticks.time.ebay.xwork.ItemShippingModifyAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/ebay/itemShippingModify.jsp</result>														
+			<result name="success" type="dispatcher">/auctionItemDetail.action</result>									
+		</action>
+		
+		<action name="auctionImageUpload" class="com.fivesticks.time.ebay.xwork.EbayImageUploadAction">
+			<interceptor-ref name="fivesticksUploadStack" />
+			<!--
+			<interceptor-ref name="execAndWait"/>
+			-->
+			<result name="input" type="dispatcher">/WEB-INF/jsp/ebay/upload.jsp</result>							
+			<result name="success" type="dispatcher">/auctionItemDetail.action</result>									
+		    <result name="wait">/WEB-INF/jsp/ebay/upload-wait.jsp</result>
+		</action>
+				
+		<action name="auctionImageDelete" class="com.fivesticks.time.ebay.xwork.EbayImageDeleteAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/auctionItemDetail.action</result>												
+		</action>
+		
+		<action name="auctionImageEarlier" class="com.fivesticks.time.ebay.xwork.ImageSequenceEarlierAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/auctionItemDetail.action</result>												
+		</action>		
+
+		<action name="auctionImageLater" class="com.fivesticks.time.ebay.xwork.ImageSequenceLaterAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/auctionItemDetail.action</result>												
+		</action>		
+
+		<action name="auctionForm" class="com.fivesticks.time.ebay.xwork.ShowFormAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/auctionItemDetail.action</result>												
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/forms.jsp</result>															
+		</action>		
+
+		<action name="auctionItemByStatus" class="com.fivesticks.time.ebay.xwork.EbayListItemByStatusAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/auctionHome.action</result>												
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/customerItems.jsp</result>															
+		</action>	
+		
+		<action name="auctionPostItemsToAccount" class="com.fivesticks.time.ebay.xwork.PostAndMarkItemsByContextAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">auctionListByFilter.action</result>							
+		</action>			
+
+		<action name="auctionMarkPostedItemsClosed" class="com.fivesticks.time.ebay.xwork.MarkItemsClosedByContextAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">auctionListByFilter.action</result>							
+		</action>		
+		
+		<!-- EBAY SETUP COMMISSION-->
+		<action name="auctionSetupCommissionList" class="com.fivesticks.time.ebay.setup.commission.xwork.ListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/auctionHome.action</result>												
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/setup/commissionList.jsp</result>															
+		</action>		
+		
+		<action name="auctionSetupCommissionModify" class="com.fivesticks.time.ebay.setup.commission.xwork.ModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="error" type="dispatcher">/auctionSetupBoxList.action</result>												
+			<result name="input" type="dispatcher">/WEB-INF/jsp/ebay/setup/commissionModify.jsp</result>															
+			<result name="success" type="dispatcher">/auctionSetupCommissionList.action</result>															
+		</action>
+		
+		<!-- EBAY SETUP BOXES-->
+		<action name="auctionSetupBoxList" class="com.fivesticks.time.ebay.setup.boxes.xwork.BoxListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/auctionHome.action</result>												
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/setup/boxList.jsp</result>															
+		</action>		
+		
+		<action name="auctionSetupBoxModify" class="com.fivesticks.time.ebay.setup.boxes.xwork.BoxModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="error" type="dispatcher">/auctionSetupBoxList.action</result>												
+			<result name="input" type="dispatcher">/WEB-INF/jsp/ebay/setup/boxModify.jsp</result>															
+			<result name="success" type="dispatcher">/auctionSetupBoxList.action</result>															
+		</action>
+
+		<!-- EBAY SETUP FORMS-->
+		<action name="auctionSetupFormsList" class="com.fivesticks.time.ebay.setup.forms.xwork.ListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/auctionHome.action</result>												
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/setup/formList.jsp</result>															
+		</action>		
+		
+		<action name="auctionSetupFormModify" class="com.fivesticks.time.ebay.setup.forms.xwork.ModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="error" type="dispatcher">/auctionSetupBoxList.action</result>												
+			<result name="input" type="dispatcher">/WEB-INF/jsp/ebay/setup/formModify.jsp</result>															
+			<result name="success" type="dispatcher">/auctionSetupFormsList.action</result>															
+		</action>			
+		
+		<action name="auctionListingForm" class="com.fivesticks.time.ebay.xwork.AuctionMergeListingAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/auctionHome.action</result>												
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/mergedListing.jsp</result>															
+		</action>	
+		
+		<action name="auctionItemFormPrint" class="com.fivesticks.time.ebay.xwork.AuctionMergeItemAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/auctionHome.action</result>												
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/mergedItem.jsp</result>															
+		</action>	
+		
+		<action name="auctionCustomerFormPrint" class="com.fivesticks.time.ebay.xwork.AuctionMergeCustomerAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/auctionHome.action</result>												
+			<result name="success" type="dispatcher">/WEB-INF/jsp/ebay/mergedItem.jsp</result>															
+		</action>	

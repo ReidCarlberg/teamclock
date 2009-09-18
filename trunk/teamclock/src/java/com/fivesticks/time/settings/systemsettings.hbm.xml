@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.settings.SystemSettings" table="fstxtimesettings">
+    <id name="id" 
+    	column="setId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+	<property name="ownerKey"
+		column="setOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+				
+	<property name="settingKey"
+		column="setKey"
+		type="string"
+		length="50"
+		not-null="true"
+		unique="false" />
+		
+	<property name="setting"
+		column="setSetting"
+		type="string"
+		length="65536"
+		not-null="false"
+		unique="false" />
+	
+		
+  </class>
+
+</hibernate-mapping>

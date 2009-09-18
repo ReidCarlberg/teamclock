@@ -1,0 +1,245 @@
+
+
+				<!--EBAY-->
+				<!--
+				<value>com/fivesticks/time/ebay/EbayItem.hbm.xml</value>
+				<value>com/fivesticks/time/ebay/EbayItemImage.hbm.xml</value>
+				<value>com/fivesticks/time/ebay/ItemShipping.hbm.xml</value>
+				<value>com/fivesticks/time/ebay/setup/boxes/Boxes.hbm.xml</value>
+				<value>com/fivesticks/time/ebay/setup/forms/EbayForms.hbm.xml</value>				
+				<value>com/fivesticks/time/ebay/setup/commission/simplecommission.hbm.xml</value>	
+				-->
+
+	<!-- EBAY -->
+	<!--updating... 2005-08-10 RSC 
+	<bean id="ebayItemDao" parent="abstractDao" 
+		class="com.fivesticks.time.ebay.EbayItemDAOImpl" />
+		-->
+	<bean id="ebayItemDao" parent="abstractGenericDao" singleton="false" >
+		<property name="criteriaBuilder">
+			<bean class="com.fivesticks.time.ebay.EbayItemCriteriaBuilder" 
+				singleton="false"/>
+		</property>
+	</bean>
+	
+	<bean id="ebayItemServiceDelegate" parent="abstractOwnerKeyValidator" 
+		class="com.fivesticks.time.ebay.EbayItemServiceDelegateImpl" singleton="false">
+		<property name="dao">
+			<ref bean="ebayItemDao" />
+		</property>
+	</bean>	
+	
+	<bean id="ebayItemImageDAO" parent="abstractDao" 
+		class="com.fivesticks.time.ebay.EbayItemImageDAOImpl" />
+	
+	<bean id="ebayItemImageServiceDelegate" parent="abstractOwnerKeyValidator" class="com.fivesticks.time.ebay.EbayItemImageServiceDelegateImpl" singleton="false">
+		<property name="ebayItemImageDAOImpl">
+			<ref bean="ebayItemImageDAO" />
+		</property>
+	</bean>		
+	
+	<bean id="ebayItemShippingDAO" parent="abstractDao"
+		class="com.fivesticks.time.ebay.ItemShippingDAOImpl" />
+		
+	<bean id="ebayItemShippingServiceDelegate" parent="abstractOwnerKeyValidator"
+		class="com.fivesticks.time.ebay.ItemShippingServiceDelegateImpl" >
+		<property name="itemShippingDAO">
+			<ref bean="ebayItemShippingDAO" />
+		</property>
+	</bean>
+	
+	<!-- EBAY SETUP -->
+	<!-- BOXES -->
+	<!-- Reid 2005-06-20
+	<bean id="ebaySetupBoxDao" parent="abstractDao" 
+		class="com.fivesticks.time.ebay.setup.boxes.BoxDAOImpl" />
+	-->
+	
+	<bean id="ebaySetupBoxDao" parent="abstractGenericDao" singleton="false" >
+		<property name="criteriaBuilder">
+			<bean class="com.fivesticks.time.ebay.setup.boxes.BoxCriteriaBuilder" 
+				singleton="false"/>
+		</property>
+	</bean>
+	
+	<bean id="ebaySetupBoxServiceDelegate" parent="abstractOwnerKeyValidator" 
+		class="com.fivesticks.time.ebay.setup.boxes.BoxServiceDelegateImpl" >
+		<property name="dao">
+			<ref bean="ebaySetupBoxDao" />
+		</property>	
+	</bean>
+	
+	<!-- FORMS -->
+	<bean id="ebaySetupFormsDao" parent="abstractGenericDao" singleton="false" >
+		<property name="criteriaBuilder">
+			<bean class="com.fivesticks.time.ebay.setup.forms.EbayFormCriteriaBuilder" 
+				singleton="false"/>
+		</property>
+	</bean>
+	
+	<bean id="ebayFormServiceDelegate" parent="abstractOwnerKeyValidator" 
+		class="com.fivesticks.time.ebay.setup.forms.EbayFormServiceDelegateImpl" >
+		<property name="dao">
+			<ref bean="ebaySetupFormsDao" />
+		</property>	
+	</bean>	
+
+	<!-- COMMISSION -->
+	<bean id="commissionDao" parent="abstractGenericDao" singleton="false" >
+		<property name="criteriaBuilder">
+			<bean class="com.fivesticks.time.ebay.setup.commission.SimpleCommissionCriteriaBuilder" 
+				singleton="false"/>
+		</property>
+	</bean>
+	
+	<bean id="simpleCommissionServiceDelegate" parent="abstractOwnerKeyValidator" 
+		class="com.fivesticks.time.ebay.setup.commission.SimpleCommissionServiceDelegateImpl" >
+		<property name="dao">
+			<ref bean="commissionDao" />
+		</property>	
+	</bean>		
+
+
+<!--
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	  <property name="triggers">
+	    <list>
+	     <ref local="simpleTrigger"/> 
+	    </list>
+	  </property>
+	</bean>
+
+	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+	  <property name="jobDetail">
+	     
+	    <ref bean="methodInvokingJobDetail"/>
+	  </property>
+	  <property name="startDelay">	   
+	    <value>10000</value>
+	  </property>
+	  <property name="repeatInterval">	  
+	    <value>50000</value>
+	  </property>
+	</bean>
+
+	
+	<bean id="methodInvokingJobDetail" 
+	  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject">
+	    	<ref bean="queuedMessageSender"/>
+	    </property>
+	    <property name="targetMethod">
+	    	<value>execute</value>
+    	</property>
+	</bean>		
+	-->
+
+	<!-- RSC 2005-08-20 Vestigal 
+	<bean id="externalUserDAO" parent="abstractDao" 
+		class="com.fivesticks.time.externaluser.ExternalUserDAOImpl" singleton="false" />
+		-->
+	
+
+	<!--
+	RSC 2005-07-01
+	<bean id="employeeAccountTransactionServiceDelegate" 
+			class="com.fivesticks.time.employee.util.EmployeeAccountTransactionServiceDelegateImpl" 
+			singleton="false">
+		<property name="accountTransactionDAO">
+			<ref bean="accountTransactionDAO" />
+		</property>
+		<property name="transactionManager" >
+			<ref bean="myTransactionManager" />
+		</property>
+		<property name="ownerKeyValidatorAndDecorator">
+			<ref bean="ownerKeyValidatorAndDecorator" />
+		</property>
+	</bean>	
+	-->
+
+	<!--
+	RSC 2005-07-01 Refactored Out	
+	<bean id="customerAccountTransactionServiceDelegate" 
+			class="com.fivesticks.time.customer.util.CustomerAccountTransactionServiceDelegateImpl" 
+			singleton="false">
+		<property name="accountTransactionDAO">
+			<ref bean="accountTransactionDAO" />
+		</property>
+		<property name="transactionManager" >
+			<ref bean="myTransactionManager" />
+		</property>
+		<property name="ownerKeyValidatorAndDecorator">
+			<ref bean="ownerKeyValidatorAndDecorator" />
+		</property>
+	</bean>
+	-->
+
+	<!--ACCOUNT TRANSACTIONS-->
+	<!--
+		RSC 2005-07-17 Replaced
+		-->
+	<!--
+	<bean id="accountTransactionDAO" parent="abstractDao" 
+		class="com.fivesticks.time.account.AccountTransactionDAOImpl" singleton="false" />
+	-->
+
+    
+	<!--
+		RSC 2005-08-20 vestigal 
+	<bean id="objectCommentDAO" parent="abstractDao"
+		class="com.fivesticks.time.object.comments.ObjectCommentDAOImpl" singleton="false" />
+		-->
+
+
+	<!-- RSC 2005-08-20 vestigal
+	<bean id="objectMetricDAO" parent="abstractDao"
+		class="com.fivesticks.time.object.metrics.ObjectMetricDAOImpl" singleton="false" />
+		-->
+
+	<!--STDLIB GROUP-->
+	<!--
+	<bean id="userGroupDAO" class="com.fstx.stdlib.authen.users.UserGroupDAOImpl" singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="mySessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="userGroupBD" class="com.fstx.stdlib.authen.users.UserGroupBDImpl" singleton="false" >
+		<property name="groupMembershipDAO">
+			<ref bean="groupMembershipDAO" />
+		</property>
+		<property name="userGroupDAO" >
+			<ref bean="userGroupDAO" />
+		</property>
+	</bean>
+	-->
+
+	<!--STDLIB GROUP MEMBERSHIP-->
+	<!--
+	<bean id="groupMembershipDAO" class="com.fstx.stdlib.authen.users.GroupMembershipDAOImpl" singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="mySessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="groupMembershipServiceDelegate" class="com.fstx.stdlib.authen.users.GroupMembershipServiceDelegateImpl" singleton="false">
+		<property name="groupMembershipDAO">
+			<ref bean="groupMembershipDAO" />
+		</property>
+	</bean>	
+	-->
+
+	<!--STDLIB GROUP RIGHTS-->
+	<!--
+	<bean id="groupRightsDAO" class="com.fstx.stdlib.authen.users.GroupRightsDAOImpl" singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="mySessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="groupRightBD" class="com.fstx.stdlib.authen.users.GroupRightBDImpl" singleton="false" >
+		<property name="groupRightsDAO">
+			<ref bean="groupRightsDAO" />
+		</property>
+	</bean>
+	-->

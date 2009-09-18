@@ -1,0 +1,71 @@
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" 
+	"http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+	 
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>form</short-name>
+	<tag>
+		<name>systemname</name>
+		<tag-class>com.fivesticks.time.taglibs.SettingsSystemNameTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
+		<name>logourl</name>
+		<tag-class>com.fivesticks.time.taglibs.SettingsLogoURLTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>	
+	<tag>
+		<name>username</name>
+		<tag-class>com.fivesticks.time.taglibs.SessionContextUserNameTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>		
+	<tag>
+		<name>validSession</name>
+		<tag-class>com.fivesticks.time.taglibs.SessionContextIsValidTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>		
+	<tag>
+		<name>invalidSession</name>
+		<tag-class>com.fivesticks.time.taglibs.SessionContextIsNotValidTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>				
+	<tag>
+		<name>rightAdmin</name>
+		<tag-class>com.fivesticks.time.taglibs.RightsGeneralAdminMenuTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>				
+	<tag>
+		<name>rightSystemAdmin</name>
+		<tag-class>com.fivesticks.time.taglibs.RightsSystemAdminMenuTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>				
+	<tag>
+		<name>userIsOwner</name>
+		<tag-class>com.fivesticks.time.taglibs.UserIsSystemOwnerTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>		
+	<tag>
+		<name>userIsPrivileged</name>
+		<tag-class>com.fivesticks.time.taglibs.UserIsPrivilegedTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>	
+	<tag>
+		<name>userIsPrivilegedOrOwner</name>
+		<tag-class>com.fivesticks.time.taglibs.UserIsPrivilegedOrOwnerTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>			
+	<tag>
+		<name>userIsNotTimeclockOnly</name>
+		<tag-class>com.fivesticks.time.taglibs.UserIsNotTimeclockOnlyTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>		
+	<tag>
+		<name>timeclockStatusAndPunch</name>
+		<tag-class>com.fivesticks.time.taglibs.TimeclockStatusAndNextPunchTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>		
+			
+
+
+</taglib>

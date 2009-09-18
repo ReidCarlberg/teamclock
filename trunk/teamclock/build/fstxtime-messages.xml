@@ -1,0 +1,452 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN/EN" "http://www.springframework.org/dtd/spring-beans.dtd" >
+<beans>
+
+	<bean id="registrationNotify" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+		<property name="fromName">
+			<value>TeamClock.com Service</value>
+		</property>	
+		<property name="fromEmail">
+			<value>service@teamclock.com</value>
+		</property>	
+		<property name="subject">
+			<value>TeamClock.com Registration Alert</value>
+		</property>			
+		<property name="message">
+			<value>
+Greetings!  A new user has registered for TeamClock.
+
+{0}
+
+   			</value>
+		</property>	
+		<property name="modifiedByUser">
+			<value>reid</value>
+		</property>			
+		<property name="ownerKey">
+			<value>CXZASTPKGU</value>
+		</property>			
+	</bean>
+	
+	<bean id="emailVerification" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+		<property name="fromName">
+			<value>TeamClock.com Service</value>
+		</property>	
+		<property name="fromEmail">
+			<value>service@teamclock.com</value>
+		</property>	
+		<property name="subject">
+			<value>TeamClock.com Account Verification</value>
+		</property>			
+		<property name="message">
+			<value>
+Greetings!
+
+Thank you for trying TeamClock.com.  
+
+Please verify your email address by clicking this link:
+
+https://my.teamclock.com/activate.action?activate={0}
+
+Username: {1}
+
+Once you follow this link, you'll have the opportunity to enter a password
+and your timeclock preferences.
+
+If you have questions or difficulties, please reply to this email.
+
+TeamClock.com Service
+service@teamclock.com
+   			</value>
+		</property>	
+		<property name="modifiedByUser">
+			<value>reid</value>
+		</property>			
+		<property name="ownerKey">
+			<value>CXZASTPKGU</value>
+		</property>				
+	</bean>	
+
+	<bean id="otherInterests" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+		<property name="fromName">
+			<value>TeamClock.com Service</value>
+		</property>	
+		<property name="fromEmail">
+			<value>service@teamclock.com</value>
+		</property>	
+		<property name="subject">
+			<value>TeamClock.com Other Interests Alert</value>
+		</property>			
+		<property name="message">
+			<value>
+A user has other interests that we should contact them about.
+
+{0}
+
+   			</value>
+		</property>	
+		<property name="modifiedByUser">
+			<value>reid</value>
+		</property>			
+		<property name="ownerKey">
+			<value>CXZASTPKGU</value>
+		</property>			
+	</bean>	
+	
+	<bean id="activationFollowUp" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+		<property name="fromName">
+			<value>TeamClock.com Service</value>
+		</property>	
+		<property name="fromEmail">
+			<value>service@teamclock.com</value>
+		</property>	
+		<property name="subject">
+			<value>TeamClock.com Opinion Survey</value>
+		</property>				
+		<property name="message">
+			<value>
+Hello again!
+
+Thank you for activating TeamClock.com.
+
+I am the main designer of the software, and I want to 
+know what you think of it.  Is it useful?  How could I 
+make it better? Please take a moment and let me know.  
+
+Please visit:
+
+http://www.teamclock.com/userSurvey.php?key={0}
+
+Thanks again.  I appreciate both your interest and your 
+input.  If you have immediate concerns, please reply to
+this email.
+
+Best regards,
+
+Reid Carlberg
+Five Sticks, Inc.
+rsc1@fivesticks.com
+
+
+			</value>
+		</property>	
+		<property name="modifiedByUser">
+			<value>reid</value>
+		</property>			
+		<property name="ownerKey">
+			<value>CXZASTPKGU</value>
+		</property>				
+	</bean>	
+	
+	<bean id="passwordHelp" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+		<property name="fromName">
+			<value>TeamClock Service</value>
+		</property>	
+		<property name="fromEmail">
+			<value>service@teamclock.com</value>
+		</property>	
+		<property name="subject">
+			<value>TeamClock.com Password Help</value>
+		</property>				
+		<property name="message">
+			<value>
+Greetings!
+
+Someone has requested we reset and send you your password.  
+
+It is: 
+
+{0}
+
+You can login at: https://my.teamclock.com 
+
+Thank you! 
+
+service@teamclock.com
+			</value>
+		</property>	
+		<property name="modifiedByUser">
+			<value>reid</value>
+		</property>			
+		<property name="ownerKey">
+			<value>CXZASTPKGU</value>
+		</property>				
+	</bean>		
+
+	<bean id="passwordHelpSendLink" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+		<property name="fromName">
+			<value>TeamCLock Service</value>
+		</property>	
+		<property name="fromEmail">
+			<value>service@teamclock.com</value>
+		</property>	
+		<property name="subject">
+			<value>TeamClock.com Password Help</value>
+		</property>				
+		<property name="message">
+			<value>
+Greetings!
+
+Someone has requested we send you password help.  If it wasn't you, 
+you can safely ignore this message.
+
+Click on the following link to start the password reset process.
+
+https://my.teamclock.com/passwordResetActivate.action?key={0}
+
+Note this link will fail to work if you request another password reset link.
+
+You can login at: https://my.teamclock.com
+
+Thank you! 
+
+service@teamclock.com
+			</value>
+		</property>	
+		<property name="modifiedByUser">
+			<value>reid</value>
+		</property>			
+		<property name="ownerKey">
+			<value>CXZASTPKGU</value>
+		</property>				
+	</bean>		
+
+	<bean id="systemError" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+		<property name="fromName">
+			<value>TeamCLock Service</value>
+		</property>	
+		<property name="fromEmail">
+			<value>service@teamclock.com</value>
+		</property>	
+		<property name="subject">
+			<value>TeamClock.com System Error</value>
+		</property>				
+		<property name="message">
+			<value>
+New System Error!
+
+{0}
+
+			</value>
+		</property>	
+		<property name="modifiedByUser">
+			<value>reid</value>
+		</property>			
+		<property name="ownerKey">
+			<value>CXZASTPKGU</value>
+		</property>				
+	</bean>		
+
+
+	<bean id="newCustomerAssociation" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+		<property name="fromName">
+			<value>TeamClock.com Service</value>
+		</property>	
+		<property name="fromEmail">
+			<value>service@teamclock.com</value>
+		</property>	
+		<property name="subject">
+			<value>TeamClock.com Login Information</value>
+		</property>				
+		<property name="message">
+			<value>
+Greetings!
+
+You have been authorized to access customer information
+with the following username and password:
+
+Customer: {0}
+Username: {1}
+Password: {2}
+
+You can login at: 
+
+https://my.teamclock.com/login.action?target={3}
+
+Thank you! 
+
+service@teamclock.com
+			</value>
+		</property>	
+		<property name="modifiedByUser">
+			<value>reid</value>
+		</property>			
+		<property name="ownerKey">
+			<value>CXZASTPKGU</value>
+		</property>				
+	</bean>		
+	
+	<bean id="newCommentNotification" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+		<property name="fromName">
+			<value>TeamClock.com Service</value>
+		</property>	
+		<property name="fromEmail">
+			<value>service@teamclock.com</value>
+		</property>	
+		<property name="subject">
+			<value>[{0}] Commented</value>
+		</property>				
+		<property name="message">
+			<value>
+A new comment has been added to a to do you are associated with.
+
+View the original by logging on to your account at: https://my.teamclock.com/login.action?target={0}
+
+Project: {1}
+
+Original Detail: 
+--
+{2}
+--
+
+Comment history: 
+--
+{3}
+
+
+			</value>
+		</property>	
+		<property name="modifiedByUser">
+			<value>reid</value>
+		</property>			
+		<property name="ownerKey">
+			<value>CXZASTPKGU</value>
+		</property>				
+	</bean>			
+	
+	
+	<bean id="fwucBalanceNotification" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+		<property name="fromName">
+			<value>FastWebUpdates.com</value>
+		</property>	
+		<property name="fromEmail">
+			<value>service@fastwebupdates.com</value>
+		</property>	
+		<property name="subject">
+			<value>FastWebUpdates.com Prepaid Website Maintenance Balance</value>
+		</property>				
+		<property name="message">
+			<value>
+Hello!
+
+Thank you for choosing FastWebUpdates.com as your website
+maintenance service provider.  This is a balance update.
+
+Your current balance with us: {0} (minutes)
+
+This is an automatic message, but replying to it will
+reach a human.  Or you can always call us at 708-386-4200.
+
+Regards,
+
+The FastWebUpdates.com Team
+service@fastwebupdates.com
+
+Message sent to: {1}
+ 
+--
+
+P.S. We send these balance udpates to keep our customers 
+posted as to their account status.  If you have a non-zero 
+balance, you'll get this about once a week.  If you have a 
+zero balance, you get this about once a month.
+
+P.P.S. If you haven't visited in a while, you can read all
+about us at these fine locations:
+
+* http://FastWebUpdates.com - Expert Website Maintenance at
+an Affordable Price
+
+* http://FiveSticks.com - Custom Software Solutions for 
+Small Business
+
+* http://www.TeamClock.com - Free Employee Time Clock for your 
+Business
+
+			</value>
+		</property>	
+		<property name="modifiedByUser">
+			<value>reid</value>
+		</property>			
+		<property name="ownerKey">
+			<value>CXZASTPKGU</value>
+		</property>				
+	</bean>	
+    
+    
+    
+    
+    
+     <bean id="generalSuperUserMessage" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+        <property name="fromName">
+            <value>Team Clock Service</value>
+        </property> 
+        <property name="fromEmail">
+            <value>service@teamclock.com</value>
+        </property> 
+        <property name="subject">
+            <value>A message from Team Clock</value>
+        </property>             
+        <property name="message">
+            <value></value>
+        </property> 
+        <property name="modifiedByUser">
+            <value>reid</value>
+        </property>         
+        <property name="ownerKey">
+            <value>CXZASTPKGU</value>
+        </property>             
+    </bean>         
+
+     <bean id="customerMessage" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+        <property name="fromName">
+            <value>Team Clock Service</value>
+        </property> 
+        <property name="fromEmail">
+            <value>service@teamclock.com</value>
+        </property> 
+        <property name="subject">
+            <value>A message from Team Clock</value>
+        </property>             
+        <property name="message">
+            <value></value>
+        </property> 
+        <property name="modifiedByUser">
+            <value>reid</value>
+        </property>         
+        <property name="ownerKey">
+            <value>CXZASTPKGU</value>
+        </property>             
+    </bean>  
+    
+
+
+	<bean id="requiredAccountUpdateComplete" class="com.fivesticks.time.system.messages.SystemMessageBean" >
+		<property name="fromName">
+			<value>TeamClock.com Account Service</value>
+		</property>	
+		<property name="fromEmail">
+			<value>service@teamclock.com</value>
+		</property>	
+		<property name="subject">
+			<value>TeamClock.com Account Update Alert</value>
+		</property>			
+		<property name="message">
+			<value>
+
+Required account update complete.
+
+{0}
+
+   			</value>
+		</property>	
+		<property name="modifiedByUser">
+			<value>reid</value>
+		</property>			
+		<property name="ownerKey">
+			<value>CXZASTPKGU</value>
+		</property>			
+	</bean>
+   
+    
+</beans>
+

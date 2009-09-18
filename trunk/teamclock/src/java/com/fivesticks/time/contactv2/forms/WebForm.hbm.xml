@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.contactv2.forms.WebForm" table="webform">
+    
+  	<id name="id" 
+    	column="formId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+    <property name="ownerKey"
+		column="formOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+    <property name="key"
+		column="formKey"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="true" />	
+		
+    <property name="name"
+		column="formName"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />	
+		
+	<property name="assignToUsername"
+		column="formAssignToUsername"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+	<property name="redirectResponse"
+		column="formRedirectResponse"
+		type="boolean"
+		not-null="true"
+		unique="false" />
+				
+    <property name="successURL"
+		column="formSuccessURL"
+		type="string"
+		length="255"
+		not-null="true"
+		unique="false" />		
+		
+    <property name="failureURL"
+		column="formFailureURL"
+		type="string"
+		length="255"
+		not-null="true"
+		unique="false" />				
+
+	<property name="contactClass"
+		column="formContactClass"
+		type="java.lang.Long"
+		not-null="false"
+		unique="false" />		
+		
+	<property name="contactSource"
+		column="formContactSource"
+		type="java.lang.Long"
+		not-null="false"
+		unique="false" />    
+ 											
+	<property name="contactInterest"
+		column="formContactInterest"
+		type="java.lang.Long"
+		not-null="false"
+		unique="false" />
+
+	<property name="sendNotification"
+		column="formSendNotification"
+		type="boolean"
+		not-null="true"
+		unique="false" />
+		
+	<property name="notificationMessageId"
+		column="formNotificationMessageId"
+		type="java.lang.Long"
+		not-null="false"
+		unique="false" />
+		
+	<property name="notificationMessageRecipient"
+		column="formNotificationMessageRecipient"
+		type="string"
+		length="255"
+		not-null="false"
+		unique="false" />
+		
+	<property name="sendThankYouMessage"
+		column="formSendThankYouMessage"
+		type="boolean"
+		not-null="true"
+		unique="false" />		
+
+	<property name="thankYouMessageId"
+		column="formThankYouMessageId"
+		type="java.lang.Long"
+		not-null="false"
+		unique="false" />
+
+	<property name="active"
+		column="formActive"
+		type="boolean"
+		not-null="true"
+		unique="false" />		
+
+
+	<property name="createDate"
+		column="formCreateDate"
+		type="java.util.Date"
+		not-null="false"
+		unique="false" />		
+		
+	<property name="modifyDate"
+		column="formModifyDate"
+		type="java.util.Date"
+		not-null="false"
+		unique="false" />
+
+  </class>
+
+</hibernate-mapping>

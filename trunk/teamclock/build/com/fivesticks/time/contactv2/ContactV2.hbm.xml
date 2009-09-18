@@ -1,0 +1,442 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.contactv2.ContactV2" table="contactv2">
+    
+  	<id name="id" 
+    	column="conId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+    <property name="ownerKey"
+		column="conOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+		
+    
+    <property name="nameTitle"
+		column="conNameTitle"
+		type="string"
+		length="10"
+		not-null="false"
+		unique="false" />	
+		    
+    <property name="nameFirst"
+		column="conNameFirst"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />	 
+
+    <property name="nameMiddle"
+		column="conNameMiddle"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="nameLast"
+		column="conNameLast"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />	 
+		
+    <property name="nameSuffix"
+		column="conNameSuffix"
+		type="string"
+		length="10"
+		not-null="false"
+		unique="false" />			
+		
+    <property name="nameFormatted"
+		column="conNameFormatted"
+		type="string"
+		length="150"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="nameNickname"
+		column="conNameNickname"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />			
+		
+	<property name="birthdayYear"
+		column="conBirthdayYear"
+		type="java.lang.Integer"
+		not-null="false"
+		unique="false" />		
+		
+	<property name="birthdayMonth"
+		column="conBirthdayMonth"
+		type="java.lang.Integer"
+		not-null="false"
+		unique="false" />	
+		
+	<property name="birthdayDay"
+		column="conBirthdayDay"
+		type="java.lang.Integer"
+		not-null="false"
+		unique="false" />							
+
+    <property name="organizationName"
+		column="conOrganizationName"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="organizationTitle"
+		column="conOrganizationTitle"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />
+		
+    <property name="organizationJob"
+		column="conOrganizationJob"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />
+		
+    <property name="organizationDepartment"
+		column="conOrganizationDepartment"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />						
+
+    <property name="homeAddress1"
+		column="conHomeAddress1"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />						
+
+    <property name="homeAddress2"
+		column="conHomeAddress2"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+
+    <property name="homePostalBox"
+		column="conHomePostalBox"
+		type="string"
+		length="10"
+		not-null="false"
+		unique="false" />	
+				
+    <property name="homeCity"
+		column="conHomeCity"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="homeRegion"
+		column="conHomeRegion"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="homePostalCode"
+		column="conHomePostalCode"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="homeCountry"
+		column="conHomeCountry"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />									
+
+
+    <property name="organizationAddress1"
+		column="conOrganizationAddress1"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />						
+
+    <property name="organizationAddress2"
+		column="conOrganizationAddress2"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+
+    <property name="organizationPostalBox"
+		column="conOrganizationPostalBox"
+		type="string"
+		length="10"
+		not-null="false"
+		unique="false" />	
+				
+    <property name="organizationCity"
+		column="conOrganizationCity"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="organizationRegion"
+		column="conOrganizationRegion"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="organizationPostalCode"
+		column="conOrganizationPostalCode"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="organizationCountry"
+		column="conOrganizationCountry"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />	
+
+
+    <property name="postalAddress1"
+		column="conPostalAddress1"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />						
+
+    <property name="postalAddress2"
+		column="conPostalAddress2"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+
+    <property name="postalPostalBox"
+		column="conPostalPostalBox"
+		type="string"
+		length="10"
+		not-null="false"
+		unique="false" />	
+				
+    <property name="postalCity"
+		column="conPostalCity"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="postalRegion"
+		column="conPostalRegion"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="postalPostalCode"
+		column="conPostalPostalCode"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="postalCountry"
+		column="conPostalCountry"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />
+
+    <property name="homePhone"
+		column="conHomePhone"
+		type="string"
+		length="25"
+		not-null="false"
+		unique="false" />
+		
+    <property name="homeFax"
+		column="conHomeFax"
+		type="string"
+		length="25"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="homeEmail"
+		column="conHomeEmail"
+		type="string"
+		length="255"
+		not-null="false"
+		unique="false" />			
+
+    <property name="homeWeb"
+		column="conHomeWeb"
+		type="string"
+		length="255"
+		not-null="false"
+		unique="false" />
+		
+    <property name="organizationPhone"
+		column="conOrganizationPhone"
+		type="string"
+		length="25"
+		not-null="false"
+		unique="false" />		
+		
+    <property name="organizationFax"
+		column="conOrganizationFax"
+		type="string"
+		length="25"
+		not-null="false"
+		unique="false" />			
+
+    <property name="organizationTelex"
+		column="conOrganizationTelex"
+		type="string"
+		length="25"
+		not-null="false"
+		unique="false" />		
+
+    <property name="organizationEmail"
+		column="conOrganizationEmail"
+		type="string"
+		length="255"
+		not-null="false"
+		unique="false" />			
+
+    <property name="organizationWeb"
+		column="conOrganizationWeb"
+		type="string"
+		length="255"
+		not-null="false"
+		unique="false" />
+							  
+    <property name="miscPhoneMobile"
+		column="conMiscPhoneMobile"
+		type="string"
+		length="25"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="miscPhoneCarphone"
+		column="conMiscPhoneCarphone"
+		type="string"
+		length="25"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="miscPhonePager"
+		column="conMiscPhonePager"
+		type="string"
+		length="25"
+		not-null="false"
+		unique="false" />			
+						
+						
+	<property name="miscTimeZone"
+		column="conMiscTimeZone"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />	 
+		
+	<property name="miscDescription"
+		column="conMiscDescription"
+		type="string"
+		length="65536"
+		not-null="false"
+		unique="false" />	   
+		
+	<property name="imAim"
+		column="conImAim"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />	
+		
+	<property name="imIcq"
+		column="conImIcq"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />	
+		
+	<property name="imJabber"
+		column="conImJabber"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />	
+		
+	<property name="imGTalk"
+		column="conImGTalk"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />		
+		
+	<property name="imYahoo"
+		column="conImYahoo"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />
+		
+	<property name="imMsn"
+		column="conImMsn"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />													
+
+	<property name="createDate"
+		column="conCreateDate"
+		type="java.util.Date"
+		not-null="false"
+		unique="false" />		
+		
+	<property name="modifyDate"
+		column="conModifyDate"
+		type="java.util.Date"
+		not-null="false"
+		unique="false" />		
+				
+    <set name="classes" table="contactv2_classes" lazy="false">
+        <key column="conId"/>
+        <many-to-many column="luId" class="com.fivesticks.time.lookups.Lookup"/>
+    </set>
+
+    <set name="interests" table="contactv2_interests" lazy="false">
+        <key column="conId"/>
+        <many-to-many column="luId" class="com.fivesticks.time.lookups.Lookup"/>
+    </set>
+    
+    <set name="sources" table="contactv2_sources" lazy="false">
+        <key column="conId"/>
+        <many-to-many column="luId" class="com.fivesticks.time.lookups.Lookup"/>
+    </set>    
+        		
+  </class>
+
+</hibernate-mapping>

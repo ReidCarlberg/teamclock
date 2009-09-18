@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fstx.stdlib.authen.users.User" table="user">
+    <id name="id" column="userId" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+	<property name="username" 
+		column="userUserName" 
+		type="string" 
+		length="20" 
+		not-null="true" 
+		unique="true" />
+		
+	<property name="password" 
+		column="userPassword" 
+		type="string" 
+		length="20" 
+		not-null="true" />
+		
+	<property name="email" 
+		column="userEmail" 
+		type="string" 
+		length="100" 
+		not-null="true" 
+		unique="true" />
+		
+	<property name="inactive" 
+		column="userInactive" 
+		type="int" 
+		not-null="false" 
+		unique="false" />
+		
+	
+  </class>
+  
+ 
+  
+	<class name="com.fstx.stdlib.authen.users.GroupMembership" table="groupmembership">
+		<id name="id" column="groupMembershipId" type="java.lang.Long" unsaved-value="null">
+		  <generator class="identity"/>
+		</id>
+
+		<property name="groupId" column="groupMembershipGroupId" type="java.lang.Long" not-null="true" />
+		<property name="userId" column="groupMembershipUserId" type="java.lang.Long" not-null="true" />
+	
+  </class>
+  
+  <class name="com.fstx.stdlib.authen.users.GroupRights" table="grouprights">
+    <id name="id" column="groupRightsId" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+	<property name="groupId" column="groupRightGroupId"      type="java.lang.Long" not-null="true" />
+	<property name="rightCode" column="groupRightsRightCode" type="string" not-null="true" />
+	
+  </class>
+
+</hibernate-mapping>

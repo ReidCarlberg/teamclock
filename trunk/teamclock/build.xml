@@ -1,0 +1,234 @@
+<project name="fstxtime" default="localPackage" basedir=".">
+
+	<property name="src" location="src/java" />
+	<property name="src-non-java" location="src/non-java" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	<property name="reports.test" location="test/reports-test" />
+	<property name="reports" location="test/reports-test-html" />
+	<property name="reports.html" location="test/reports-test-html" />	
+	
+	<property name="tomcat.home" location="C:\java\tomcat\apache-tomcat-5.5.12" />
+	
+	<tstamp />
+
+	<path id="classpath">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<!--
+		<fileset dir="WEB-INF/lib-build">
+			<include name="**/*.jar" />
+		</fileset>
+		-->
+	</path>
+
+	<target name="init">
+
+		<delete dir="${build}" />
+		<delete dir="${reports.test}" />
+		<delete dir="${reports}"/>
+		<delete dir="${reports.html}"/>
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${reports.test}" />
+		<mkdir dir="${reports}" />
+		<mkdir dir="${reports.html}" />
+		
+		
+		
+		
+	</target>
+
+	<target name="build.plain" depends="init">
+		<javac srcdir="${src}" destdir="${build}" classpathref="classpath" debug="false" debuglevel="lines,vars,source" />
+	</target>
+		
+	<target name="build" depends="init">
+		<javac srcdir="${src}" destdir="${build}" classpathref="classpath" debug="true" debuglevel="lines,vars,source" />
+	</target>
+
+	<target name="tests" depends="build">
+		<junit printsummary="yes" haltonfailure="no">
+			<classpath>
+				<fileset dir="lib">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement location="${src}" />
+				<pathelement location="${src-non-java}" />
+				<pathelement location="${build}" />
+			</classpath>
+			<formatter type="xml" />
+			<!--
+			<test name="com.fivesticks.time.account.AccountTransactionServiceDelegateImplTest" todir="${reports.test}" />
+			-->
+
+			<batchtest fork="yes" todir="${reports.test}">
+				<fileset dir="${src}">
+					<include name="**/*Test*.java" />
+					<exclude name="**/AbstractTimeTestCase.java" />
+					<exclude name="**/AbstractAPIBasedAccessTestCase.java" />
+					<exclude name="**/*TestFactory.java" />
+					<exclude name="**/AllTests.java" />
+				</fileset>
+			</batchtest>
+			
+	
+		</junit>
+		
+		<junitreport todir="${reports}">
+		  		<fileset dir="${reports.test}">
+		  		  <include name="TEST-*.xml"/>
+		  		</fileset>
+		  	<report format="frames" todir="${reports.html}"/>
+		</junitreport>
+	</target>
+
+	<target name="distwar" depends="build.plain">
+
+		<copy todir="${build}">
+			<fileset dir="${src}">
+				<include name="**/*.hbm.xml" />
+				<include name="**/*.properties" />
+			</fileset>
+		</copy>
+
+		<copy todir="${build}">
+			<fileset dir="src/non-java" />
+		</copy>
+
+		<copy file="${build}/spring.properties.server5" tofile="${build}/spring.properties" overwrite="true" />
+		<copy file="${build}/xwork.xml.standard" tofile="${build}/xwork.xml" overwrite="true" />		
+		<copy file="web/conf/web.xml.server5" tofile="web/conf/web.xml" overwrite="true" />
+		<copy file="web/index/index-standard.jsp" tofile="web/ui/index.jsp" overwrite="true" />
+		<copy file="web/index/miscerror-standard.jsp" tofile="web/ui/miscerror.jsp" overwrite="true" />
+			
+		<war basedir="web/ui" destfile="${dist}/fstxtime-${DSTAMP}-${TSTAMP}.war" webxml="web/conf/web.xml">
+
+			<classes dir="${build}" />
+
+			<webinf dir="web/WEB-INF" />
+
+			<lib dir="lib/dist" />
+
+		</war>
+	</target>
+	
+	<target name="distwar-connect" depends="build.plain">
+
+		<copy todir="${build}">
+			<fileset dir="${src}">
+				<include name="**/*.hbm.xml" />
+				<include name="**/*.properties" />
+			</fileset>
+		</copy>
+
+		<copy todir="${build}">
+			<fileset dir="src/non-java" />
+		</copy>
+
+		<copy file="${build}/spring.properties.server5" tofile="${build}/spring.properties" overwrite="true" />
+		<copy file="${build}/xwork.xml.connect" tofile="${build}/xwork.xml" overwrite="true" />				
+		<copy file="web/conf/web.xml.server5.connect" tofile="web/conf/web.xml" overwrite="true" />
+		<copy file="web/index/index-connect.jsp" tofile="web/ui/index.jsp" overwrite="true" />
+		<copy file="web/index/miscerror-connect.jsp" tofile="web/ui/miscerror.jsp" overwrite="true" />
+		
+		<war basedir="web/ui" destfile="${dist}/teamclock-connect-${DSTAMP}-${TSTAMP}.war" webxml="web/conf/web.xml">
+
+			<classes dir="${build}" />
+
+			<webinf dir="web/WEB-INF" />
+
+			<lib dir="lib/dist" />
+
+		</war>
+	</target>
+
+	<property name="tomcat.home" location="C:\java\tomcat\apache-tomcat-5.5.12" />
+	<!--	
+	<property name="tomcat.home" location="C:\java\tomcat\jakarta-tomcat-5.0.27" />
+	-->
+	
+
+	<property name="tomcat.start" location="${tomcat.home}\bin\startup.bat" />
+	<property name="tomcat.webapp" location="${tomcat.home}\webapps" />
+	<property name="tomcat.webapp.war" location="${tomcat.webapp}\fstxtime.war" />
+
+
+	<target name="localPackage" depends="localClean,build">
+
+		<copy todir="${build}">
+			<fileset dir="${src}">
+				<include name="**/*.hbm.xml" />
+				<include name="**/*.properties" />
+				
+			</fileset>
+		</copy>
+
+		<copy todir="${build}">
+			<fileset dir="src/non-java" />
+		</copy>
+
+		
+		<copy file="${build}/spring.properties.local" tofile="${build}/spring.properties" overwrite="true" />
+		<copy file="${build}/xwork.xml.standard" tofile="${build}/xwork.xml" overwrite="true" />				
+		<copy file="web/conf/web.xml.localhost" tofile="web/conf/web.xml" overwrite="true" />
+		<copy file="web/index/index-standard.jsp" tofile="web/ui/index.jsp" overwrite="true" />
+		<copy file="web/index/miscerror-standard.jsp" tofile="web/ui/miscerror.jsp" overwrite="true" />
+
+		
+		<echo message="Deploying the Web app...." />
+		<war basedir="web/ui" destfile="${tomcat.webapp.war}" webxml="web/conf/web.xml">
+			<classes dir="${build}" />
+			<webinf dir="web/WEB-INF" />
+			<lib dir="lib/dist" />
+		</war>
+	</target>
+
+	
+	<target name="localPackage-connect" depends="localClean,build">
+
+		<copy todir="${build}">
+			<fileset dir="${src}">
+				<include name="**/*.hbm.xml" />
+				<include name="**/*.properties" />
+				
+			</fileset>
+		</copy>
+
+		<copy todir="${build}">
+			<fileset dir="src/non-java" />
+		</copy>
+
+		
+		<copy file="${build}/spring.properties.local" tofile="${build}/spring.properties" overwrite="true" />
+		<copy file="${build}/xwork.xml.connect" tofile="${build}/xwork.xml" overwrite="true" />				
+		<copy file="web/conf/web.xml.server5.connect" tofile="web/conf/web.xml" overwrite="true" />
+		<copy file="web/index/index-connect.jsp" tofile="web/ui/index.jsp" overwrite="true" />
+		<copy file="web/index/miscerror-connect.jsp" tofile="web/ui/miscerror.jsp" overwrite="true" />
+
+		
+		<echo message="Deploying the Web app...." />
+		<war basedir="web/ui" destfile="${tomcat.webapp.war}" webxml="web/conf/web.xml">
+			<classes dir="${build}" />
+			<webinf dir="web/WEB-INF" />
+			<lib dir="lib/dist" />
+		</war>
+	</target>
+	
+	
+	<target name="localStart">
+		<exec executable="${tomcat.start}" />
+	</target>
+
+	<target name="localClean">
+		<delete dir="${tomcat.webapp}\fstxtime" />
+		<delete dir="${tomcat.home}\work\Catalina" />
+		<delete file="${tomcat.webapp.war}" />
+	</target>
+
+	<target name="localDeploy" depends="localClean,localPackage, localStart">
+	</target>
+
+
+</project>

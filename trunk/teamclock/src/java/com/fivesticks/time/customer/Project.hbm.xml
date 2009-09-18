@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.customer.Project" table="fstxproject">
+    <id name="id" 
+    	column="projId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+    
+	<property name="ownerKey"
+		column="projOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />    
+    
+    <property name="custId" 
+    	column="projCustId" 
+    	type="java.lang.Long"
+    	not-null="true" 
+    	/>
+
+		
+	<property name="shortName"
+		column="projShortName"
+		type="string"
+		length="50"
+		not-null="true"
+		unique="false" />
+		
+	<property name="longName"
+		column="projLongName"
+		type="string"
+		length="50"
+		not-null="true"
+		unique="false" />
+	
+	<property name="active"
+		column="projActive"
+		type="boolean"
+		not-null="true"
+		unique="false" />
+
+	<property name="postable"
+		column="projPostable"
+		type="java.lang.Boolean"
+		not-null="false"
+		unique="false" />	
+		
+    <property name="projectClassId" 
+    	column="projProjectClassId" 
+    	type="java.lang.Long"
+    	not-null="false" 
+    	/>		
+		
+  </class>
+
+</hibernate-mapping>

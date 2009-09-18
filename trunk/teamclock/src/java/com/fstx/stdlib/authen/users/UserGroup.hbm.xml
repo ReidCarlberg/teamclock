@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  
+  
+  <class name="com.fstx.stdlib.authen.users.UserGroup" table="usergroup">
+    <id name="id" column="groupId" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+	<property name="name" column="groupName" type="string" length="25" not-null="true" />
+	
+  </class>
+  
+
+</hibernate-mapping>

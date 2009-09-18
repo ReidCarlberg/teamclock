@@ -1,0 +1,42 @@
+.KLSelect
+{ width:      325px;
+  
+  background: #eeeeee;
+  border:     groove #808080 3px;
+  font-family: Tahoma, sans-serif;
+  font-size:   11px;
+  overflow-x:  hidden;
+  position: absolute;
+  z-index:10;
+}
+
+.KLOption, .KLOptionSelected
+{ margin:      0px;
+  padding:     1px 3px 1px 3px;
+  width:       100%;	
+  text-align: left;
+  white-space: nowrap; 
+  cursor:      pointer;
+  cursor:      hand;
+
+
+}
+
+.KLOptionPopUp, .KLOptionPopUpSelected
+{ display:     block;
+ position:absolute;
+  margin:      0px;
+  padding:     0px 2px 0px 2px;
+  border:      solid black 1px;
+  background: #eeeeee;
+  white-space: nowrap; 
+  font-family: Tahoma, sans-serif;
+  font-size:   11px;
+  cursor:      pointer;
+  cursor:      hand;
+}
+
+.KLOptionSelected, .KLOptionPopUpSelected
+{ background: #303030;
+  color:      #ffffff;
+}

@@ -1,0 +1,19 @@
+    xx [junit] Test com.fivesticks.time.accountactivity.AccountActivityServiceDelegateTest FAILED
+    
+       xx [junit] Test com.fivesticks.time.customer.xwork.CustomerListActionTest FAILED
+        
+            [junit] Test com.fivesticks.time.customer.xwork.CustomerSettingModifyActionTest FAILED
+            
+   xx [junit] Test com.fivesticks.time.ebay.xwork.EbayCustomerStatementActionTest FAILED
+    
+       xx [junit] Test com.fivesticks.time.ebay.xwork.EbayItemListByContextActionTest FAILED
+        
+   xx [junit] Test com.fivesticks.time.ebay.xwork.ListEbayCustomersActionTest FAILED                    
+    
+   xx [junit] Test com.fivesticks.time.ebay.xwork.ModifyEbayCustomerActionTest FAILED   
+   
+xx    [junit] Test com.fivesticks.time.ebay.xwork.ModifyEbayCustomerActionTest FAILED
+    
+xx [junit] Test com.fivesticks.time.systemowner.delete.FstxCommandTest FAILED    
+
+[junit] Test com.fivesticks.time.systemowner.delete.SystemOwnerDeleteCommandTest FAILED

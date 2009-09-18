@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.queuedmessages.QueuedMessage" table="queuedmessages">
+
+    <id name="id" 
+    	column="queueId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+    
+	<property name="ownerKey"
+		column="queueOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />    
+
+	<property name="sendTime"
+		column="queueSendTime"
+		type="java.util.Date"
+		not-null="true"
+		unique="false" />    
+				
+	<property name="fromName"
+		column="queueFromName"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />
+				
+	<property name="fromAddress"
+		column="queueFromAddress"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />				
+
+	<property name="toName"
+		column="queueToName"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />
+		
+	<property name="toAddress"
+		column="queueToAddress"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />	
+
+	<property name="subject"
+		column="queueSubject"
+		type="string"
+		length="255"
+		not-null="true"
+		unique="false" />	
+		
+	<property name="message"
+		column="queueMessage"
+		type="string"
+		length="65536"
+		not-null="true"
+		unique="false" />	
+		
+	<property name="sent"
+		column="queueSent"
+		type="boolean"
+		not-null="true" />			
+
+	<property name="modifiedByUsername"
+		column="queueModifiedByUsername"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />
+								
+  </class>
+
+</hibernate-mapping>

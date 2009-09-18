@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.todo.ToDo" table="todo">
+
+    <id name="id" 
+    	column="todoId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+	<property name="ownerKey"
+		column="todoOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+				
+	<property name="projectId" 
+    	column="todoProjectId" 
+    	type="java.lang.Long" 
+    	not-null="false"
+		unique="false" />
+     
+	<property name="createTimestamp"
+		column="todoCreateTimestamp"
+		type="java.util.Date"
+		not-null="true" />
+
+	<property name="priority"
+		column="todoPriority"
+		type="string"
+		length="25"
+		not-null="false"
+		unique="false" />
+		
+	<property name="detail"
+		column="todoDetail"
+		type="string"
+		length="65536"
+		not-null="true"
+		unique="false" />
+		
+	<property name="deadlineTimestamp"
+		column="todoDeadlineTimestamp"
+		type="java.util.Date"
+		not-null="false" />
+	
+	<property name="complete"
+		column="todoComplete"
+		type="boolean"
+		not-null="true" />
+
+	<property name="externalUser"
+		column="todoExternalUser"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />
+				
+	<property name="enteredByUser"
+		column="todoEnteredByUser"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+		
+	<property name="assignedToUser"
+		column="todoAssignedToUser"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />
+		
+	<property name="sequence" 
+    	column="todoSequence" 
+    	type="java.lang.Integer" 
+    	not-null="false"
+		unique="false" />		
+
+	<property name="status"
+		column="todoStatus"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />
+    
+
+		
+	<property name="estimatedTotalHours"
+		column="todoEstimatedTotalHours"
+		type="double"
+		not-null="false"
+		unique="false" />
+		
+	<property name="estimatedRemainingHours"
+		column="todoEstimatedRemainingHours"
+		type="double"
+		not-null="false"
+		unique="false" />		
+
+	<property name="totalElapsedHours"
+		column="todoTotalElapsedHours"
+		type="double"
+		not-null="false"
+		unique="false" />
+
+	<property name="totalChargeableElapsedHours"
+		column="todoTotalChargeableElapsedHours"
+		type="double"
+		not-null="false"
+		unique="false" />
+		
+	<property name="modifyDate"
+		column="todoModifyDate"
+		type="java.util.Date"
+		not-null="false"
+		unique="false" />		
+		
+	<property name="modifiedByUser"
+		column="todoModifiedByUser"
+		type="string"
+		not-null="false"
+		unique="false" 
+		length="20" />		
+
+	<property name="linkedObjectType"
+		column="todoLinkedObjectType"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />
+
+	<property name="linkedObjectId"
+		column="todoLinkedObjectId"
+		type="java.lang.Long"
+		not-null="false"
+		unique="false" />
+
+	 <!-- 2006-06-28 removed
+     <property name="tag"
+        column="todoTag"
+        type="string"
+        length="256"
+        not-null="false"
+        unique="false" />
+        -->
+        		
+	<!-- 2006-06-28 removed long ago
+	<set name="schedules" table="todoschedule">
+	       <key column="tsTodoId"/>
+	       <one-to-many class="com.fivesticks.time.todo.schedule.ToDoSchedule"/>
+    </set>	
+    -->
+  </class>
+
+</hibernate-mapping>

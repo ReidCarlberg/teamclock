@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.ebay.EbayItem" table="ebayitem">
+    <id name="id" 
+    	column="itemId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+	<property name="ownerKey"
+		column="itemOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+	<property name="custId"
+		column="itemCustId"
+		type="java.lang.Long"
+		not-null="true"
+		unique="false" />
+		
+	<property name="itemStatus"
+		column="itemItemStatus"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />		
+						
+	<property name="descriptionShort"
+		column="itemDescriptionShort"
+		type="string"
+		length="55"
+		not-null="false"
+		unique="false" />
+
+	<property name="description"
+		column="itemDescription"
+		type="string"
+		length="65536"
+		not-null="false"
+		unique="false" />
+
+	<property name="listingHeadline"
+		column="itemListingHeadline"
+		type="string"
+		length="55"
+		not-null="false"
+		unique="false" />		
+
+	<property name="listingDetail"
+		column="itemListingDetail"
+		type="string"
+		length="65536"
+		not-null="false"
+		unique="false" />
+
+	<property name="commission"
+		column="itemCommission"
+		type="java.lang.Double"
+		not-null="false" />		
+
+	<property name="customerNet"
+		column="itemCustomerNet"
+		type="java.lang.Double"
+		not-null="false" />		
+
+	<property name="customerNetDeduction"
+		column="itemCustomerNetDeduction"
+		type="java.lang.Double"
+		not-null="false" />		
+		
+	<property name="customerNetDeductionReason"
+		column="itemCustomerNetDeductionReason"
+		type="string"
+		length="50"
+		unique="false"
+		not-null="false" />				
+		
+	<property name="shippingCharge"
+		column="itemShippingCharge"
+		type="java.lang.Double"
+		not-null="false" />		
+		
+	<property name="grossProfit"
+		column="itemGrossProfit"
+		type="java.lang.Double"
+		not-null="false" />		
+		
+	<property name="priceStart"
+		column="itemPriceStart"
+		type="java.lang.Double"
+		not-null="false" />		
+		
+	<property name="priceBuyItNow"
+		column="itemPriceBuyItNow"
+		type="java.lang.Double"
+		not-null="false" />		
+
+	<property name="priceReserve"
+		column="itemPriceReserve"
+		type="java.lang.Double"
+		not-null="false" />
+
+	<property name="priceFinal"
+		column="itemPriceFinal"
+		type="java.lang.Double"
+		not-null="false" />		
+
+	<property name="length"
+		column="itemLength"
+		type="java.lang.Integer"
+		not-null="false" />		
+
+	<property name="ebayItemId"
+		column="itemEbayItemId"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />
+
+	<property name="ebayItemId2"
+		column="itemEbayItemId2"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />
+
+	<property name="ebayCategoryId"
+		column="itemEbayCategoryId"
+		type="string"
+		length="10"
+		not-null="false"
+		unique="false" />
+
+	<property name="handlingCharge"
+		column="itemHandlingCharge"
+		type="java.lang.Double"
+		not-null="false" />		
+		
+	<property name="weight"
+		column="itemWeight"
+		type="java.lang.Integer"
+		not-null="false" />		
+
+	<property name="shippingWeight"
+		column="itemShippingWeight"
+		type="java.lang.Integer"
+		not-null="false" />	
+				
+	<property name="dateAdded"
+		column="itemDateAdded"
+		type="java.util.Date"
+		not-null="false"
+		unique="false" />
+		
+	<property name="dateStart"
+		column="itemDateStarted"
+		type="java.util.Date"
+		not-null="false"
+		unique="false" />
+
+	<property name="dateEnded"
+		column="itemDateEnd"
+		type="java.util.Date"
+		not-null="false"
+		unique="false" />
+
+	<property name="dateNetPaid"
+		column="itemDateNetPaid"
+		type="java.util.Date"
+		not-null="false"
+		unique="false" />
+
+	<property name="feeEbayListing"
+		column="itemFeeEbayListing"
+		type="java.lang.Double"
+		not-null="false" />		
+		
+	<property name="feeEbayFinal"
+		column="itemFeeEbayFinal"
+		type="java.lang.Double"
+		not-null="false" />	
+		
+	<property name="feePayPal"
+		column="itemFeePayPal"
+		type="java.lang.Double"
+		not-null="false" />	
+		
+	<property name="feeOther"
+		column="itemFeeOther"
+		type="java.lang.Double"
+		not-null="false" />	
+		
+	<property name="complete"
+		column="itemComplete"
+		type="boolean"
+		not-null="false" />			
+										
+	<property name="lockedCosts"	
+		column="itemLockedCosts"
+		type="java.lang.Boolean"
+		not-null="false" />
+
+	<property name="lockedShipping"	
+		column="itemLockedShipping"
+		type="java.lang.Boolean"
+		not-null="false" />
+		
+	<property name="prepayAmount"
+		column="itemPrepayAmount"
+		type="java.lang.Double"
+		not-null="false" />
+	
+	<property name="commissionDiscountTypeLuId"
+		column="itemCommissionDiscountTypeLuId"
+		type="java.lang.Long"
+		not-null="false" />
+		
+	<property name="commissionDiscountMethod"
+		column="itemCommissionDiscountMethod"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />
+		
+	<property name="commissionDiscountBase"
+		column="itemCommissionDiscountBase"
+		type="java.lang.Double"
+		not-null="false" />
+		
+	<property name="commissionDiscount"
+		column="itemCommissionDiscount"
+		type="java.lang.Double"
+		not-null="false" />
+		
+	<property name="simpleCommissionId"
+		column="itemSimpleCommissionId"
+		type="java.lang.Long"
+		not-null="false" />
+		
+		
+		
+  </class>
+
+</hibernate-mapping>

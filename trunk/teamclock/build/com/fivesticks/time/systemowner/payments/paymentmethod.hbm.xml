@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.systemowner.payments.PaymentMethod" table="paymentmethod">
+
+    <id name="id" 
+    	column="paymId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+		
+	<property name="ownerKey"
+		column="paymOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+
+	<!--
+	<property name="methodName" column="paymMethodName" type="string" length="25" not-null="true" unique="false" />
+	-->
+	
+	<property name="nameOnCard" column="paymNameOnCard" type="string" length="100" not-null="true" unique="false" />
+
+	<property name="street" column="paymStreet" type="string" length="100" not-null="true" unique="false" />
+
+	<property name="city" column="paymCity" type="string" length="100" not-null="true" unique="false" />
+
+	<property name="state" column="paymState" type="string" length="50" not-null="true" unique="false" />
+
+	<property name="zip" column="paymZip" type="string" length="25" not-null="true" unique="false" />
+
+	<property name="country" column="paymCountry" type="string" length="50" not-null="true" unique="false" />
+
+	<property name="phone" column="paymPhone" type="string" length="50" not-null="true" unique="false" />
+
+	<property name="number" column="paymNumber" type="string" length="16" not-null="true" unique="false" />
+
+	<property name="expiresMonth" column="paymExpiresMonth" type="string" length="2" not-null="true" unique="false" />
+
+	<property name="expiresYear" column="paymExpiresYear" type="string" length="4" not-null="true" unique="false" />
+
+	<property name="cvv" column="paymCvv" type="string" length="5" not-null="true" unique="false" />
+
+	<property name="current" column="paymCurrent" type="boolean" not-null="true" unique="false"  />
+
+</class>
+
+</hibernate-mapping>

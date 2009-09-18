@@ -1,0 +1,5 @@
+database.url=jdbc:hsqldb:mem:TestDatabase
+database.driver=org.hsqldb.jdbcDriver
+database.username=sa
+database.password=
+
