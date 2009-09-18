@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.contactv2.CustomerContactV2Map" table="customercontactv2map">
+    
+  	<id name="id" 
+    	column="ccmapId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+    
+    <property name="ownerKey"
+		column="ccmapOwnerKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />    
+
+ 	<property name="customerId"
+		column="ccmapCustomerId"
+		type="java.lang.Long"
+		not-null="true"
+		unique="false" />
+ 
+ 	<property name="contactV2Id"
+		column="ccmapContactV2Id"
+		type="java.lang.Long"
+		not-null="true"
+		unique="false" />
+		 												
+  </class>
+
+</hibernate-mapping>

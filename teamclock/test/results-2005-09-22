@@ -1,0 +1,279 @@
+   [junit] Running com.fivesticks.time.account.AccountTransactionServiceDelegateImplPart2Test
+    [junit] Tests run: 12, Failures: 0, Errors: 0, Time elapsed: 7.02 sec
+    [junit] Running com.fivesticks.time.account.AccountTransactionServiceDelegateImplTest
+    [junit] Tests run: 11, Failures: 0, Errors: 0, Time elapsed: 5.929 sec
+    [junit] Running com.fivesticks.time.accountactivity.AccountActivityServiceDelegateTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.787 sec
+    [junit] Running com.fivesticks.time.activity.FstxActivityBDImplTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.356 sec
+    [junit] Running com.fivesticks.time.activity.FstxActivityTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 5.578 sec
+    [junit] Running com.fivesticks.time.activity.xwork.ActivityListActionTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.987 sec
+    [junit] Running com.fivesticks.time.activity.xwork.ActivityModifyActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.156 sec
+    [junit] Running com.fivesticks.time.activity.xwork.TimeResolverTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 0.221 sec
+    [junit] Running com.fivesticks.time.authen.events.AuthenticationEventHandlerTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.807 sec
+    [junit] Running com.fivesticks.time.authen.events.EventPublisherTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.636 sec
+    [junit] Running com.fivesticks.time.authen.xwork.GeneralLoginActionMultipleOwnerTest
+    [junit] Tests run: 7, Failures: 0, Errors: 0, Time elapsed: 6.199 sec
+    [junit] Running com.fivesticks.time.authen.xwork.GeneralLoginActionTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.726 sec
+    [junit] Running com.fivesticks.time.authen.xwork.LoginWithOwnerKeySetupActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.026 sec
+    [junit] Running com.fivesticks.time.calendar.ScheduleBuilderTest1
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.2 sec
+    [junit] Running com.fivesticks.time.calendar.ScheduleBuilderTest2
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.446 sec
+    [junit] Running com.fivesticks.time.calendar.xwork.CalendarModifyActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.366 sec
+    [junit] Running com.fivesticks.time.calendar.xwork.CalendarShowMonthActionTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.657 sec
+    [junit] Running com.fivesticks.time.calendar.xwork.CalendarShowWeekActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.065 sec
+    [junit] Running com.fivesticks.time.common.FstxTimePropertiesTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.026 sec
+    [junit] Running com.fivesticks.time.common.SessionContextTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.607 sec
+    [junit] Running com.fivesticks.time.common.util.TimeclockEventTimestampRounderQuarterHourImplTest
+    [junit] Tests run: 7, Failures: 0, Errors: 0, Time elapsed: 0.231 sec
+    [junit] Running com.fivesticks.time.common.util.TimeclockEventTimestampRounderTenthsHourImplTest
+    [junit] Tests run: 7, Failures: 0, Errors: 0, Time elapsed: 0.24 sec
+    [junit] Running com.fivesticks.time.common.util.TimezoneDateTimeResolverTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.22 sec
+    [junit] Running com.fivesticks.time.common.util.ValidationHelperTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 0.23 sec
+    [junit] Running com.fivesticks.time.config.DatabaseInitializerTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 3.696 sec
+    [junit] Running com.fivesticks.time.config.DatabaseUpdaterTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 3.736 sec
+    [junit] Running com.fivesticks.time.customer.FstxCustomerBDImplTest
+    [junit] Tests run: 6, Failures: 0, Errors: 0, Time elapsed: 4.767 sec
+    [junit] Running com.fivesticks.time.customer.FstxProjectBDImplTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.457 sec
+    [junit] Running com.fivesticks.time.customer.FstxTaskBDImplTest
+    [junit] Tests run: 5, Failures: 0, Errors: 0, Time elapsed: 4.677 sec
+    [junit] Running com.fivesticks.time.customer.contact.ContactServiceDelegateTest
+    [junit] Tests run: 7, Failures: 0, Errors: 0, Time elapsed: 4.907 sec
+    [junit] Running com.fivesticks.time.customer.contact.ContactTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.967 sec
+    [junit] Running com.fivesticks.time.customer.contact.ContactTestFactoryTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.526 sec
+    [junit] Running com.fivesticks.time.customer.contact.xwork.ContactModifyActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.346 sec
+    [junit] Running com.fivesticks.time.customer.fwuc.SendCustomerBalanceUpdatesCommandTest
+    [junit] Tests run: 6, Failures: 0, Errors: 6, Time elapsed: 5.628 sec
+    [junit] Test com.fivesticks.time.customer.fwuc.SendCustomerBalanceUpdatesCommandTest FAILED
+    [junit] Running com.fivesticks.time.customer.xwork.CustomerContactProjectAddActionTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.416 sec
+    [junit] Running com.fivesticks.time.customer.xwork.CustomerListActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.176 sec
+    [junit] Running com.fivesticks.time.customer.xwork.CustomerModifyActionTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 4.557 sec
+    [junit] Running com.fivesticks.time.customer.xwork.CustomerProjectModifyActionTest
+    [junit] Tests run: 5, Failures: 0, Errors: 0, Time elapsed: 4.807 sec
+    [junit] Running com.fivesticks.time.customer.xwork.CustomerSettingModifyActionTest
+    [junit] Tests run: 2, Failures: 2, Errors: 0, Time elapsed: 4.507 sec
+    [junit] Test com.fivesticks.time.customer.xwork.CustomerSettingModifyActionTest FAILED
+    [junit] Running com.fivesticks.time.customer.xwork.CustomerUserAssociationAddUserActionTest
+    [junit] Tests run: 9, Failures: 0, Errors: 0, Time elapsed: 5.368 sec
+    [junit] Running com.fivesticks.time.customer.xwork.CustomerUserAssociationRemoveUserActionTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.456 sec
+    [junit] Running com.fivesticks.time.customer.xwork.CustomerUserAssociationsShowExternalActionTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.347 sec
+    [junit] Running com.fivesticks.time.customer.xwork.ProjectListActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.106 sec
+    [junit] Running com.fivesticks.time.customer.xwork.ProjectModifyActionTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 4.666 sec
+    [junit] Running com.fivesticks.time.customer.xwork.TaskListActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.687 sec
+    [junit] Running com.fivesticks.time.customer.xwork.TaskModifyActionTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 4.487 sec
+    [junit] Running com.fivesticks.time.ebay.EbayItemImageServiceDelegateImplTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.937 sec
+    [junit] Running com.fivesticks.time.ebay.EbayItemServiceDelegateTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.847 sec
+    [junit] Running com.fivesticks.time.ebay.ItemShippingServiceDelegateImplTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.997 sec
+    [junit] Running com.fivesticks.time.ebay.ItemStatusTypeTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.056 sec
+    [junit] Running com.fivesticks.time.ebay.setup.boxes.BoxServiceDelegateImplTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.276 sec
+    [junit] Running com.fivesticks.time.ebay.setup.boxes.xwork.BoxListActionTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.516 sec
+    [junit] Running com.fivesticks.time.ebay.setup.commission.SimpleCommissionServiceDelegateImplTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.276 sec
+    [junit] Running com.fivesticks.time.ebay.setup.forms.EbayFormServiceDelegateImplTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.667 sec
+    [junit] Running com.fivesticks.time.ebay.setup.forms.util.ListingFormDataMerger2Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.27 sec
+    [junit] Running com.fivesticks.time.ebay.setup.forms.util.ListingFormDataMergerTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.317 sec
+    [junit] Running com.fivesticks.time.ebay.setup.forms.xwork.ListActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.096 sec
+    [junit] Running com.fivesticks.time.ebay.util.CommissionCalculatorTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.221 sec
+    [junit] Running com.fivesticks.time.ebay.util.EbayItemCalculatorTest
+    [junit] Tests run: 8, Failures: 0, Errors: 0, Time elapsed: 5.388 sec
+    [junit] Running com.fivesticks.time.ebay.xwork.EbayCustomerStatementActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.156 sec
+    [junit] Running com.fivesticks.time.ebay.xwork.EbayItemListByContextActionTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 4.857 sec
+    [junit] Running com.fivesticks.time.ebay.xwork.EbayItemUpdateStatusActionTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 5.729 sec
+    [junit] Running com.fivesticks.time.ebay.xwork.EbayItemViewDetailActionTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.897 sec
+    [junit] Running com.fivesticks.time.ebay.xwork.ListEbayCustomersActionTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.817 sec
+    [junit] Running com.fivesticks.time.ebay.xwork.ModifyActionTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 4.497 sec
+    [junit] Running com.fivesticks.time.ebay.xwork.ModifyEbayCustomerActionTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 4.737 sec
+    [junit] Running com.fivesticks.time.employee.EmployeeServiceDelegateImplTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.447 sec
+    [junit] Running com.fivesticks.time.employee.team.TeamMemberServiceDelegateImplTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.777 sec
+    [junit] Running com.fivesticks.time.employee.team.TeamServiceDelegateImplTest
+    [junit] Tests run: 10, Failures: 0, Errors: 0, Time elapsed: 5.498 sec
+    [junit] Running com.fivesticks.time.employee.team.xwork.ListActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.126 sec
+    [junit] Running com.fivesticks.time.employee.team.xwork.ModifyActionTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.396 sec
+    [junit] Running com.fivesticks.time.employee.team.xwork.ModifyTeamMembershipActionTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.797 sec
+    [junit] Running com.fivesticks.time.employee.xwork.ListActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.316 sec
+    [junit] Running com.fivesticks.time.employee.xwork.ModifyActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.096 sec
+    [junit] Running com.fivesticks.time.events.EventChannelImplTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.276 sec
+    [junit] Running com.fivesticks.time.events.EventChannelInitializerTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.24 sec
+    [junit] Running com.fivesticks.time.events.EventChannelTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.241 sec
+    [junit] Running com.fivesticks.time.events.EventHandlerCommandTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.241 sec
+    [junit] Running com.fivesticks.time.externaluser.ExternalUserServiceDelegateImplTest
+    [junit] Tests run: 9, Failures: 0, Errors: 0, Time elapsed: 5.248 sec
+    [junit] Running com.fivesticks.time.externaluser.xwork.ExternalUserAddCommentActionTest
+    [junit] Tests run: 5, Failures: 0, Errors: 0, Time elapsed: 4.887 sec
+    [junit] Running com.fivesticks.time.externaluser.xwork.ExternalUserModifyToDoActionTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.527 sec
+    [junit] Running com.fivesticks.time.externaluser.xwork.ExternalUserSetActiveCustomerActionTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 4.617 sec
+    [junit] Running com.fivesticks.time.externaluser.xwork.ExternalUserViewDashboardActionTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.487 sec
+    [junit] Running com.fivesticks.time.lookups.LookupServiceDelegateImplTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 4.527 sec
+    [junit] Running com.fivesticks.time.messages.MessageServiceDelegateImplTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.066 sec
+    [junit] Running com.fivesticks.time.object.comments.ObjectCommentServiceDelegateImplTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.186 sec
+    [junit] Running com.fivesticks.time.object.metrics.ObjectMetricServiceDelegateImplTest
+    [junit] Tests run: 8, Failures: 0, Errors: 0, Time elapsed: 4.977 sec
+    [junit] Running com.fivesticks.time.queuedmessages.SendQueuedMessagesCommandTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 5.688 sec
+    [junit] Running com.fivesticks.time.register.events.RegisterEventPublisherTest
+    [junit] Tests run: 1, Failures: 0, Errors: 1, Time elapsed: 4.997 sec
+    [junit] Test com.fivesticks.time.register.events.RegisterEventPublisherTest FAILED
+    [junit] Running com.fivesticks.time.register.xwork.ActivateActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 1, Time elapsed: 4.146 sec
+    [junit] Test com.fivesticks.time.register.xwork.ActivateActionTest FAILED
+    [junit] Running com.fivesticks.time.register.xwork.RegisterActionTest
+    [junit] Tests run: 3, Failures: 0, Errors: 2, Time elapsed: 4.646 sec
+    [junit] Test com.fivesticks.time.register.xwork.RegisterActionTest FAILED
+    [junit] Running com.fivesticks.time.settings.FstxTimeSettingsTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.486 sec
+    [junit] Running com.fivesticks.time.settings.SystemSettingsDaoTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.576 sec
+    [junit] Running com.fivesticks.time.settings.broker.MasterSettingsBrokerTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 5.057 sec
+    [junit] Running com.fivesticks.time.superuser.SuperuserServiceDelegateTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.586 sec
+    [junit] Running com.fivesticks.time.superuser.xwork.SystemOwnerShowMetricsActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.116 sec
+    [junit] Running com.fivesticks.time.system.DatabaseConnectionValidatorTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 3.555 sec
+    [junit] Running com.fivesticks.time.system.StartupValidatorTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.327 sec
+    [junit] Running com.fivesticks.time.system.messages.PasswordHelpTest
+    [junit] Tests run: 1, Failures: 0, Errors: 1, Time elapsed: 4.296 sec
+    [junit] Test com.fivesticks.time.system.messages.PasswordHelpTest FAILED
+    [junit] Running com.fivesticks.time.system.update.august.August_BuildDefaultSystemOwnerCommandTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.136 sec
+    [junit] Running com.fivesticks.time.systemowner.KeyGeneratorTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 6.329 sec
+    [junit] Running com.fivesticks.time.systemowner.SystemOwnerDAOImplTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.146 sec
+    [junit] Running com.fivesticks.time.systemowner.SystemOwnerServiceDelegateImplTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.016 sec
+    [junit] Running com.fivesticks.time.systemowner.SystemUserDAOImplReidTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 3.965 sec
+    [junit] Running com.fivesticks.time.systemowner.SystemUserServiceDelegateImplTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 4.576 sec
+    [junit] Running com.fivesticks.time.systemowner.delete.FstxCommandTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 5.097 sec
+    [junit] Running com.fivesticks.time.systemowner.delete.SystemOwnerDeleteCommandTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.577 sec
+    [junit] Running com.fivesticks.time.testutil.AbstractTimeTestCase
+    [junit] Tests run: 1, Failures: 1, Errors: 0, Time elapsed: 0.32 sec
+    [junit] Test com.fivesticks.time.testutil.AbstractTimeTestCase FAILED
+    [junit] Running com.fivesticks.time.testutil.TestSettingsTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.156 sec
+    [junit] Running com.fivesticks.time.timeclock.FstxTimeclockBDTest
+    [junit] Tests run: 10, Failures: 0, Errors: 0, Time elapsed: 5.998 sec
+    [junit] Running com.fivesticks.time.timeclock.UserShiftCollectionBuilderTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.486 sec
+    [junit] Running com.fivesticks.time.timeclock.UserShiftRecordTest
+    [junit] Tests run: 13, Failures: 1, Errors: 0, Time elapsed: 5.728 sec
+    [junit] Test com.fivesticks.time.timeclock.UserShiftRecordTest FAILED
+    [junit] Running com.fivesticks.time.timeclock.util.PayPeriodDeterminatorTest
+    [junit] Tests run: 10, Failures: 0, Errors: 0, Time elapsed: 0.25 sec
+    [junit] Running com.fivesticks.time.timeclock.xwork.TimeclockOnlyPageActionTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 4.918 sec
+    [junit] Running com.fivesticks.time.timeclockadmin.xwork.TimeclockActivityByDateActionTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 5.408 sec
+    [junit] Running com.fivesticks.time.todo.ToDoServiceDelegateTest
+    [junit] Tests run: 9, Failures: 0, Errors: 0, Time elapsed: 5.688 sec
+    [junit] Running com.fivesticks.time.todo.events.ToDoEventHandlerTest
+    [junit] Tests run: 4, Failures: 0, Errors: 1, Time elapsed: 4.577 sec
+    [junit] Test com.fivesticks.time.todo.events.ToDoEventHandlerTest FAILED
+    [junit] Running com.fivesticks.time.todo.queue.PollEmailServiceProviderCommandTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 3.996 sec
+    [junit] Running com.fivesticks.time.todo.xwork.ListActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.276 sec
+    [junit] Running com.fivesticks.time.todo.xwork.ModifyActionTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.356 sec
+    [junit] Running com.fivesticks.time.todo.xwork.ReassignFromDashboardActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.126 sec
+    [junit] Running com.fivesticks.time.todo.xwork.ToDoAddCommentActionTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.096 sec
+    [junit] Running com.fivesticks.time.useradmin.UseradminDeleteCommandTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.407 sec
+    [junit] Running com.fivesticks.time.useradmin.events.UseradminEventHandlerTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.036 sec
+    [junit] Running com.fivesticks.time.useradmin.events.UseradminEventPublisherTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.105 sec
+    [junit] Running com.fivesticks.time.useradmin.util.TimeclockUserCounterTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 4.667 sec
+    [junit] Running com.fivesticks.time.useradmin.xwork.UserCollectionBuilderTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 5.278 sec
+    [junit] Running com.fivesticks.time.useradmin.xwork.UserModifyActionTest
+    [junit] Tests run: 8, Failures: 0, Errors: 0, Time elapsed: 5.127 sec
+    [junit] Running com.fivesticks.util.SequenceSorterTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.21 sec
+    [junit] Running com.fstx.stdlib.authen.LoginHistoryBDImplTest
+    [junit] Tests run: 6, Failures: 0, Errors: 0, Time elapsed: 4.767 sec
+    [junit] Running com.fstx.stdlib.authen.test.AuthenticatorTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.547 sec
+    [junit] Running com.fstx.stdlib.authen.users.UserBDImplTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.236 sec
+    [junit] Running com.fstx.stdlib.authen.users.UserDAOImplTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.746 sec
+    [junit] Running com.fstx.stdlib.authen.users.UserTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 4.957 sec
+    [junit] Running com.fstx.stdlib.common.messages.MailBrokerTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 11.536 sec

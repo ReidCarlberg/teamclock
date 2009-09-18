@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.employee.team.Team" table="team">
+    <id name="id" 
+    	column="teamId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+    
+	<property name="ownerKey"
+		column="teamOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+				
+	<property name="nameShort"
+		column="teamNameShort"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+	<property name="name"
+		column="teamName"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />
+	
+		
+	<property name="status"
+		column="teamStatusLuId"
+		type="java.lang.Long"
+		not-null="false" />
+		
+  </class>
+
+</hibernate-mapping>

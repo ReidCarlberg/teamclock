@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ws.timeclock.time.fivesticks.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://ws.timeclock.time.fivesticks.com" xmlns:intf="http://ws.timeclock.time.fivesticks.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2.1
+Built on Jun 14, 2005 (09:15:57 EDT)-->
+
+   <wsdl:message name="punchOutRequest">
+
+      <wsdl:part name="in0" type="soapenc:string"/>
+
+      <wsdl:part name="in1" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="punchInRequest">
+
+      <wsdl:part name="in0" type="soapenc:string"/>
+
+      <wsdl:part name="in1" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="punchInResponse">
+
+      <wsdl:part name="punchInReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="breakStopRequest">
+
+      <wsdl:part name="in0" type="soapenc:string"/>
+
+      <wsdl:part name="in1" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getStatusResponse">
+
+      <wsdl:part name="getStatusReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="breakStopResponse">
+
+      <wsdl:part name="breakStopReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="punchOutResponse">
+
+      <wsdl:part name="punchOutReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getStatusRequest">
+
+      <wsdl:part name="in0" type="soapenc:string"/>
+
+      <wsdl:part name="in1" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="breakStartRequest">
+
+      <wsdl:part name="in0" type="soapenc:string"/>
+
+      <wsdl:part name="in1" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="breakStartResponse">
+
+      <wsdl:part name="breakStartReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="RemoteTimeclockService">
+
+      <wsdl:operation name="punchIn" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:punchInRequest" name="punchInRequest"/>
+
+         <wsdl:output message="impl:punchInResponse" name="punchInResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="punchOut" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:punchOutRequest" name="punchOutRequest"/>
+
+         <wsdl:output message="impl:punchOutResponse" name="punchOutResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="breakStart" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:breakStartRequest" name="breakStartRequest"/>
+
+         <wsdl:output message="impl:breakStartResponse" name="breakStartResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="breakStop" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:breakStopRequest" name="breakStopRequest"/>
+
+         <wsdl:output message="impl:breakStopResponse" name="breakStopResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getStatus" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:getStatusRequest" name="getStatusRequest"/>
+
+         <wsdl:output message="impl:getStatusResponse" name="getStatusResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="RemoteTimeclockServiceSoapBinding" type="impl:RemoteTimeclockService">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="punchIn">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="punchInRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.timeclock.time.fivesticks.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="punchInResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.timeclock.time.fivesticks.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="punchOut">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="punchOutRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.timeclock.time.fivesticks.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="punchOutResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.timeclock.time.fivesticks.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="breakStart">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="breakStartRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.timeclock.time.fivesticks.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="breakStartResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.timeclock.time.fivesticks.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="breakStop">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="breakStopRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.timeclock.time.fivesticks.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="breakStopResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.timeclock.time.fivesticks.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getStatus">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getStatusRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.timeclock.time.fivesticks.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getStatusResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.timeclock.time.fivesticks.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="RemoteTimeclockServiceService">
+
+      <wsdl:port binding="impl:RemoteTimeclockServiceSoapBinding" name="RemoteTimeclockService">
+
+         <wsdlsoap:address location="test.wsdl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

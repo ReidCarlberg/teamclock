@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!--
+2006-09-16 reid
+removed
+-->
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.contactv2.ContactV2KeyValue" table="contactv2keyvalue">
+    
+  	<id name="id" 
+    	column="conkvId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+    <property name="ownerKey"
+		column="conkvOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+  	<property name="contactV2Id" 
+    	column="conkvContactV2Id" 
+    	type="java.lang.Long" 
+    	not-null="true"
+    	unique="false" />
+
+
+    
+    <property name="key"
+		column="conkvKey"
+		type="string"
+		length="255"
+		not-null="false"
+		unique="false" />	 
+
+    <property name="value"
+		column="conkvValue"
+		type="string"
+		length="255"
+		not-null="false"
+		unique="false" />	
+		
+
+		
+  </class>
+
+</hibernate-mapping>

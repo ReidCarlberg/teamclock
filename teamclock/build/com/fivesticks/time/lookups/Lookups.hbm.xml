@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.lookups.Lookup" table="lookups">
+    <id name="id" 
+    	column="luId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+	<property name="ownerKey"
+		column="itemOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+	<property name="type"
+		column="luType"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+	<property name="shortName"
+		column="luShort"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+	<property name="fullName"
+		column="luFull"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />
+
+  </class>
+
+</hibernate-mapping>

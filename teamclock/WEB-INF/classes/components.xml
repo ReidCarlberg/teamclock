@@ -1,0 +1,227 @@
+<components>
+
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.common.SessionContext</class>
+		<enabler>com.fivesticks.time.common.SessionContextAware</enabler>
+	</component>
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.timeclockadmin.xwork.TimeclockAdminContext</class>
+		<enabler>com.fivesticks.time.timeclockadmin.xwork.TimeclockAdminContextAware</enabler>
+	</component>	
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.timeclockadmin.xwork.TimeclockActivityByDateContext</class>
+		<enabler>com.fivesticks.time.timeclockadmin.xwork.TimeclockActivityByDateContextAware</enabler>
+	</component>	
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.timeclockadmin.xwork.TimeclockEventModifyContext</class>
+		<enabler>com.fivesticks.time.timeclockadmin.xwork.TimeclockEventModifyContextAware</enabler>
+	</component>	
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.todo.xwork.TodoModifyContext</class>
+		<enabler>com.fivesticks.time.todo.xwork.TodoModifyContextAware</enabler>
+	</component>	
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.todo.xwork.ToDoListContext</class>
+		<enabler>com.fivesticks.time.todo.xwork.ToDoListContextAware</enabler>
+	</component>		
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.useradmin.xwork.UserModifyContext</class>
+		<enabler>com.fivesticks.time.useradmin.xwork.UserModifyContextAware</enabler>
+	</component>	
+		
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.useradmin.xwork.PasswordModifyContext</class>
+		<enabler>com.fivesticks.time.useradmin.xwork.PasswordModifyContextAware</enabler>
+	</component>
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.activity.xwork.ActivityListContext</class>
+		<enabler>com.fivesticks.time.activity.xwork.ActivityListContextAware</enabler>
+	</component>
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.admin.xwork.LoginHistoryListContext</class>
+		<enabler>com.fivesticks.time.admin.xwork.LoginHistoryListContextAware</enabler>
+	</component>
+	
+	
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.activity.xwork.ActivityModifyContext</class>
+		<enabler>com.fivesticks.time.activity.xwork.ActivityModifyContextAware</enabler>
+	</component>	
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.activity.xwork.ActivitySummaryContext</class>
+		<enabler>com.fivesticks.time.activity.xwork.ActivitySummaryContextAware</enabler>
+	</component>
+		
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.calendar.xwork.CalendarListContext</class>
+		<enabler>com.fivesticks.time.calendar.xwork.CalendarListContextAware</enabler>
+	</component>	
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.calendar.xwork.CalendarModifyContext</class>
+		<enabler>com.fivesticks.time.calendar.xwork.CalendarModifyContextAware</enabler>
+	</component>	
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.account.xwork.AccountTransactionContext</class>
+		<enabler>com.fivesticks.time.account.xwork.AccountTransactionContextAware</enabler>
+	</component>					
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.account.xwork.ModifyAccountTransactionContext</class>
+		<enabler>com.fivesticks.time.account.xwork.ModifyAccountTransactionContextAware</enabler>
+	</component>	
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.superuser.xwork.SystemOwnerManagerContext</class>
+		<enabler>com.fivesticks.time.superuser.xwork.SystemOwnerManagerContextAware</enabler>
+	</component>	
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.superuser.xwork.SystemOwnerListContext</class>
+		<enabler>com.fivesticks.time.superuser.xwork.SystemOwnerListContextAware</enabler>
+	</component>							
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.dashboard.xwork.DashboardContext</class>
+		<enabler>com.fivesticks.time.dashboard.xwork.DashboardContextAware</enabler>
+	</component>		
+
+	<!--
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.externaluser.common.ExternalUserSessionContext</class>
+		<enabler>com.fivesticks.time.externaluser.common.ExternalUserSessionContextAware</enabler>
+	</component>		
+	-->
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.externaluser.common.ExternalUserToDoContext</class>
+		<enabler>com.fivesticks.time.externaluser.common.ExternalUserToDoContextAware</enabler>
+	</component>	
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.customer.xwork.CustomerModifyContext</class>
+		<enabler>com.fivesticks.time.customer.xwork.CustomerModifyContextAware</enabler>
+	</component>	
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.customer.xwork.ProjectModifyContext</class>
+		<enabler>com.fivesticks.time.customer.xwork.ProjectModifyContextAware</enabler>
+	</component>	
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.customer.xwork.CustomerListContext</class>
+		<enabler>com.fivesticks.time.customer.xwork.CustomerListContextAware</enabler>
+	</component>	
+	
+	<!-- 2006-08-30 rsc old -->
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.customer.contactxx.xwork.ContactModifyContext</class>
+		<enabler>com.fivesticks.time.customer.contactxx.xwork.ContactModifyContextAware</enabler>
+	</component>	
+
+	<!-- 2006-08-30 rsc NEW -->	
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.contactv2.xwork.ContactV2ModifyContext</class>
+		<enabler>com.fivesticks.time.contactv2.xwork.ContactV2ModifyContextAware</enabler>
+	</component>	
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.contactv2.xwork.ContactV2ListContext</class>
+		<enabler>com.fivesticks.time.contactv2.xwork.ContactV2ListContextAware</enabler>
+	</component>	
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.contactv2.forms.xwork.WebFormModifyContext</class>
+		<enabler>com.fivesticks.time.contactv2.forms.xwork.WebFormModifyContextAware</enabler>
+	</component>
+				
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.lookups.xwork.ListContext</class>
+		<enabler>com.fivesticks.time.lookups.xwork.ListContextAware</enabler>
+	</component>
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.lookups.xwork.ModifyContext</class>
+		<enabler>com.fivesticks.time.lookups.xwork.ModifyContextAware</enabler>
+	</component>			
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.employee.xwork.ModifyContext</class>
+		<enabler>com.fivesticks.time.employee.xwork.ModifyContextAware</enabler>
+	</component>
+	
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.employee.team.xwork.ModifyContext</class>
+		<enabler>com.fivesticks.time.employee.team.xwork.ModifyContextAware</enabler>
+	</component>			
+
+	<component>
+		<scope>session</scope>
+		<class>com.fivesticks.time.messages.xwork.ModifyContext</class>
+		<enabler>com.fivesticks.time.messages.xwork.ModifyContextAware</enabler>
+	</component>
+    
+    <component>
+        <scope>session</scope>
+        <class>com.fivesticks.time.messages.customer.xwork.SendMessageContext</class>
+        <enabler>com.fivesticks.time.messages.customer.xwork.SendMessageContextAware</enabler>
+    </component>
+
+    <component>
+        <scope>session</scope>
+        <class>com.fivesticks.time.ws.xwork.AuthenticationBasedServiceSupport</class>
+        <enabler>com.fivesticks.time.ws.xwork.AuthenticationBasedServiceSupportAware</enabler>
+    </component>
+    
+   <component>
+        <scope>session</scope>
+        <class>com.fivesticks.time.systemowner.payments.xwork.AccountManagementContext</class>
+        <enabler>com.fivesticks.time.systemowner.payments.xwork.AccountManagementContextAware</enabler>
+    </component>
+    
+				
+</components>

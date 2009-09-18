@@ -1,0 +1,1 @@
+do not delete or CVS will kill the dir.

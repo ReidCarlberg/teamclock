@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.timeclock.Timeclock" table="fstxtimeclock">
+    <id name="id" 
+    	column="tcId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+	<property name="ownerKey"
+		column="tcOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+				
+	<property name="username"
+		column="tcUsername"
+		type="string"
+		length="50"
+		not-null="true"
+		unique="false" />
+		
+	<property name="timestamp"
+		column="tcTimestamp"
+		type="java.util.Date"
+		not-null="true"
+		unique="false" />
+		
+	<property name="event"
+		column="tcEvent"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+	<property name="eventTimestamp"
+		column="tcEventTimestamp"
+		type="java.util.Date"
+		not-null="false"
+		unique="false" />
+				
+	<property name="comment"
+		column="tcComment"
+		type="string"
+		length="255"
+		not-null="false"
+		unique="false" />
+	
+	<property name="sourceip"
+		column="tcSourceIP"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />		
+  </class>
+
+</hibernate-mapping>

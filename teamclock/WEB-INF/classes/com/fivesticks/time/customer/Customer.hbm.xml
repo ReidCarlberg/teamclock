@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.customer.Customer" table="fstxcustomer">
+    <id name="id" 
+    	column="custId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+    
+	<property name="ownerKey"
+		column="custOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+				
+	<property name="name"
+		column="custName"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />
+		
+	<property name="street1"
+		column="custStreet1"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />
+		
+	<property name="street2"
+		column="custStreet2"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />
+		
+	<property name="city"
+		column="custCity"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />
+		
+	<property name="state"
+		column="custState"
+		type="string"
+		length="10"
+		not-null="false"
+		unique="false" />
+		
+	<property name="zip"
+		column="custZip"
+		type="string"
+		length="10"
+		not-null="false"
+		unique="false" />
+		
+	<property name="status"
+		column="custStatusLuId"
+		type="java.lang.Long"
+		not-null="false" />
+    
+    <property name="country"
+        column="custCountry"
+        type="string"
+        length="50"
+        not-null="false"
+        unique="false" />
+        
+	<property name="hidden"
+		column="custHidden"
+		type="java.lang.Boolean" />
+
+	<property name="budget"
+		column="custBudget"
+		type="java.lang.Double"
+		not-null="false"
+		 />
+		
+	<property name="budgetProgress"
+		column="custBudgetProgress"
+		type="java.lang.Double"
+		not-null="false"
+		 />
+		
+	<property name="payMethod"
+		column="custPayMethod"
+		type="string"
+		length="10"
+		not-null="false"
+		unique="false" />
+		
+	<property name="payNumber"
+		column="custPayNumber"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />
+		
+	<property name="payMonth"
+		column="custPayMonth"
+		type="string"
+		length="2"
+		not-null="false"
+		unique="false" />
+		
+	<property name="payYear"
+		column="custPayYear"
+		type="string"
+		length="4"
+		not-null="false"
+		unique="false" />		
+		
+	<property name="payCode"
+		column="custPayCode"
+		type="string"
+		length="4"
+		not-null="false"
+		unique="false" />	
+		
+	<property name="payName"
+		column="custPayName"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />		
+		
+	<property name="payStreet"
+		column="custPayStreet"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />		
+				
+	<property name="payZip"
+		column="custPayZip"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />
+		
+	<property name="payNotifyContactId"
+		column="custPayContactId"
+		type="java.lang.Long"
+		not-null="false"
+		unique="false" />
+						
+  </class>
+
+</hibernate-mapping>

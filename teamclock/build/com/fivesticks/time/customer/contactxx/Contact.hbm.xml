@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.customer.contactxx.Contact" table="contact">
+    
+  	<id name="id" 
+    	column="conId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+    <property name="ownerKey"
+		column="conOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+	<property name="custId"
+		column="conCustomerId"
+		type="java.lang.Long"
+		not-null="true"
+		unique="false" />				
+    
+    <property name="nameFirst"
+		column="conNameFirst"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	 
+
+    <property name="nameLast"
+		column="conNameLast"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	 
+    
+	<property name="primaryPhone"
+		column="conPrimaryPhone"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />
+		
+	<property name="alternatePhone"
+		column="conAlternatePhone"
+		type="string"
+		length="20"
+		not-null="false"
+		unique="false" />
+				
+		
+	<property name="primaryEmail"
+		column="conPrimaryEmail"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	 
+
+ 	<property name="alternateEmail1"
+		column="conAlternateEmail1"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	 
+
+
+ 	<property name="alternateEmail2"
+		column="conAlternateEmail2"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+		
+	<property name="alternateEmail3"
+		column="conAlternateEmail3"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+		
+	<property name="alternateEmail4"
+		column="conAlternateEmail4"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+
+
+
+   
+		
+  </class>
+
+</hibernate-mapping>

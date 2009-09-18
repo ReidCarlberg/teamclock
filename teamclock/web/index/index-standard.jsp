@@ -1,0 +1,7 @@
+
+<%
+	response.sendRedirect("login.action");
+%>
+
+
+

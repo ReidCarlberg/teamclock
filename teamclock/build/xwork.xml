@@ -1,0 +1,1461 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN" "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+
+    <include file="webwork-default.xml"/>
+
+    <package name="default" extends="webwork-default">
+        <result-types>
+      <result-type name="excel" class="com.fivesticks.common.poi.ExcelResult" default="false" />
+    </result-types>
+    <interceptors>
+
+		<interceptor name="sessionValidator"
+			class="com.fivesticks.time.xwork.util.SessionValidatorInterceptor" />
+		
+		<!-- 2006-07-06 shouldn't need this anymore-->
+		<interceptor name="component"
+	    	    class="com.fivesticks.xwork.util.ComponentInterceptor"/> 
+
+		<interceptor name="systemOwnerNotTimeClockOnly"
+	    	    class="com.fivesticks.time.xwork.util.SystemOwnerNotTimeClockOnlyInterceptor"/>	
+	    	    
+		<interceptor name="userRoleAdministrator"
+	    	    class="com.fivesticks.time.xwork.util.UserRoleAdminInterceptor"/>		 
+
+		<interceptor name="userRoleNotExternal"
+	    	    class="com.fivesticks.time.xwork.util.UserRoleNotExternalInterceptor"/>		 
+
+		<interceptor name="userRoleExternal"
+	    	    class="com.fivesticks.time.xwork.util.UserRoleExternalInterceptor"/>	
+	    	    
+		<interceptor name="featureComplete"
+	    	    class="com.fivesticks.time.xwork.util.CompleteFeatureSetValidatorInterceptor"/>	
+
+		<interceptor name="featureSuperUser"
+	    	    class="com.fivesticks.time.xwork.util.SuperUserFeatureSetValidatorInterceptor"/>	
+
+		<!-- 2006-04-28 not using
+		<interceptor name="errorChecker"
+	    	    class="com.fivesticks.time.xwork.util.ErrorCheckerInterceptor"/>	-->
+
+           <interceptor name="errorInterceptor" 
+           	class="com.fivesticks.time.common.xwork.ErrorInterceptor" />
+
+		<interceptor name="execAndWait" class="com.opensymphony.webwork.interceptor.ExecuteAndWaitInterceptor"/>
+
+		<interceptor name="fileUpload" class="com.fivesticks.time.xwork.util.FileUploadInterceptor">
+		    <param name="allowedTypes">image/jpeg</param>
+		    <param name="maximumSize">2500000</param>
+		</interceptor>
+	    	    
+        <interceptor-stack name="fivesticksComponentStack">
+			<interceptor-ref name="component"/>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="errorInterceptor" />
+			<interceptor-ref name="sessionValidator" />
+			<interceptor-ref name="userRoleNotExternal" />
+			<interceptor-ref name="systemOwnerNotTimeClockOnly" />
+        </interceptor-stack>
+
+        <interceptor-stack name="fivesticksTimeClockComponentStack">
+			<interceptor-ref name="component"/>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="errorInterceptor" />
+			<interceptor-ref name="sessionValidator" />
+			<interceptor-ref name="userRoleNotExternal" />
+        </interceptor-stack>
+                
+        <interceptor-stack name="fivesticksUploadStack">
+			<interceptor-ref name="fileUpload" />
+			<interceptor-ref name="fivesticksComponentStack" />
+        </interceptor-stack>        
+
+        <interceptor-stack name="fivesticksLoginComponentStack">
+         	<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="component"/>
+			<interceptor-ref name="errorInterceptor" />
+        </interceptor-stack>
+
+		<!--external-->
+        <interceptor-stack name="fivesticksExternalComponentStack">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="sessionValidator" />
+			<interceptor-ref name="userRoleExternal" />
+			<interceptor-ref name="component"/>
+        </interceptor-stack>
+		      
+	</interceptors>
+
+        <global-results>
+           <result name="global-timeclock-only" type="chain">
+                <param name="actionName">timeclock-only</param>
+           </result> 
+           <result name="global-dashboard" type="chain">
+                <param name="actionName">home</param>
+           </result>        
+           <result name="global-login" type="chain">
+                <param name="actionName">login</param>
+           </result>
+      <result name="global-error" type="chain">
+        <param name="actionName">error</param>
+      </result>
+           <result name="global-external-home" type="chain">
+           		<!-- 2006-08-27 updated from external to extAccount. -->
+                <param name="actionName">extAccount</param>
+           </result>  
+           <result name="global-login-timeclock" type="chain">
+                <param name="actionName">timeclockOnly</param>
+           </result>          
+           <result name="global-timeclock-home" type="chain">
+	           <param name="actionName">timeclockHome</param>
+           </result> 
+           <result name="global-common-delete" type="chain">
+                <param name="actionName">commonDelete</param>
+           </result>
+           <result name="delete-success-timeclock-event" type="chain">
+                <param name="actionName">timeclockUserPunchDetail</param>
+           </result>
+           <result name="delete-success-timeclock-event-home" type="chain">
+                <param name="actionName">timeclockHome</param>
+           </result>       
+           <result name="delete-success-timeclock-event-bydate" type="chain">
+                <param name="actionName">timeclockActivityByDate</param>
+           </result>                                
+           <result name="delete-success-todo" type="chain">
+                <param name="actionName">todolist</param>
+           </result>           
+           <result name="global-todo-detail" type="chain">
+                <param name="actionName">tododetail</param>
+           </result>           
+           <result name="delete-success-activity" type="chain">
+                <param name="actionName">activitylist</param>
+           </result>     
+           <result name="delete-success-contact-customer" type="chain">
+                <param name="actionName">customerdetail</param>
+           </result>                  
+           <result name="delete-success-contact" type="chain">
+                <param name="actionName">contactlistv2</param>
+           </result>                  
+           <result name="delete-success-webform" type="chain">
+                <param name="actionName">webformlist</param>
+           </result>               
+           <result name="delete-success-calendar" type="chain">
+                <param name="actionName">calendarDeleteSuccess</param>
+           </result>      
+           <result name="delete-success-system-owner" type="chain">
+                <param name="actionName">ownerList</param>
+           </result> 
+           <result name="delete-success-accounttxn" type="chain">
+           		<param name="actionName">accttxnList</param>
+           </result>
+           <result name="global-inactive" type="chain">
+                <param name="actionName">inactReg</param>
+           </result>
+           <result name="delete-success-message" type="chain">
+           		<param name="actionName">messageList</param>
+           </result>           
+           <result name="delete-success-customer-project" type="chain">
+           		<param name="actionName">customerdetail</param>
+			</result>
+           <result name="delete-success-project-list" type="chain">
+           		<param name="actionName">projectlist</param>
+			</result>
+           <result name="delete-success-customer-list" type="chain">
+           		<param name="actionName">customerlist</param>
+			</result>			
+           <result name="delete-success-user-list" type="chain">
+           		<param name="actionName">userList</param>
+			</result>	           
+
+        </global-results>
+        	
+		<action name="home"    class="com.fivesticks.time.dashboard.xwork.ViewDashboard" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/dashboard/dashboard.jsp</result>
+		</action>
+
+
+		<action name="timeclock-only" class="com.opensymphony.xwork.ActionSupport" >
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/error/timeclock-only.jsp</result>
+		</action>
+				
+		<action name="error" class="com.opensymphony.xwork.ActionSupport" >
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/error/error.jsp</result>
+		</action>
+
+		<action name="toDoAutoCompleteAJAX" class="com.fivesticks.time.dashboard.xwork.ToDoAutoCompleteAJAX" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="successA" type="dispatcher">/WEB-INF/jsp/dashboard/toDoAutoCompleteAJAX.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>			
+		</action>
+
+		
+		<action name="getToDoList" class="com.fivesticks.time.dashboard.xwork.GetToDoListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+
+		<action name="getDelegatedToDoList" class="com.fivesticks.time.dashboard.xwork.GetDelegatedToDoListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+
+		
+        
+        <action name="dashboardGetRecentActions" class="com.fivesticks.time.dashboard.xwork.GetRecentActionsAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+        </action> 
+
+		<action name="dashboardDeleteTodo" class="com.fivesticks.time.todo.xwork.DeleteFromDashboardAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+        </action>
+                
+        <action name="dashboardTodoDetail" class="com.fivesticks.time.todo.xwork.ToDoModifyDetailFromDashboardAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+        </action>  
+
+        <action name="dashboardTodoDetailUpdate" class="com.fivesticks.time.todo.xwork.ToDoUpdateDetailFromDashboardAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+        </action>
+        
+        <action name="dashboardGetToDoProjectCloud" class="com.fivesticks.time.dashboard.xwork.GetToDoProjectCloudAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+        </action>
+        
+        <action name="dashboardGetToDoProjectContext" class="com.fivesticks.time.dashboard.xwork.GetToDoProjectContextAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+        </action>
+        
+
+        
+		<action name="dashboardGetCalendar" class="com.fivesticks.time.dashboard.xwork.ViewDashboardCalendarAJAX" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+		
+		
+		<action name="viewDashboardActivityAJAX" class="com.fivesticks.time.dashboard.xwork.ViewDashboardActivityAJAX" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+		
+		<action name="getUnpostedActivity" class="com.fivesticks.time.dashboard.xwork.GetUnpostedActivityAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+		
+		<action name="postAllUnpostedActivity" class="com.fivesticks.time.dashboard.xwork.PostAllUnpostedActivityAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+
+		<action name="timeclockStatusSummary" class="com.fivesticks.time.dashboard.xwork.ViewDashboardTimeClockAJAX" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>	        
+        
+
+        
+       <action name="timeclockSummary" class="com.fivesticks.time.timeclock.xwork.TimeClockHomeAsJSONAction" >
+            <interceptor-ref name="fivesticksTimeClockComponentStack" />
+            <result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+        </action>        
+        
+        
+        
+        
+        
+        
+		<action name="homeFilter" class="com.fivesticks.time.dashboard.xwork.FilterDashboardAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<!-- 2006-06-14 <result name="successXXX" type="dispatcher">home.action</result> -->
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+
+
+
+
+
+		<action name="adminHome" class="com.fivesticks.time.dashboard.xwork.ViewAdminDashboard" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/admin/dashboardadmin.jsp</result>
+		</action>
+
+		
+		<action name="loginHistoryList" class="com.fivesticks.time.admin.xwork.LoginHistoryListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/admin/wwLoginHistoryList.jsp</result>
+		</action>
+		
+		
+		
+		<action name="todolist" class="com.fivesticks.time.todo.xwork.ListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/todo/list.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/todo/list.jsp</result>
+		</action>
+		
+		<action name="todolistJSON" class="com.fivesticks.time.todo.xwork.ListCurrentToDosAsJSONAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+		
+		<action name="todolistPrint" class="com.fivesticks.time.todo.xwork.ListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/todo/listPrint.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/todo/listPrint.jsp</result>
+		</action>
+		
+		<action name="todoRest" class="com.fivesticks.time.todo.rest.RestToDoAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/todo/restToDoResponse.jsp</result>
+		</action>
+
+		<action name="todoRSSv2" class="com.fivesticks.time.todo.rest.ToDoToRSSAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/todo/todoRSSv2.jsp</result>
+		</action>
+		
+
+		 
+		
+		<action name="todomodify" class="com.fivesticks.time.todo.xwork.ModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/todo/modify.jsp</result>
+			<result name="success" type="dispatcher">/todolist.action</result>
+		</action>
+		
+
+		<action name="todo2acknowledge" class="com.fivesticks.time.todo.xwork.AcknowledgeFromDashboardAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>	
+		
+		<action name="setToDoPriority" class="com.fivesticks.time.todo.xwork.SetPriorityFromDashboardAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>	
+
+		
+		<action name="todo2activity" class="com.fivesticks.time.todo.xwork.ToDoToActivityFromDashboardAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+		
+		<action name="todo2complete" class="com.fivesticks.time.todo.xwork.CompleteFromDashboardAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>		
+
+		<action name="calendar2activity" class="com.fivesticks.time.calendar.xwork.CalendarToActivityFromDashboardAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+		
+        <!-- AJAX Actions -->
+
+
+		<action name="dashboardtodoaddAJAX" class="com.fivesticks.time.todo.xwork.AddFromDashboardAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+            <result name="inputXX" type="dispatcher">/WEB-INF/jsp/dashboard/toDoToActivityErrorAJAX.jsp</result>
+            <result name="successXX" type="dispatcher">/WEB-INF/jsp/dashboard/toDoToActivitySuccessAJAX.jsp</result>
+            <result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+
+        
+       <!--task-->
+		<action name="tasklist" class="com.fivesticks.time.customer.xwork.TaskListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/customer/taskList.jsp</result>
+		</action>
+
+		<action name="taskmodify" class="com.fivesticks.time.customer.xwork.TaskModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/customer/taskModify.jsp</result>
+			<result name="success" type="dispatcher">/tasklist.action</result>
+		</action>
+		
+		
+		<!--customer-->
+		<action name="customerlist" class="com.fivesticks.time.customer.xwork.CustomerListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/customer/customerList.jsp</result>
+		</action>
+
+				
+        
+        
+
+		<action name="customermodify" class="com.fivesticks.time.customer.xwork.CustomerModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/customer/customerModify.jsp</result>
+			<result name="success" type="dispatcher">/customerdetail.action</result>
+		</action>
+        
+        <action name="customerSettingsModify" class="com.fivesticks.time.customer.xwork.CustomerSettingModifyAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+            <result name="input" type="dispatcher">/WEB-INF/jsp/customer/customerSettingsModify.jsp</result>
+            <result name="success" type="dispatcher">/customerdetail.action</result>
+        </action>
+        
+        
+        <action name="userSettingsModify" class="com.fivesticks.time.useradmin.xwork.UserSettingModifyAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+            <result name="input" type="dispatcher">/WEB-INF/jsp/admin/userSettingsModify.jsp</result>
+            <result name="success" type="dispatcher">/home.action</result>
+        </action>
+        
+        
+		
+		<action name="customerProjectModify" class="com.fivesticks.time.customer.xwork.CustomerProjectModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="error" type="dispatcher">/home.action</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/customer/customerProjectModify.jsp</result>
+			<result name="success" type="dispatcher">/customerdetail.action</result>
+		</action>
+		
+		<action name="customerContactProjectAdd" class="com.fivesticks.time.customer.xwork.CustomerContactProjectAddAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="error" type="dispatcher">/customerlist.action</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/customer/customerContactProjectAdd.jsp</result>
+			<result name="success" type="dispatcher">/customerdetail.action</result>
+		</action>		
+				
+		<action name="customerdetail" class="com.fivesticks.time.customer.xwork.CustomerDetailAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/customer/customerDetail.jsp</result>
+		</action>
+		
+		
+		<action name="customercomment" class="com.fivesticks.time.customer.xwork.CustomerAddCommentAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/customerdetail.action</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/customer/comment.jsp</result>
+		</action>	
+
+		<!-- 2006-08-30 reid old version -->
+		<!--
+		<action name="contactmodify" class="com.fivesticks.time.customer.contact.xwork.ContactModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/customerdetail.action</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/contact/contactModify.jsp</result>
+		</action>
+		-->
+		
+		<!-- 2006-08-30 reid new version -->
+		<action name="contactdetailv2" class="com.fivesticks.time.contactv2.xwork.ContactV2DetailAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="error" type="dispatcher">/contactlistv2.action</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/contactv2/contactV2Detail.jsp</result>
+		</action>	
+		
+		<action name="contactdetailv2Print" class="com.fivesticks.time.contactv2.xwork.ContactV2DetailAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="error" type="dispatcher">/contactlistv2.action</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/contactv2/contactV2DetailPrint.jsp</result>
+		</action>			
+		
+		<action name="contactsettingsv2" class="com.fivesticks.time.contactv2.xwork.ContactV2ModifySettingsAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/contactv2/contactV2Settings.jsp</result>
+			<result name="success" type="dispatcher">/contactdetailv2.action</result>
+		</action>	
+		
+		<action name="contactassociatev2" class="com.fivesticks.time.contactv2.xwork.ContactV2AssociateAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/customerdetail.action</result>
+		</action>							
+		
+		<action name="contactmodifyv2" class="com.fivesticks.time.contactv2.xwork.ContactV2ModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/contactdetailv2.action</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/contactv2/contactV2Modify.jsp</result>
+		</action>		
+		
+		<action name="contactlistv2" class="com.fivesticks.time.contactv2.xwork.ContactV2ListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/contactv2/contactV2List.jsp</result>
+		</action>		
+		
+		<action name="contactv2comment" class="com.fivesticks.time.contactv2.xwork.ContactV2AddCommentAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/contactdetailv2.action</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/contactv2/comment.jsp</result>
+		</action>	
+		
+		<action name="webformlist" class="com.fivesticks.time.contactv2.forms.xwork.WebFormListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/contactv2/webFormList.jsp</result>
+		</action>	
+		
+		<action name="webformmodify" class="com.fivesticks.time.contactv2.forms.xwork.WebFormModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/webformlist.action</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/contactv2/webFormModify.jsp</result>
+		</action>		
+		
+					
+
+		
+		<action name="customerUserList" class="com.fivesticks.time.customer.xwork.CustomerUserAssociationsShowExternalAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="error" type="dispatcher">/WEB-INF/jsp/customer/customerList.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/customer/customerUserList.jsp</result>
+		</action>
+
+		<action name="customerUserAdd" class="com.fivesticks.time.customer.xwork.CustomerUserAssociationAddUserAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="error" type="dispatcher">/WEB-INF/jsp/customer/customerList.jsp</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/customer/customerUserAdd.jsp</result>
+			<result name="success" type="dispatcher">/customerUserList.action</result>
+		</action>
+
+		<action name="customerUserRemove" class="com.fivesticks.time.customer.xwork.CustomerUserAssociationRemoveUserAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="error" type="dispatcher">/WEB-INF/jsp/customer/customerList.jsp</result>
+			<result name="success" type="dispatcher">/customerUserList.action</result>
+		</action>
+
+		<!--account transactions-->
+		<action name="viewCustomerTransactions" 
+			class="com.fivesticks.time.customer.xwork.ViewCustomerAccountTransactionsAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">customerlist.action</result>
+			<result name="success" type="chain">accttxnList</result>		
+		</action>			
+			
+		<action name="accttxnList" class="com.fivesticks.time.account.xwork.ViewCurrentAccountTransactionsAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureComplete" />
+			<result name="input" type="dispatcher">customerlist.action</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/account/listActive.jsp</result>		
+		</action>
+		
+		<action name="accttxnListPrint" class="com.fivesticks.time.account.xwork.PrintCurrentAccountTransactionsAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureComplete" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/account/printActive.jsp</result>		
+		</action>		
+
+		<action name="accttxnModify" class="com.fivesticks.time.account.xwork.ModifyAccountTransactionAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureComplete" />
+			<result name="error" type="dispatcher">customerlist.action</result>			
+			<result name="input" type="dispatcher">/WEB-INF/jsp/account/modifyTransaction.jsp</result>
+			<result name="success" type="dispatcher">accttxnList.action</result>		
+		</action>
+
+		<action name="unpostedActivityList" class="com.fivesticks.time.accountactivity.xwork.ListUnpostedAccountActivityAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureComplete" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/accountactivity/unposted.jsp</result>
+		</action>
+
+		<action name="postUnpostedActivityList" class="com.fivesticks.time.accountactivity.xwork.PostAllUnpostedActivityToAccountAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureComplete" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/accountactivity/unposted.jsp</result>
+		</action>
+				
+		<action name="accountActivityPost" class="com.fivesticks.time.accountactivity.xwork.PostActivityToAccountAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureComplete" />
+			<result name="error" type="dispatcher">unpostedActivityList.action</result>		
+			<result name="success" type="dispatcher">unpostedActivityList.action</result>		
+		</action>
+				
+		<!--project-->
+		<action name="projectlist" class="com.fivesticks.time.customer.xwork.ProjectListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/customer/projectList.jsp</result>
+		</action>
+		<action name="projectmodify" class="com.fivesticks.time.customer.xwork.ProjectModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/customer/projectModify.jsp</result>
+			<result name="success" type="dispatcher">/projectlist.action</result>
+		</action>
+		
+		<!--activity-->
+		<!-- 2006-06-14
+		<action name="dashboardactivitystop" class="com.fivesticks.time.activity.xwork.StopFromDashboardAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">home.action</result>
+			<result name="success" type="dispatcher">/home.action</result>
+		</action>
+		<action name="dashboardactivitycontinue" class="com.fivesticks.time.activity.xwork.ContinueFromDashboardAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/home.action</result>
+			<result name="success" type="dispatcher">/home.action</result>
+		</action>
+		-->
+		
+		<action name="activity2stop" class="com.fivesticks.time.activity.xwork.StopFromDashboardAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>	
+		</action>
+		<action name="activity2start" class="com.fivesticks.time.activity.xwork.ContinueFromDashboardAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>		
+        
+        <!-- AJAX Activities -->
+        <!-- 2006-06-14
+        <action name="dashboardactivitycontinueAJAX" class="com.fivesticks.time.activity.xwork.ContinueFromDashboardAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+            <result name="input" type="dispatcher">/WEB-INF/jsp/dashboard/toDoToActivityErrorAJAX.jsp</result>
+            <result name="success" type="dispatcher">/WEB-INF/jsp/dashboard/toDoToActivitySuccessAJAX.jsp</result>
+        </action>
+        <action name="dashboardactivitystopAJAX" class="com.fivesticks.time.activity.xwork.StopFromDashboardAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+            <result name="input" type="dispatcher">/WEB-INF/jsp/dashboard/toDoToActivityErrorAJAX.jsp</result>
+            <result name="success" type="dispatcher">/WEB-INF/jsp/dashboard/toDoToActivitySuccessAJAX.jsp</result>
+        </action>
+        -->
+        
+
+		<action name="dashboardActivityAdd" class="com.fivesticks.time.activity.xwork.AddFromDashboardAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="inputxx" type="dispatcher">/home.action</result>
+			<result name="successxx" type="dispatcher">/home.action</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+		
+		<action name="dashboardDeleteActivity" class="com.fivesticks.time.activity.xwork.DeleteFromDashboardAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+        </action>  
+
+		<action name="dashboardActivityDetail" class="com.fivesticks.time.activity.xwork.ActivityModifyDetailFromDashboardAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+        </action>  
+
+		<action name="dashboardActivityUpdateDetail" class="com.fivesticks.time.activity.xwork.ActivityUpdateDetailFromDashboardAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+        </action>  
+
+        
+		<action name="activitylist" class="com.fivesticks.time.activity.xwork.ActivityListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="billing" type="dispatcher">/activitylistPrint.action</result>	 
+			<result name="add" type="dispatcher">/activityrecordmodify.action</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/activity/activityList.jsp</result>
+		</action>
+		
+		<action name="activitylistJSON" class="com.fivesticks.time.activity.xwork.ListCurrentActivityAsJSONAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>
+		
+		<action name="activitylistPrint" class="com.fivesticks.time.activity.xwork.ActivityListPrintAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/activity/activityBilling.jsp</result>	 
+		</action>		
+
+		<action name="activitySummarizeByClass" class="com.fivesticks.time.activity.xwork.ActivitySummarizeByClassAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/activity/activitySummarizeByClass.jsp</result>
+		</action>
+		
+		<action name="getSummaryDataForGraph" class="com.fivesticks.time.activity.xwork.GetSummaryDataForGraphAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/activity/activitySummarizePieGraphData.jsp</result>
+			<result name="success.chargeable" type="dispatcher">/WEB-INF/jsp/activity/activitySummarizeMultiColumnData.jsp</result>			
+		</action>
+		
+		<action name="activitySummarizeByProject" class="com.fivesticks.time.activity.xwork.ActivitySummarizeByProjectAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/activity/activitySummarizeByProject.jsp</result>
+		</action>		
+				
+		<action name="activityrecordmodify" class="com.fivesticks.time.activity.xwork.ActivityModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/activity/activityRecordModify.jsp</result>
+			<result name="success" type="dispatcher">/activitylist.action</result>
+		</action>
+		
+		<action name="activityRest" class="com.fivesticks.time.activity.rest.RestActivityAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/activity/restActivityResponse.jsp</result>
+		</action>
+		
+	 <!--calendar-->
+			
+       <action name="calendarDefault" class="com.fivesticks.time.calendar.xwork.CalendarDefaultGatewayAction" >
+            <interceptor-ref name="fivesticksComponentStack" />          
+                <result name="success-Day" type="chain">calendarDaily</result>  
+                <result name="success-Week" type="chain">calendarWeekly</result>  
+                <result name="success-Month" type="chain">calendarMonthly</result>  
+        </action>      
+            
+            
+            
+		<action name="calendarDaily" class="com.fivesticks.time.calendar.xwork.CalendarShowDayAction" >
+			<interceptor-ref name="fivesticksComponentStack" />			 
+			<result name="success" type="dispatcher">/WEB-INF/jsp/calendar/dailyHalfHour.jsp</result>		
+		</action>	
+
+		<action name="calendarWeekly" class="com.fivesticks.time.calendar.xwork.CalendarShowWeekAction" >
+			<interceptor-ref name="fivesticksComponentStack" />			 
+			<result name="success" type="dispatcher">/WEB-INF/jsp/calendar/weeklyHour.jsp</result>		
+		</action>	
+		
+		<action name="calendarMonthly" class="com.fivesticks.time.calendar.xwork.CalendarShowMonthAction" >
+			<interceptor-ref name="fivesticksComponentStack" />			 
+			<result name="success" type="dispatcher">/WEB-INF/jsp/calendar/monthlyDay.jsp</result>		
+		</action>					
+
+		<action name="calendarMonthlyPrint" class="com.fivesticks.time.calendar.xwork.CalendarShowMonthAction" >
+			<interceptor-ref name="fivesticksComponentStack" />			 
+			<result name="success" type="dispatcher">/WEB-INF/jsp/calendar/monthlyDayPrint.jsp</result>		
+		</action>					
+
+		
+		<action name="calendarmodify" class="com.fivesticks.time.calendar.xwork.CalendarModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/calendar/calendarModify.jsp</result>
+			<result name="success" type="dispatcher">calendarDaily.action</result>
+			<result name="success.week" type="dispatcher">calendarWeekly.action</result>
+			<result name="success.month" type="dispatcher">calendarMonthly.action</result>
+		</action>
+		
+		<action name="calendarDeleteSuccess" class="com.fivesticks.time.calendar.xwork.CalendarDeleteSuccessAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">calendarDaily.action</result>
+			<result name="success.week" type="dispatcher">calendarWeekly.action</result>
+			<result name="success.month" type="dispatcher">calendarMonthly.action</result>
+		</action>
+		
+
+		
+		 
+		 <!--General Login -->
+		<action name="login" class="com.fivesticks.time.authen.xwork.GeneralLoginAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/authen/wwlogin.jsp</result>
+			<result name="success" type="dispatcher">/home.action</result>
+			<result name="success.Calendar" type="dispatcher">/calendarMonthly.action</result>
+			<result name="success.TimeClock" type="dispatcher">/timeclockHome.action</result>
+			<result name="success.TimeClockAdmin" type="dispatcher">/timeclockAdmin.action</result>			
+			<result name="success.accountUpdate" type="dispatcher">/updateAccountFromDashboard.action</result>
+			<result name="error" type="dispatcher">/reset.action</result>
+		</action>
+		
+		<action name="reset" class="com.fivesticks.time.authen.xwork.LoginResetAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/authen/wwlogin.jsp</result>
+		</action>
+
+		<action name="logout" class="com.fivesticks.time.authen.xwork.LogoutAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/authen/wwlogout.jsp</result>
+		</action>		
+
+		<action name="passwordHelp" class="com.fivesticks.time.authen.xwork.PasswordHelpAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/authen/wwPasswordHelpInput.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/authen/wwPasswordHelpSuccess.jsp</result>
+		</action>	
+
+		<action name="passwordReset" class="com.fivesticks.time.authen.xwork.PasswordResetSendLinkAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/authen/wwPasswordHelpInput.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/authen/wwPasswordHelpSuccess.jsp</result>
+		</action>	
+
+		<action name="passwordResetActivate" class="com.fivesticks.time.authen.xwork.PasswordResetActivateLinkAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/authen/wwPasswordResetActivate.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/authen/wwPasswordResetActivateSuccess.jsp</result>
+		</action>	
+		
+		<action name="suggestImprovement" class="com.fivesticks.time.admin.xwork.SuggestImprovementAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/admin/suggestImprovement.jsp</result>
+		</action>				
+
+		<!-- General Admin -->
+
+		<action name="userList" class="com.fivesticks.time.useradmin.xwork.UserListAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/admin/wwUserList.jsp</result>
+		</action>
+		<action name="userActive" class="com.fivesticks.time.useradmin.xwork.MakeActiveAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />
+			<result name="success" type="dispatcher">/userList.action</result>
+		</action>
+		<action name="userInactive" class="com.fivesticks.time.useradmin.xwork.MakeInactiveAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />
+			<result name="success" type="dispatcher">/userList.action</result>
+		</action>
+		<action name="userModify" class="com.fivesticks.time.useradmin.xwork.UserModifyAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/admin/wwUserModify.jsp</result>			
+			<result name="success" type="dispatcher">userList.action</result>
+		</action>
+		<action name="userAdd" class="com.fivesticks.time.useradmin.xwork.UserAddAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/admin/wwUserAdd.jsp</result>			
+			<result name="success" type="dispatcher">userList.action</result>
+		</action>
+		<action name="passwordModify" class="com.fivesticks.time.useradmin.xwork.PasswordModifyAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/admin/wwPasswordModify.jsp</result>			
+			<result name="success" type="dispatcher">userSettingsModify.action</result>
+			<result name="success-admin" type="dispatcher">userList.action</result>
+		</action>
+		
+		
+		<!-- Time Clock -->
+		<!--timeclock-->
+		<action name="timeclockOnly" class="com.fivesticks.time.timeclock.xwork.TimeclockOnlyPageAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<param name="action">timeclockOnly.action</param>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockLogin.jsp</result>
+			<!--<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockLoginSuccess.jsp</result>-->
+			<!--<result name="report" type="dispatcher">/WEB-INF/jsp/timeclock/todaysReport.jsp</result>-->
+			<!--<result name="forword" type="dispatcher">/WEB-INF/jsp/timeclock/todaysClockLogin.jsp</result>-->
+			<result name="punchinsuccess" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockMessage.jsp</result>
+			<result name="punchoutsuccess" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockMessage.jsp</result>
+			<result name="success.userPeriod" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockLoginSuccessUserPeriod.jsp</result>			
+			<result name="error" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockMessage.jsp</result>
+		</action>
+		
+		<action name="tco" class="com.fivesticks.time.timeclock.xwork.TimeclockOnlyPageAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<param name="action">tco.m</param>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockLogin.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockLoginSuccess.jsp</result>
+			<result name="report" type="dispatcher">/WEB-INF/jsp/timeclock/todaysReport.jsp</result>
+			<result name="forword" type="dispatcher">/WEB-INF/jsp/timeclock/todaysClockLogin.jsp</result>
+			<result name="punchinsuccess" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockMessage.jsp</result>
+			<result name="punchoutsuccess" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockMessage.jsp</result>
+			<result name="success.userPeriod" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockLoginSuccessUserPeriod.jsp</result>			
+			<result name="error" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockMessage.jsp</result>
+		</action>
+
+		<action name="timeclockOnlyV2" class="com.fivesticks.time.timeclock.xwork.TimeclockOnlyPageActionV2" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<param name="action">timeclockOnlyV2.action</param>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/timeClockLoginV2.jsp</result>
+		</action>	
+		
+		<action name="handleTimeClockOnlyV2" class="com.fivesticks.time.timeclock.xwork.HandleTimeclockOnlyPageActionV2" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<param name="action">timeclockOnlyV2.action</param>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>
+		</action>				
+		
+		<action name="timeclockHome" class="com.fivesticks.time.timeclock.xwork.TimeClockHomeAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/wwTimeClockHome.jsp</result>
+		</action>
+
+		<action name="timeclockRest" class="com.fivesticks.time.timeclock.rest.RestTimeclockAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/restTimeclockResponse.jsp</result>
+		</action>
+
+		<action name="timeclockRestAjax" class="com.fivesticks.time.timeclock.rest.RestTimeclockAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/restTimeclockResponseAjax.jsp</result>
+		</action>
+		
+		<action name="timeclockPunchIn" class="com.fivesticks.time.timeclock.xwork.PunchInAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="chain">timeclockHome</result>		
+		</action>		
+
+		<action name="timeclockPunchOut" class="com.fivesticks.time.timeclock.xwork.PunchOutAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="chain">timeclockHome</result>		
+		</action>		
+
+		<action name="timeclockBreakStart" class="com.fivesticks.time.timeclock.xwork.BreakStartAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="chain">timeclockHome</result>		
+		</action>		
+
+		<action name="timeclockBreakStop" class="com.fivesticks.time.timeclock.xwork.BreakStopAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="chain">timeclockHome</result>		
+		</action>		
+
+		<!-- 2006-06-14 updated to JSON -->
+        <action name="timeclockPunchInDashboard" class="com.fivesticks.time.timeclock.xwork.PunchInAction" >
+            <interceptor-ref name="fivesticksTimeClockComponentStack" />
+            <result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>      
+        </action>       
+
+        <action name="timeclockPunchOutDashboard" class="com.fivesticks.time.timeclock.xwork.PunchOutAction" >
+            <interceptor-ref name="fivesticksTimeClockComponentStack" />
+            <result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>      
+        </action>       
+
+        <action name="timeclockBreakStartDashboard" class="com.fivesticks.time.timeclock.xwork.BreakStartAction" >
+            <interceptor-ref name="fivesticksTimeClockComponentStack" />
+            <result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>      
+        </action>       
+
+        <action name="timeclockBreakStopDashboard" class="com.fivesticks.time.timeclock.xwork.BreakStopAction" >
+            <interceptor-ref name="fivesticksTimeClockComponentStack" />
+            <result name="success" type="dispatcher">/WEB-INF/jsp/json/generic-json.jsp</result>      
+        </action>   
+        
+
+        
+		<action name="timeclockCurrent" class="com.fivesticks.time.timeclock.xwork.ShowMyPayPeriodSummaryAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/wwPayPeriod.jsp</result>
+			<param name="periodType">Current</param>
+		</action>
+		
+		<action name="timeclockPrevious" class="com.fivesticks.time.timeclock.xwork.ShowMyPayPeriodSummaryAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/wwPayPeriod.jsp</result>
+			<param name="periodType">Previous</param>
+		</action>
+		
+		<action name="timeclockDetail" class="com.fivesticks.time.timeclock.xwork.ShowShiftDetailAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/wwPunchList.jsp</result>
+		</action>
+		
+		<action name="timeclockAdmin" class="com.fivesticks.time.timeclockadmin.xwork.TimeclockAdminAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/wwTimeclockAdmin.jsp</result>				
+		</action>
+
+
+				
+		<action name="timeclockActivityByDate" class="com.fivesticks.time.timeclockadmin.xwork.TimeclockActivityByDateAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/timeclockActivityByDate.jsp</result>				
+		</action>
+		
+		
+		<action name="timeclockEventModifySetup" class="com.fivesticks.time.timeclockadmin.xwork.TimeclockEventModifyPrepareAction" >
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="chain">timeclockEventModify</result>				
+		</action>
+		
+		<action name="timeclockEventModify" class="com.fivesticks.time.timeclockadmin.xwork.TimeclockAdminEventModifyAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<param name="actionName" >timeclockEventModify.action</param>
+			<param name="deleteDestination" >delete-success-timeclock-event-bydate</param>						
+			<result name="error" type="dispatcher">timeclockAdmin.action</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/timeclock/wwTimeclockEventModify.jsp</result>
+			<result name="success" type="dispatcher">timeclockActivityByDate.action</result>		
+		</action>		
+		
+		<action name="timeclockPayPeriodAllUsers" class="com.fivesticks.time.timeclockadmin.xwork.ShowAllPayPeriodSummariesAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="input" type="dispatcher">timeclockAdmin.action</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/wwPayPeriodAllUsers.jsp</result>		
+		</action>
+		
+		<action name="timeclockPayPeriodAllUsersPrint" class="com.fivesticks.time.timeclockadmin.xwork.ShowAllPayPeriodSummariesAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/wwPayPeriodAllUsersPrint.jsp</result>		
+		</action>		
+
+		<action name="timeclockPayPeriodAllUsersExcel" class="com.fivesticks.time.timeclockadmin.xwork.ShowAllPayPeriodSummariesAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="excel" />
+		</action>	
+				
+		<action name="timeclockPayPeriodAllUsersSummary" class="com.fivesticks.time.timeclockadmin.xwork.ShowAllPayPeriodSummariesAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="input" type="dispatcher">timeclockAdmin.action</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/wwPayPeriodAllUsersSummary.jsp</result>		
+		</action>		
+
+		<action name="timeclockPayPeriodAllUsersSummaryPrint" class="com.fivesticks.time.timeclockadmin.xwork.ShowAllPayPeriodSummariesAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/wwPayPeriodAllUsersSummaryPrint.jsp</result>		
+		</action>		
+
+
+		<action name="timeclockUserPayPeriod" class="com.fivesticks.time.timeclockadmin.xwork.ShowUserPayPeriodSummaryAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="input" type="dispatcher">timeclockAdmin.action</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/wwTimeclockAdminUserPayPeriod.jsp</result>		
+		</action>		
+
+		<action name="timeclockUserPunchDetail" class="com.fivesticks.time.timeclockadmin.xwork.TimeclockAdminShowDetailAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="error" type="dispatcher">timeclockAdmin.action</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/timeclock/wwTimeclockAdminPunchDetail.jsp</result>		
+		</action>		
+
+		<action name="timeclockUserDetailModifytch" class="com.fivesticks.time.timeclockadmin.xwork.TimeclockAdminEventModifyAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<param name="actionName">timeclockUserDetailModifytch.action</param>
+			<param name="deleteDestination" >delete-success-timeclock-event-home</param>
+			<result name="error" type="dispatcher">timeclockHome.action</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/timeclock/wwTimeclockModify.jsp</result>
+			<result name="success" type="dispatcher">timeclockHome.action</result>		
+		</action>		
+		
+		<action name="timeclockUserDetailModify" class="com.fivesticks.time.timeclockadmin.xwork.TimeclockAdminEventModifyAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<param name="actionName" >timeclockUserDetailModify.action</param>
+			<param name="deleteDestination" >delete-success-timeclock-event</param>
+			<result name="error" type="dispatcher">timeclockAdmin.action</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/timeclock/wwTimeclockModify.jsp</result>
+			<result name="success" type="dispatcher">timeclockUserPunchDetail.action</result>		
+		</action>		
+
+		<action name="commonDelete" class="com.fivesticks.time.common.delete.xwork.CommonDeleteAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="error" type="dispatcher">/WEB-INF/jsp/common/wwDeleteError.jsp</result>
+			<result name="input" type="dispatcher">/WEB-INF/jsp/common/wwDeleteInput.jsp</result>
+		</action>
+
+		
+		<action name="settingsModify" class="com.fivesticks.time.settings.xwork.SystemSettingsModifyAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />			
+			<result name="input" type="dispatcher">/WEB-INF/jsp/settings/settingsModify.jsp</result>
+			<result name="success" type="dispatcher">adminHome.action</result>
+		</action>
+
+		<action name="settingsGenerateToken" class="com.fivesticks.time.settings.xwork.GenerateSystemOwnerTokenAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />			
+			<result name="input" type="dispatcher">/WEB-INF/jsp/settings/generateToken.jsp</result>
+			<result name="success" type="dispatcher">settingsModify.action</result>
+		</action>
+
+		<action name="settingsRevokeToken" class="com.fivesticks.time.settings.xwork.RevokeSystemOwnerTokenAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />			
+			<result name="input" type="dispatcher">/WEB-INF/jsp/settings/revokeToken.jsp</result>
+			<result name="success" type="dispatcher">settingsModify.action</result>
+		</action>
+		
+		<action name="updateAccount" class="com.fivesticks.time.systemowner.payments.xwork.ModifyAccountAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />			
+			<result name="input" type="dispatcher">/WEB-INF/jsp/settings/accountInformation.jsp</result>
+			<result name="success" type="dispatcher">settingsModify.action</result>		
+		</action>
+		
+		<action name="updateAccountFromDashboard" class="com.fivesticks.time.systemowner.payments.xwork.ModifyAccountAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<interceptor-ref name="userRoleAdministrator" />	
+			<param name="actionName">updateAccountFromDashboard.action</param>	
+			<result name="input" type="dispatcher">/WEB-INF/jsp/settings/accountInformation.jsp</result>
+			<result name="success" type="dispatcher">home.action</result>		
+		</action>		
+
+		<action name="userGenerateToken" class="com.fivesticks.time.useradmin.xwork.GenerateUserTokenAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/settings/generateToken.jsp</result>
+			<result name="success" type="dispatcher">userSettingsModify.action</result>
+		</action>
+
+		<action name="userRevokeToken" class="com.fivesticks.time.useradmin.xwork.RevokeUserTokenAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />		
+			<result name="input" type="dispatcher">/WEB-INF/jsp/settings/revokeToken.jsp</result>
+			<result name="success" type="dispatcher">userSettingsModify.action</result>
+		</action>
+		
+		<action name="help" class="com.fivesticks.time.help.xwork.ShowHelpAction">
+			<interceptor-ref name="fivesticksTimeClockComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/help/showHelp.jsp</result>
+		</action>
+
+		<!--REGISTER V1-->
+		<action name="register" class="com.fivesticks.time.register.xwork.RegisterAction">
+			<interceptor-ref name="defaultStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/register/wwRegisterInput.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/register/wwRegisterSuccess.jsp</result>
+		</action>		
+		
+		<action name="initialSetup" class="com.fivesticks.time.register.xwork.InitialSetupAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/register/initialSettings.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/register/initialSettingsSuccess.jsp</result>
+		</action>							
+
+		<!--REGISTER V2 -->
+		<action name="regPlan" class="com.fivesticks.time.register.v2.xwork.SelectPlanAction">
+			<interceptor-ref name="defaultStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/register/v2/wwRegisterInput_plan.jsp</result>
+			<result name="success" type="dispatcher">regCompanyInfo.action</result>
+		</action>				
+
+		<action name="regCompany" class="com.fivesticks.time.register.v2.xwork.EnterCompanyInformationAction">
+			<interceptor-ref name="defaultStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/register/v2/wwRegisterInput_company.jsp</result>
+			<result name="success" type="dispatcher">regPayment.action</result>
+			<result name="success.free" type="dispatcher">regConfirm.action</result>
+		</action>				
+
+		<action name="regPayment" class="com.fivesticks.time.register.v2.xwork.EnterPaymentInformationAction">
+			<interceptor-ref name="defaultStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/register/v2/wwRegisterInput_payment.jsp</result>
+			<result name="success" type="dispatcher">regConfirm.action</result>
+		</action>				
+
+		<action name="regConfirm" class="com.fivesticks.time.register.v2.xwork.ConfirmOrderAction">
+			<interceptor-ref name="defaultStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/register/v2/wwRegisterInput_summary.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/register/wwRegisterSuccess.jsp</result>
+		</action>				
+
+
+
+		<action name="activate" class="com.fivesticks.time.register.xwork.ActivateAction">
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="error" type="dispatcher">/WEB-INF/jsp/register/wwActivateError.jsp</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/register/wwActivateSuccess.jsp</result>
+		</action>				
+
+		<action name="actResend" class="com.fivesticks.time.register.xwork.ResendActivationMessageAction">
+			<interceptor-ref name="defaultStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/register/wwResendInput.jsp</result>
+		</action>		
+
+		<action name="inactReg" class="com.fivesticks.time.register.xwork.InactiveAccountAction">
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/authen/wwLoginError.jsp</result>
+		</action>				
+		
+		<action name="otherReg" class="com.fivesticks.time.register.xwork.OtherInterestAction">
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/register/wwOtherInterests.jsp</result>
+		</action>
+				
+		<!--SUPERUSER STUFF-->
+		<action name="superUserDashboard" class="com.fivesticks.time.superuser.xwork.SuperUserDashboardAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="error" type="dispatcher">/WEB-INF/jsp/superuser/error.jsp</result>		
+			<result name="success" type="dispatcher">/WEB-INF/jsp/superuser/dashboard.jsp</result>		
+		</action>
+        
+        
+       <action name="superUserEmailToAllSystemOwners" class="com.fivesticks.time.superuser.xwork.SuperUserEmailAllSystemOwnersAction">
+            <interceptor-ref name="fivesticksComponentStack" />
+            <interceptor-ref name="featureSuperUser" />
+            <result name="error" type="dispatcher">/WEB-INF/jsp/superuser/superUserEmailToAllSystemOwners.jsp</result>        
+            <result name="success" type="chain">superUserDashboard</result>   
+            <result name="input" type="dispatcher">/WEB-INF/jsp/superuser/superUserEmailToAllSystemOwners.jsp</result>   
+        </action>
+        
+        
+        
+
+		<action name="mostActive" class="com.fivesticks.time.superuser.xwork.SystemOwnerMostActiveAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="error" type="dispatcher">/WEB-INF/jsp/error/error.jsp</result>		
+			<result name="success" type="dispatcher">/WEB-INF/jsp/superuser/mostActive.jsp</result>		
+		</action>	
+		
+		<action name="ownerList" class="com.fivesticks.time.superuser.xwork.SystemOwnerListAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="error" type="dispatcher">/WEB-INF/jsp/error/error.jsp</result>		
+			<result name="success" type="dispatcher">/WEB-INF/jsp/superuser/ownerList.jsp</result>		
+		</action>		
+
+		<action name="ownerActivate" class="com.fivesticks.time.superuser.xwork.SystemOwnerActivateAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="input" type="dispatcher">/ownerList.action</result>		
+			<result name="success" type="dispatcher">/ownerList.action</result>		
+		</action>	
+
+		<action name="ownerDeactivate" class="com.fivesticks.time.superuser.xwork.SystemOwnerDeactivateAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="input" type="dispatcher">/ownerList.action</result>		
+			<result name="success" type="dispatcher">/ownerList.action</result>		
+		</action>						
+
+		<action name="ownerUserList" class="com.fivesticks.time.superuser.xwork.SystemOwnerUserListAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="input" type="dispatcher">/ownerList.action</result>		
+			<result name="success" type="dispatcher">/WEB-INF/jsp/superuser/userList.jsp</result>		
+		</action>	
+		
+		<action name="rawUserList" class="com.fivesticks.time.superuser.xwork.SuperUserUserListAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/superuser/rawUserList.jsp</result>		
+		</action>			
+
+		<action name="loginHistoryStats" class="com.fivesticks.time.superuser.xwork.SuperUserLoginStats">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/superuser/loginHistoryStats.jsp</result>		
+		</action>	
+				
+		<action name="systemOwnerModifyAccountSetting" class="com.fivesticks.time.superuser.xwork.SystemOwnerModifyAccountSettingAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="error" type="chain">/home.action</result>		
+			<result name="success" type="dispatcher">/superUserDashboard.action</result>		
+			<result name="input" type="dispatcher">/WEB-INF/jsp/superuser/systemOwnerModifyAccountSetting.jsp</result>		
+		</action>
+
+		<action name="systemOwnerModify" class="com.fivesticks.time.superuser.xwork.SystemOwnerModifyAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="error" type="chain">/home.action</result>		
+			<result name="success" type="dispatcher">ownerList.action</result>		
+			<result name="input" type="dispatcher">/WEB-INF/jsp/superuser/systemOwnerModify.jsp</result>		
+		</action>
+		
+		<action name="ownerMetrics" class="com.fivesticks.time.superuser.xwork.SystemOwnerShowMetricsAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/superuser/systemOwnerMetrics.jsp</result>		
+		</action>			
+		
+		<action name="ownerUserResetPassword" class="com.fivesticks.time.superuser.xwork.SystemOwnerUserResetPasswordAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="input" type="dispatcher">/ownerUserList.action</result>		
+			<result name="success" type="dispatcher">/ownerUserList.action</result>		
+		</action>	
+		
+		<action name="ownerUserModify" class="com.fivesticks.time.useradmin.xwork.UserModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/superuser/wwUserModify.jsp</result>			
+			<result name="success" type="dispatcher">/ownerUserList.action</result>
+		</action>
+		<action name="ownerPasswordModify" class="com.fivesticks.time.useradmin.xwork.PasswordModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<interceptor-ref name="featureSuperUser" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/superuser/wwPasswordModify.jsp</result>			
+			<result name="success" type="dispatcher">/ownerUserList.action</result>
+		</action>		
+		
+		<action name="qmList" class="com.fivesticks.time.queuedmessages.xwork.MessageListAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/queuedmessages/list.jsp</result>							
+		</action>
+
+		<action name="qmModify" class="com.fivesticks.time.queuedmessages.xwork.MessageModifyAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/queuedmessages/modify.jsp</result>							
+			<result name="success" type="dispatcher">/qmList.action</result>							
+		</action>
+		
+		<!-- 2006-06-28 reid replaced
+		<action name="payPeriodProductivityReport" class="com.fivesticks.time.payperiodproductivity.xwork.PayPeriodProductivityReportAction">
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/payperiodproductivity/payPeriodProductivityInput.jsp</result>		
+			<result name="success" type="dispatcher">/WEB-INF/jsp/payperiodproductivity/payPeriodProductivityInput.jsp</result>		
+		</action>	
+		-->
+
+		<!-- external user information -->
+		<action name="external" class="com.fivesticks.time.externaluser.xwork.ExternalUserViewDashboardAction" >
+			<interceptor-ref name="fivesticksExternalComponentStack" />
+			<result name="input" type="dispatcher">/extCustomer.action</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/externaluser/dashboard.jsp</result>
+		</action>
+
+		<action name="extCustomer" class="com.fivesticks.time.externaluser.xwork.ExternalUserSetActiveCustomerAction" >
+			<interceptor-ref name="fivesticksExternalComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/externaluser/custList.jsp</result>
+			<result name="success" type="dispatcher">/external.action</result>
+		</action>
+		
+		<action name="extAccount" class="com.fivesticks.time.externaluser.xwork.ExternalUserViewAccountAction" >
+			<interceptor-ref name="fivesticksExternalComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/externaluser/transactions.jsp</result>
+		</action>		
+				
+		<action name="extTodos" class="com.fivesticks.time.externaluser.xwork.ExternalUserViewToDoListAction" >
+			<interceptor-ref name="fivesticksExternalComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/externaluser/todoList.jsp</result>
+		</action>	
+
+		<action name="extTodoModify" class="com.fivesticks.time.externaluser.xwork.ExternalUserModifyToDoAction" >
+			<interceptor-ref name="fivesticksExternalComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/externaluser/todoModify.jsp</result>
+			<result name="success" type="dispatcher">/extTodos.action</result>			
+		</action>				
+
+		<action name="extTodoComment" class="com.fivesticks.time.externaluser.xwork.ExternalUserAddCommentAction" >
+			<interceptor-ref name="fivesticksExternalComponentStack" />
+			<result name="error" type="dispatcher">/extTodos.action</result>			
+			<result name="input" type="dispatcher">/WEB-INF/jsp/externaluser/todoComment.jsp</result>
+			<result name="success" type="dispatcher">/extTodoDetail.action</result>			
+		</action>	
+		
+		<!-- 2006-06-28 rsc
+		<action name="extTodoCommentDetail" class="com.fivesticks.time.externaluser.xwork.ExternalUserAddCommentAction" >
+			<interceptor-ref name="fivesticksExternalComponentStack" />
+			<result name="error" type="dispatcher">/extTodos.action</result>			
+			<result name="input" type="dispatcher">/WEB-INF/jsp/externaluser/todoComment.jsp</result>
+			<result name="success" type="dispatcher">/extTodoDetail.action</result>			
+		</action>	
+		-->		
+		
+		<action name="extTodoDetail" class="com.fivesticks.time.externaluser.xwork.ExternalUserViewToDoDetailAction" >
+			<interceptor-ref name="fivesticksExternalComponentStack" />
+			<result name="input" type="dispatcher">/extTodos.action</result>
+			<result name="success" type="dispatcher">/WEB-INF/jsp/externaluser/todoDetail.jsp</result>			
+		</action>	
+		
+		<action name="extPassword" class="com.fivesticks.time.externaluser.xwork.PasswordModifyAction" >
+			<interceptor-ref name="fivesticksExternalComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/externaluser/wwPasswordModify.jsp</result>			
+			<result name="success" type="dispatcher">external.action</result>
+		</action>				
+		
+
+		
+						
+					
+						
+		<!-- LOOKUPS -->
+		<action name="lookupsList" class="com.fivesticks.time.lookups.xwork.ListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/lookups/list.jsp</result>															
+		</action>		
+		
+		<action name="lookupModify" class="com.fivesticks.time.lookups.xwork.ModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/lookups/modify.jsp</result>															
+			<result name="success" type="dispatcher">/lookupsList.action</result>															
+		</action>		
+		
+		
+		<!-- EMPLOYEES -->
+		<action name="employeeList" class="com.fivesticks.time.employee.xwork.ListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/employee/list.jsp</result>															
+		</action>		
+		
+		<action name="employeeModify" class="com.fivesticks.time.employee.xwork.ModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/employee/modify.jsp</result>															
+			<result name="success" type="dispatcher">/employeeList.action</result>															
+		</action>			
+
+		<action name="employeeView" class="com.fivesticks.time.employee.xwork.ViewAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/employeeList.action</result>															
+			<result name="success" type="dispatcher">/WEB-INF/jsp/employee/view.jsp</result>															
+		</action>		
+		
+		<action name="teamList" class="com.fivesticks.time.employee.team.xwork.ListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/employee/teamList.jsp</result>															
+		</action>		
+		
+		<action name="teamModify" class="com.fivesticks.time.employee.team.xwork.ModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/employee/teamModify.jsp</result>															
+			<result name="success" type="dispatcher">/teamList.action</result>															
+		</action>		
+		
+		<action name="teamModifyMembers" class="com.fivesticks.time.employee.team.xwork.ModifyTeamMembershipAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">/WEB-INF/jsp/employee/teamMembers.jsp</result>															
+			<result name="success" type="dispatcher">/teamList.action</result>															
+		</action>								
+		
+		<!--account transactions-->
+		<action name="employeeViewTransactions" 
+			class="com.fivesticks.time.employee.xwork.ViewEmployeeAccountTransactionsAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="input" type="dispatcher">employeeList.action</result>
+			<result name="success" type="chain">accttxnList</result>		
+		</action>		
+		
+		<!-- MESSAGES -->
+		<action name="messageList" class="com.fivesticks.time.messages.xwork.ListAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/messages/list.jsp</result>															
+		</action>		
+		
+		<action name="messageModify" class="com.fivesticks.time.messages.xwork.ModifyAction" >
+			<interceptor-ref name="fivesticksComponentStack" />
+            <result name="input" type="dispatcher">/WEB-INF/jsp/messages/modify.jsp</result>
+			<result name="success" type="dispatcher">/messageList.action</result>															
+		</action>	
+        
+       <action name="sendCustomerMessage" class="com.fivesticks.time.messages.customer.xwork.SendCustomerMessageActionV2" >
+            <interceptor-ref name="fivesticksComponentStack" />
+            <result name="input" type="dispatcher">/WEB-INF/jsp/messages/sendCustomerMessageInputV2.jsp</result>
+            <result name="success" type="dispatcher">/sendCustomerMessageConfirm.action</result>                                                           
+        </action>
+        
+        <action name="sendCustomerMessageSelectRecipients" class="com.fivesticks.time.messages.customer.xwork.SendCustomerMessagePrepareRecipientsAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+            <result name="input" type="dispatcher">/WEB-INF/jsp/messages/sendCustomerMessageInput.jsp</result>
+            <result name="error" type="dispatcher">/WEB-INF/jsp/messages/sendCustomerMessagePrepError.jsp</result>
+            <result name="success" type="chain">sendCustomerMessage</result>                                                           
+        </action>
+
+       <action name="sendCustomerMessageConfirm" class="com.fivesticks.time.messages.customer.xwork.ConfirmSendAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+            <result name="input" type="dispatcher">/WEB-INF/jsp/messages/sendCustomerMessageConfirmInput.jsp</result>
+            <result name="success" type="dispatcher">/WEB-INF/jsp/messages/sendCustomerMessageSuccess.jsp</result>                                                           
+            <result name="cancel" type="dispatcher">/sendCustomerMessage.action</result>                                                           
+        </action>
+
+       
+        <action name="sendSystemOwnerMessage" class="com.fivesticks.time.messages.systemowner.xwork.SendSystemOwnerMessageAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+           <interceptor-ref name="featureSuperUser" />
+            <result name="input" type="dispatcher">/WEB-INF/jsp/messages/sendSystemOwnerMessageInput.jsp</result>
+            <result name="success" type="dispatcher">/WEB-INF/jsp/messages/sendSystemOwnerMessageSuccess.jsp</result>                                                           
+        </action>
+                                                                     
+        <action name="sendSystemOwnerMessageSelectRecipients" class="com.fivesticks.time.messages.systemowner.xwork.SendSystemOwnerMessagePrepareRecipientsAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+            <interceptor-ref name="featureSuperUser" />
+            <result name="input" type="dispatcher">/WEB-INF/jsp/messages/sendSystemOwnerMessageInput.jsp</result>
+            <result name="error" type="dispatcher">/WEB-INF/jsp/messages/sendCustomerMessagePrepError.jsp</result>
+            <result name="success" type="chain">sendSystemOwnerMessage</result>                                                           
+        </action>
+        
+        <action name="sendCustomerMessagePreviewAJAX" class="com.fivesticks.time.messages.customer.xwork.SendCustomerMessagePreviewAction" >
+            <interceptor-ref name="fivesticksComponentStack" />
+            <result name="input" type="dispatcher">/WEB-INF/jsp/messages/sendMessagePreviewErrorAJAX.jsp</result>
+            <result name="success" type="dispatcher">/WEB-INF/jsp/messages/sendMessagePreviewSuccessAJAX.jsp</result>                                                           
+        </action>
+        
+        
+        <!-- external link -->
+		<action name="tcconnect" class="com.fivesticks.time.contactv2.forms.external.InputFromWebFormAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/contactv2/externalLink.jsp</result>
+			<result name="success-redirect" type="dispatcher">/WEB-INF/jsp/contactv2/externalLinkNoRedirect.jsp</result>						
+			<result name="success.spam" type="dispatcher">/WEB-INF/jsp/contactv2/probablySpam.jsp</result>						
+		</action>        
+        
+        
+	</package>
+
+	
+
+</xwork>

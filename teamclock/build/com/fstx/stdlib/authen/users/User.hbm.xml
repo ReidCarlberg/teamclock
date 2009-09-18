@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fstx.stdlib.authen.users.User" table="user">
+    <id name="id" column="userId" type="java.lang.Long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+
+	<property name="username" 
+		column="userUserName" 
+		type="string" 
+		length="20" 
+		not-null="true" 
+		unique="true" />
+		
+	<property name="password" 
+		column="userPassword" 
+		type="string" 
+		length="20" 
+		not-null="true" />
+
+	<property name="passwordHash" 
+		column="userPasswordHash" 
+		type="string" 
+		length="255" 
+		not-null="true" />
+				
+	<property name="email" 
+		column="userEmail" 
+		type="string" 
+		length="100" 
+		not-null="true" 
+		unique="true" />
+		
+	<property name="inactive" 
+		column="userInactive" 
+		type="int" 
+		not-null="false" 
+		unique="false" />
+	
+	<property name="passwordExpires"
+		column="userPasswordExpires"
+		type="java.util.Date"
+		not-null="false" />
+
+	<property name="resetKey"
+		column="userResetKey"
+		type="string"
+		length="100"
+		not-null="false" />
+
+	
+  </class>
+  
+ 
+  <!--
+	<class name="com.fstx.stdlib.authen.users.GroupMembership" table="groupmembership">
+		<id name="id" column="groupMembershipId" type="java.lang.Long" unsaved-value="null">
+		  <generator class="identity"/>
+		</id>
+
+		<property name="groupId" column="groupMembershipGroupId" type="java.lang.Long" not-null="true" />
+		<property name="userId" column="groupMembershipUserId" type="java.lang.Long" not-null="true" />
+	
+  </class>
+  -->
+  
+
+
+</hibernate-mapping>

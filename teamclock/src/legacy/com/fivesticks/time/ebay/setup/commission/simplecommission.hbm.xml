@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.ebay.setup.commission.SimpleCommission" table="ebaycommission">
+    <id name="id" 
+    	column="scId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+	<property name="ownerKey"
+		column="scOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+	<property name="name"
+		column="scName"
+		type="string"
+		length="50"
+		not-null="true"
+		unique="false" />
+				
+	<property name="minimum"
+		column="scMinimum"
+		type="double"
+		not-null="false" />
+
+	<property name="oneMin"
+		column="scOneMin"
+		type="double"
+		not-null="false" />
+
+	<property name="oneMax"
+		column="scOneMax"
+		type="double"
+		not-null="false" />
+
+	<property name="oneRate"
+		column="scOneRate"
+		type="double"
+		not-null="false" />
+				
+
+	<property name="twoMin"
+		column="scTwoMin"
+		type="double"
+		not-null="false" />
+
+	<property name="twoMax"
+		column="scTwoMax"
+		type="double"
+		not-null="false" />
+
+	<property name="twoRate"
+		column="scTwoRate"
+		type="double"
+		not-null="false" />				
+
+
+	<property name="threeMin"
+		column="scThreeMin"
+		type="double"
+		not-null="false" />
+
+	<property name="threeMax"
+		column="scThreeMax"
+		type="double"
+		not-null="false" />
+
+	<property name="threeRate"
+		column="scThreeRate"
+		type="double"
+		not-null="false" />				
+
+
+	<property name="fourMin"
+		column="scFourMin"
+		type="double"
+		not-null="false" />
+
+	<property name="fourMax"
+		column="scFourMax"
+		type="double"
+		not-null="false" />
+
+	<property name="fourRate"
+		column="scFourRate"
+		type="double"
+		not-null="false" />				
+
+
+	<property name="fiveMin"
+		column="scFiveMin"
+		type="double"
+		not-null="false" />
+
+	<property name="fiveMax"
+		column="scFiveMax"
+		type="double"
+		not-null="false" />
+
+	<property name="fiveRate"
+		column="scFiveRate"
+		type="double"
+		not-null="false" />				
+
+
+	<property name="sixMin"
+		column="scSixMin"
+		type="double"
+		not-null="false" />
+
+	<property name="sixMax"
+		column="scSixMax"
+		type="double"
+		not-null="false" />
+
+	<property name="sixRate"
+		column="scSixRate"
+		type="double"
+		not-null="false" />				
+
+
+				
+				
+  </class>
+
+</hibernate-mapping>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.ebay.setup.boxes.Box" table="ebayboxes">
+    <id name="id" 
+    	column="esbId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+
+	<property name="ownerKey"
+		column="esbOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+	<property name="name"
+		column="esbName"
+		type="string"
+		length="25"
+		not-null="false"
+		unique="false" />	
+		
+	<property name="length"
+		column="esbLength"
+		type="java.lang.Integer"
+		not-null="false"
+		unique="false" />
+	
+	<property name="width"
+		column="esbWidth"
+		type="java.lang.Integer"
+		not-null="false"
+		unique="false" />
+
+	<property name="height"
+		column="esbHeight"
+		type="java.lang.Integer"
+		not-null="false"
+		unique="false" />
+
+	<property name="weight"
+		column="esbWeight"
+		type="java.lang.Double"
+		not-null="false"
+		unique="false" />
+				
+	<property name="cost"
+		column="esbCost"
+		type="java.lang.Double"
+		not-null="false"
+		unique="false" />
+		
+	<property name="defaultHandlingCost"
+		column="esbDefaultHandlingCost"
+		type="java.lang.Double"
+		not-null="false"
+		unique="false" />
+
+	<property name="qtyOnHand"
+		column="esbQtyOnHand"
+		type="java.lang.Integer"
+		not-null="false"
+		unique="false" />
+		
+	<property name="active"
+		column="esbActive"
+		type="boolean"
+		not-null="true"
+		unique="false" />
+				
+  </class>
+
+</hibernate-mapping>

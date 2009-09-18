@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN/EN" "http://www.springframework.org/dtd/spring-beans.dtd" >
+<beans>
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	  <property name="triggers">
+	    <list>
+	      <ref local="queuedMessageTrigger"/>
+	      <ref local="eventHandlerTrigger"/>
+	      <ref local="settingsBrokerMonitorTrigger"/>
+	      <ref local="managerJobTrigger"/>
+	      
+	    </list>
+	  </property>
+	</bean>
+
+<bean id="managerJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+  <property name="jobDetail" ref="flagDemosForAccountUpdateCommand"/>
+	<!-- run every morning at 1 AM -->
+  <property name="cronExpression" value="0 0 1 * * ?"/>
+</bean>
+
+
+	<bean id="flagDemosForAccountUpdateCommand" 
+	  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject">
+	    	<bean class="com.fivesticks.time.system.manager.FlagDemosForAccountUpdateCommand" />
+	    </property>
+	    <property name="targetMethod">
+	    	<value>execute</value>
+    	</property>
+	</bean>		
+	
+	<!-- 2006-07-05 -->
+	<bean id="queuedMessageTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+	  <property name="jobDetail">
+	    <ref bean="queuedMessageSenderJob"/>
+	  </property>
+	  <property name="startDelay">
+	    <value>10000</value>
+	  </property>
+	  <property name="repeatInterval">
+	    <value>50000</value>
+	  </property>
+	</bean>
+
+	<bean id="queuedMessageSenderJob" 
+	  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject">
+	    	<ref bean="queuedMessageSenderProxy"/>
+	    </property>
+	    <property name="targetMethod">
+	    	<value>execute</value>
+    	</property>
+	</bean>		
+	
+	<bean id="queuedMessageSenderProxy" 
+		class="com.fivesticks.time.queuedmessages.SendQueuedMessagesCommandProxy" singleton="false">
+	</bean>
+	
+
+	<bean id="eventHandlerTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+	  <property name="jobDetail">
+	    <ref bean="eventHandlerJob"/>
+	  </property>
+	  <property name="startDelay">
+	    <value>2000</value>
+	  </property>
+	  <property name="repeatInterval">
+	    <value>10000</value>
+	  </property>
+	</bean>
+
+	<bean id="eventHandlerJob" 
+	  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject">
+	    	<ref bean="eventHandlerCommand"/>
+	    </property>
+	    <property name="targetMethod">
+	    	<value>execute</value>
+    	</property>
+	</bean>		
+
+	<bean id="eventHandlerCommand" 
+		class="com.fivesticks.time.events.EventHandlerCommand" singleton="false">
+	</bean>
+	
+	<bean id="settingsBrokerMonitorCommand" 
+		class="com.fivesticks.time.settings.broker.SettingsBrokerMonitorCommand" singleton="false">
+	</bean>
+
+	<bean id="settingsBrokerMonitorTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+	  <property name="jobDetail">
+	    <ref bean="settingsBrokerMonitorJob"/>
+	  </property>
+	  <property name="startDelay">
+	    <value>2000</value>
+	  </property>
+	  <property name="repeatInterval">
+	    <value>1000000</value>
+	  </property>
+	</bean>
+
+	<bean id="settingsBrokerMonitorJob" 
+	  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject">
+	    	<ref bean="settingsBrokerMonitorCommand"/>
+	    </property>
+	    <property name="targetMethod">
+	    	<value>execute</value>
+    	</property>
+	</bean>		
+
+
+	
+</beans>
+

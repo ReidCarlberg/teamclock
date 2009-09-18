@@ -1,0 +1,7 @@
+    [junit] Test com.fivesticks.time.timeclock.FstxTimeclockBDTest FAILED
+    [junit] Running com.fivesticks.time.timeclock.UserShiftCollectionBuilderTest
+    [junit] Tests run: 1, Failures: 0, Errors: 1, Time elapsed: 4.356 sec
+    [junit] Test com.fivesticks.time.timeclock.UserShiftCollectionBuilderTest FAILED
+    [junit] Running com.fivesticks.time.timeclock.UserShiftRecordTest
+    [junit] Tests run: 13, Failures: 2, Errors: 6, Time elapsed: 5.948 sec
+    [junit] Test com.fivesticks.time.timeclock.UserShiftRecordTest FAILED

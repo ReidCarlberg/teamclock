@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:UseCaseDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" metadata="nsuml-1.4" initialized="true">
+  <children xsi:type="editmodel:UseCaseActorEditModel" location="52,62" size="50,100" targetConnections="//@children.1/@sourceConnections.0" itemName="User">
+    <sourceConnections xsi:type="editmodel:UseCaseAssociationEditModel" connectionRouterKind="Manual" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@sourceConnections.0/@children.0">
+      <children xsi:type="editmodel:UseCaseEndEditModel" location="50,14" attachSource="true"/>
+      <children xsi:type="editmodel:UseCaseEndEditModel" location="1,19"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:UseCaseAssociationEditModel" connectionRouterKind="Manual" source="//@children.0" target="//@children.3" targetEnd="//@children.0/@sourceConnections.1/@children.1" sourceEnd="//@children.0/@sourceConnections.1/@children.0">
+      <children xsi:type="editmodel:UseCaseEndEditModel" location="50,85" attachSource="true"/>
+      <children xsi:type="editmodel:UseCaseEndEditModel" location="1,21"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:UseCaseAssociationEditModel" connectionRouterKind="Manual" source="//@children.0" target="//@children.4" targetEnd="//@children.0/@sourceConnections.2/@children.1" sourceEnd="//@children.0/@sourceConnections.2/@children.0">
+      <children xsi:type="editmodel:UseCaseEndEditModel" location="50,66" attachSource="true"/>
+      <children xsi:type="editmodel:UseCaseEndEditModel" location="9,11"/>
+    </sourceConnections>
+  </children>
+  <children xsi:type="editmodel:NotepadEditModel" location="41,230" size="74,24" note="Any user.">
+    <sourceConnections xsi:type="editmodel:IndicationEditModel" connectionRouterKind="Manual" source="//@children.1" target="//@children.0" targetEnd="//@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@sourceConnections.0/@children.0">
+      <children xsi:type="editmodel:UseCaseEndEditModel" location="36,-1" attachSource="true"/>
+      <children xsi:type="editmodel:UseCaseEndEditModel" location="26,100"/>
+    </sourceConnections>
+  </children>
+  <children xsi:type="editmodel:UseCaseEditModel" location="223,18" size="102,34" targetConnections="//@children.0/@sourceConnections.0" itemName="Authenticate"/>
+  <children xsi:type="editmodel:UseCaseEditModel" location="223,87" size="118,49" targetConnections="//@children.0/@sourceConnections.1" itemName="Change Password"/>
+  <children xsi:type="editmodel:UseCaseEditModel" location="212,209" size="115,47" targetConnections="//@children.0/@sourceConnections.2" itemName="Password Help"/>
+</editmodel:UseCaseDiagramEditModel>

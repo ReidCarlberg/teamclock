@@ -1,0 +1,33 @@
+<decorators>
+
+	<decorator name="mydecorator-register" page="/WEB-INF/decorators/fstxtime-decorator-register.jsp">
+		<pattern>*register.action</pattern>
+	</decorator>
+
+	<decorator name="mydecorator-register1" page="/WEB-INF/decorators/fstxtime-decorator-register.jsp">
+		<pattern>*activate.action</pattern>
+	</decorator>
+	
+	<decorator name="mydecorator-register2" page="/WEB-INF/decorators/fstxtime-decorator-register.jsp">
+		<pattern>*Resend.action</pattern>
+	</decorator>	
+
+	<decorator name="mydecorator-print" page="/WEB-INF/decorators/fstxtime-decorator-printing.jsp">
+		<pattern>*Print.action</pattern>
+	</decorator>
+
+	<decorator name="mydecorator-temp" page="/WEB-INF/decorators/fstxtime-decorator-temp.jsp">
+		<pattern>*Temp.action</pattern>
+	</decorator>
+
+	<decorator name="mydecorator-mobile" page="/WEB-INF/decorators/fstxtime-decorator-mobile.jsp">
+		<pattern>*.m</pattern>
+	</decorator>
+	
+	<decorator name="mydecorator" page="/WEB-INF/decorators/fstxtime-decorator.jsp">
+		<pattern>*</pattern>
+	</decorator>
+
+
+
+</decorators>

@@ -1,0 +1,63 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN" "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+
+    <include file="webwork-default.xml"/>
+
+    <package name="default" extends="webwork-default">
+        <result-types>
+      <result-type name="excel" class="com.fivesticks.common.poi.ExcelResult" default="false" />
+    </result-types>
+    <interceptors>
+
+
+		
+		<!-- 2006-07-06 shouldn't need this anymore-->
+		<interceptor name="component"
+	    	    class="com.fivesticks.xwork.util.ComponentInterceptor"/> 
+
+		<!-- 2006-04-28 not using
+		<interceptor name="errorChecker"
+	    	    class="com.fivesticks.time.xwork.util.ErrorCheckerInterceptor"/>	-->
+
+           <interceptor name="errorInterceptor" 
+           	class="com.fivesticks.time.common.xwork.ErrorInterceptor" />
+
+		<interceptor name="execAndWait" class="com.opensymphony.webwork.interceptor.ExecuteAndWaitInterceptor"/>
+
+     
+
+        <interceptor-stack name="fivesticksLoginComponentStack">
+         	<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="component"/>
+			<interceptor-ref name="errorInterceptor" />
+        </interceptor-stack>
+
+
+		      
+	</interceptors>
+
+        <global-results> 
+           <result name="global-login" type="chain">
+                <param name="actionName">redirect</param>
+           </result>
+           </global-results>
+        	
+        <action name="redirect" class="com.opensymphony.xwork.ActionSupport">
+	        <result name="success" type="dispatcher">/miscerror.jsp</result>
+        </action>
+        	
+        
+        <!-- external link -->
+		<action name="tcconnect" class="com.fivesticks.time.contactv2.forms.external.InputFromWebFormAction" >
+			<interceptor-ref name="fivesticksLoginComponentStack" />
+			<result name="success" type="dispatcher">/WEB-INF/jsp/contactv2/externalLink.jsp</result>
+			<result name="success-redirect" type="dispatcher">/WEB-INF/jsp/contactv2/externalLinkNoRedirect.jsp</result>						
+			<result name="success.spam" type="dispatcher">/WEB-INF/jsp/contactv2/probablySpam.jsp</result>						
+		</action>        
+        
+        
+	</package>
+
+	
+
+</xwork>

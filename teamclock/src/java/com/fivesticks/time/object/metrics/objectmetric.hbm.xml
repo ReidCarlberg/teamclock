@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.object.metrics.ObjectMetric" table="objectmetrics">
+
+    <id name="id" 
+    	column="metricId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+		
+	<property name="ownerKey"
+		column="metricOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />
+
+	<property name="objectType"
+		column="metricObjectType"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />
+
+	<property name="objectId"
+		column="metricObjectId"
+		type="java.lang.Long"
+		not-null="true"
+		unique="false" />
+		
+	<property name="metricType" 
+		column="metricType" 
+		type="string" 
+		length="50" 
+		not-null="true" 
+		unique="false" />		
+		
+	<property name="metricValue"
+		column="metricValue"
+		type="string" 
+		length="50" 
+		not-null="false" 
+		unique="false" />		
+</class>
+
+</hibernate-mapping>

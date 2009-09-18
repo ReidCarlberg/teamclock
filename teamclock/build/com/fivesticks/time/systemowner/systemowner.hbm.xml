@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.systemowner.SystemOwner" table="fstxtimesystemowner">
+
+    <id name="id" 
+    	column="ownId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+		
+	<property name="key"
+		column="ownKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="true" />
+		
+	<property name="name"
+		column="ownName"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />
+	
+	<property name="address1"
+		column="ownAddress1"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />
+
+	<property name="address2"
+		column="ownAddress2"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />	
+		
+	<property name="city"
+		column="ownCity"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />
+		
+	<property name="state"
+		column="ownState"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />				
+		
+	<property name="postalCode"
+		column="ownPostalCode"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />		
+
+	<property name="country"
+		column="ownCountry"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />		
+		
+	<property name="contactName"
+		column="ownContactName"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />		
+
+	<property name="contactNameFirst"
+		column="ownContactNameFirst"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />		
+
+	<property name="contactNameLast"
+		column="ownContactNameLast"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />		
+
+	<property name="contactEmail"
+		column="contactEmail"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />	
+		
+	<property name="contactPhone"
+		column="contactPhone"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />	
+		
+	<property name="activated"
+		column="activated"
+		type="boolean"
+		not-null="true" />	
+		
+	<property name="expirationDate"
+		column="expirationDate"
+		type="java.util.Date"
+		not-null="false" />					
+	
+	
+	<property name="account"
+		column="accountType"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />		
+		
+	<property name="billingFrequency"
+		column="billingFrequencyType"
+		type="string"
+		length="50"
+		not-null="false"
+		unique="false" />	
+
+	<property name="requiresAccountUpdate"
+		column="requiresAccountUpdate"
+		type="boolean"
+		not-null="true"
+		unique="false" />	
+		
+	<property name="requiresAccountUpdateReason"
+		column="requiresAccountUpdateReason"
+		type="string"
+		length="100"
+		not-null="false"
+		unique="false" />
+						
+</class>
+
+</hibernate-mapping>

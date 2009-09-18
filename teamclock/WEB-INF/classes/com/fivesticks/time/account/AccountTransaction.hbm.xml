@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+
+  <class name="com.fivesticks.time.account.AccountTransaction" table="accounttransaction">
+
+    <id name="id" 
+    	column="acctId" 
+    	type="java.lang.Long" 
+    	unsaved-value="null">
+      <generator class="identity" />
+    </id>
+    
+	<property name="ownerKey"
+		column="acctOwnKey"
+		type="string"
+		length="20"
+		not-null="true"
+		unique="false" />    
+
+	<property name="objectType"
+		column="acctObjectType"
+		type="string"
+		length="100"
+		not-null="true"
+		unique="false" />
+
+	<property name="objectId"
+		column="acctObjectId"
+		type="java.lang.Long"
+		not-null="true"
+		unique="false" />
+
+	<property name="objectTransactionType"
+		column="acctObjectTransactionType"
+		type="string"
+		length="25"
+		not-null="true"
+		unique="false" />
+
+	<property name="objectTransactionCode"
+		column="acctObjectTransactionCode"
+		type="string"
+		length="25"
+		not-null="false"
+		unique="false" />
+	<property name="date"
+		column="timeDate"
+		type="java.util.Date"
+		not-null="false" />
+
+	<property name="customerId" 
+    	column="acctCustomerId" 
+    	type="java.lang.Long" 
+    	not-null="true"
+		unique="false"
+     />
+		
+	<property name="type"
+		column="acctType"
+		type="string"
+		length="50"
+		not-null="true"
+		unique="false" />
+
+	<property name="amount"
+		column="acctAmount"
+		type="java.lang.Double"
+		not-null="false" />
+
+	<property name="enteredBy"
+		column="acctEnteredBy"
+		type="string"
+		length="50"
+		not-null="true"
+		unique="false" />
+				
+	<property name="comments"
+		column="acctComments"
+		type="string"
+		length="65536"
+		not-null="false"
+		unique="false" />
+		
+	<property name="activityId" 
+    	column="acctActivityId" 
+    	type="java.lang.Long" 
+    	not-null="false"
+		unique="false"
+     />		
+		
+	<property name="archived"
+		column="acctArchived"
+		type="boolean" />
+		
+  </class>
+
+</hibernate-mapping>

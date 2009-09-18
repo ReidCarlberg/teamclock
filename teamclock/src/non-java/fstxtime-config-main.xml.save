@@ -1,0 +1,779 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN/EN" "http://www.springframework.org/dtd/spring-beans.dtd" >
+<beans>
+
+	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/fstxtime</value>
+		</property>
+		<property name="username">
+			<value>fstxtime</value>
+		</property>
+		<property name="password">
+			<value>fstxtime</value>
+		</property>
+	</bean>
+	<bean id="mySessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="mappingResources">
+			<list>
+				<value>com/fstx/stdlib/authen/LoginHistory.hbm.xml</value>
+				<value>com/fstx/stdlib/authen/users/User.hbm.xml</value>
+				<!--
+				<value>com/fstx/stdlib/authen/users/UserGroup.hbm.xml</value>
+				-->
+				<value>com/fivesticks/time/activity/FstxActivity.hbm.xml</value>
+				<value>com/fivesticks/time/calendar/FstxCalendar.hbm.xml</value>
+				<value>com/fivesticks/time/timeclock/FstxTimeclock.hbm.xml</value>
+				<value>com/fivesticks/time/customer/FstxCustomer.hbm.xml</value>
+				<value>com/fivesticks/time/customer/contact/Contact.hbm.xml</value>
+				<value>com/fivesticks/time/customer/FstxProject.hbm.xml</value>
+				<value>com/fivesticks/time/customer/FstxTask.hbm.xml</value>			
+				<value>com/fivesticks/time/todo/ToDo.hbm.xml</value>
+				<value>com/fivesticks/time/settings/systemsettings.hbm.xml</value>
+				<value>com/fivesticks/time/systemowner/systemowner.hbm.xml</value>
+				<value>com/fivesticks/time/systemowner/systemuser.hbm.xml</value>			
+				<value>com/fivesticks/time/account/AccountTransaction.hbm.xml</value>
+				<value>com/fivesticks/time/queuedmessages/queuedmessage.hbm.xml</value>
+				<value>com/fivesticks/time/externaluser/externaluser.hbm.xml</value>
+				<value>com/fivesticks/time/object/metrics/objectmetric.hbm.xml</value>
+				<value>com/fivesticks/time/object/comments/objectcomment.hbm.xml</value>
+				<value>com/fivesticks/time/ebay/EbayItem.hbm.xml</value>
+				<value>com/fivesticks/time/ebay/EbayItemImage.hbm.xml</value>
+				<value>com/fivesticks/time/ebay/ItemShipping.hbm.xml</value>
+				<value>com/fivesticks/time/ebay/setup/boxes/Boxes.hbm.xml</value>
+				<value>com/fivesticks/time/ebay/setup/forms/EbayForms.hbm.xml</value>				
+				<value>com/fivesticks/time/ebay/setup/commission/simplecommission.hbm.xml</value>				
+				<value>com/fivesticks/time/lookups/Lookups.hbm.xml</value>
+				<value>com/fivesticks/time/employee/employee.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>	
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</prop>
+				
+				<prop key="show_sql">true</prop>
+			</props>
+		</property>
+		<property name="dataSource">
+			<ref bean="myDataSource"/>
+		</property>
+	</bean>
+
+	<!-- ABSTRACT BEANS -->	
+	<bean id="abstractDao" abstract="true" 
+		class="org.springframework.orm.hibernate3.support.HibernateDaoSupport" singleton="false">
+		<property name="sessionFactory">
+			<ref bean="mySessionFactory" />
+		</property>		
+	</bean>
+	
+	<bean id="abstractOwnerKeyValidator" abstract="true" >
+		<property name="ownerKeyValidatorAndDecorator">
+			<ref bean="ownerKeyValidatorAndDecorator" />
+		</property>		
+	</bean>
+	
+	<bean id="abstractGenericDao" abstract="true" 
+		class="com.fivesticks.time.common.dao.GenericDAOImpl" singleton="false">
+		<property name="sessionFactory">
+			<ref bean="mySessionFactory"/>
+		</property>
+	</bean>
+	
+	<bean id="genericDao" parent="abstractGenericDao" />
+	
+	<bean id="abstractTransactionAware" abstract="true" >
+		<property name="transactionManager">
+			<ref bean="myTransactionManager" />
+		</property>
+	</bean>
+	
+	<bean id="myTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" >
+		<property name="sessionFactory">
+			<ref bean="mySessionFactory" />
+		</property>	
+	</bean>
+	
+	<bean id="passwordDigester" class="com.fivesticks.time.useradmin.util.PasswordDigester" singleton="true" />
+	
+	<!-- MESSAGES -->
+	<bean id="mailSettingsBean" class="com.fivesticks.time.messages.MailSettingsBean" >
+		<property name="smtpServer">
+			<value>smtp.emailsrvr.com</value>
+		</property>	
+		<property name="username">
+			<value>rsc1@fivesticks.com</value>
+		</property>	
+		<property name="password">
+			<value>mark1969</value>
+		</property>	
+	</bean>
+	
+	<!--EVENTS-->
+	<bean id="authenticationEventHandler" 
+		class="com.fivesticks.time.authen.events.AuthenticationEventHandler" singleton="false">
+		<property name="loginHistoryBD">
+			<ref bean="loginHistoryBD" />
+		</property>
+	</bean>	
+	<bean id="toDoEventHandler" 
+		class="com.fivesticks.time.todo.events.ToDoEventHandler" singleton="false">
+	</bean>		
+	<bean id="externalUserEventHandler" 
+		class="com.fivesticks.time.externaluser.events.ExternalUserEventHandler" singleton="false">
+	</bean>		
+	<bean id="useradminEventHandler" 
+		class="com.fivesticks.time.useradmin.events.UseradminEventHandler" singleton="false">
+	</bean>			
+	
+	<!--SYSTEM-->
+	
+	<bean id="systemUpdateMarkCurrentAsOwnedCommand" 
+		class="com.fivesticks.time.system.update.august.August_MarkAllCurrentContentAsOwnedCommand" singleton="false">
+		<property name="transactionManager">
+			<ref bean="myTransactionManager" />
+		</property>
+	</bean>
+	
+	<bean id="systemUserDAO"
+		parent="abstractDao"
+		class="com.fivesticks.time.systemowner.SystemUserDAOImpl" singleton="false" />
+	
+	<bean id="systemUserServiceDelegate"
+		class="com.fivesticks.time.systemowner.SystemUserServiceDelegateImpl" singleton="false" >
+		<property name="systemUserDAO">
+			<ref bean="systemUserDAO" />
+		</property>
+	</bean>
+	
+	<bean id="deleteSystemOwnerTransactionCommand"
+		class="com.fivesticks.time.systemowner.delete.TransactionWrapperCommand" singleton="false" >
+		<property name="transactionManager">
+			<ref bean="myTransactionManager" />
+		</property>	
+		<property name="rootCommand">
+			<ref bean="deleteSystemOwnerChainCommand" />
+		</property>
+	</bean>
+	
+	
+	<bean id="deleteSystemOwnerChainCommand"
+		class="com.fivesticks.time.systemowner.delete.SessionContextChainCommand" singleton="false" >
+		<property name="chainCommands">
+		<list>	
+			<ref bean="systemOwnerDeleteCommand" />
+			<ref bean="systemOwnerActivitiesDeleteCommand" />
+			<ref bean="systemOwnerCalendarDeleteCommand" />
+			<ref bean="systemOwnerToDoDeleteCommand" />
+			<ref bean="systemOwnerAccountTransactionsDeleteCommand" />
+			<ref bean="systemOwnerCustomerDeleteCommand" />
+			<ref bean="systemOwnerProjectDeleteCommand" />
+			<ref bean="systemOwnerTaskDeleteCommand" />
+			<ref bean="systemOwnerTimeClockDeleteCommand" />
+			<ref bean="systemOwnerSettingsDeleteCommand" />
+			<ref bean="systemOwnerExternalUsersDeleteCommand" />
+			<ref bean="systemOwnerUsersDeleteCommand" />
+			<ref bean="systemOwnerMetricsDeleteCommand" />
+			<ref bean="systemOwnerCommentsDeleteCommand" />
+			<ref bean="systemOwnerLoginHistoryDeleteCommand" />
+															
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="systemOwnerDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerDeleteCommand" singleton="false" >
+			<property name="dao">
+				<ref bean="systemOwnerDAO" />
+	        </property>
+		</bean>
+
+	<bean id="systemOwnerExternalUsersDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerExternalUsersDeleteCommand" singleton="false" >
+	</bean>
+
+	<bean id="systemOwnerMetricsDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerMetricsDeleteCommand" singleton="false" >
+	</bean>
+
+	<bean id="systemOwnerCommentsDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerCommentsDeleteCommand" singleton="false" >
+	</bean>
+		
+	<bean id="systemOwnerActivitiesDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerActivitiesDeleteCommand" singleton="false" >
+	</bean>
+	
+	<bean id="systemOwnerCalendarDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerCalendarDeleteCommand" singleton="false" >
+	</bean>
+	
+	<bean id="systemOwnerToDoDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerToDoDeleteCommand" singleton="false" >
+	</bean>
+	
+	<bean id="systemOwnerAccountTransactionsDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerAccountTransactionsDeleteCommand" singleton="false" >
+	</bean>
+
+	<bean id="systemOwnerCustomerDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerCustomerDeleteCommand" singleton="false" >
+	</bean>
+	
+	<bean id="systemOwnerProjectDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerProjectDeleteCommand" singleton="false" >
+	</bean>
+	
+	<bean id="systemOwnerTaskDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerTaskDeleteCommand" singleton="false" >
+	</bean>
+	
+	<bean id="systemOwnerTimeClockDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerTimeClockDeleteCommand" singleton="false" >
+	</bean>
+	
+	<bean id="systemOwnerSettingsDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerSettingsDeleteCommand" singleton="false" >
+	</bean>
+	
+	<bean id="systemOwnerUsersDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerUsersDeleteCommand" singleton="false" >
+	</bean>
+	
+	<bean id="systemOwnerLoginHistoryDeleteCommand"
+		class="com.fivesticks.time.systemowner.delete.SystemOwnerLoginHistoryDeleteCommand" singleton="false" >
+	</bean>
+	
+	<!--LOOKUPS-->
+	<bean id="lookupsDao" parent="abstractGenericDao" >
+		<property name="criteriaBuilder" >
+			<bean class="com.fivesticks.time.lookups.LookupsCriteriaBuilder" singleton="false"/>
+		</property>
+	</bean>
+	
+	<bean id="lookupsServiceDelegate" 
+		parent="abstractOwnerKeyValidator"
+		class="com.fivesticks.time.lookups.LookupServiceDelegateImpl" >
+		<property name="dao" >
+			<ref bean="lookupsDao" />
+		</property>
+	</bean>
+	
+	<bean id="lookupReplaceCustomerStatus" 
+		parent="abstractTransactionAware"
+		class="com.fivesticks.time.lookups.LookupReplacementDelegateCustomerStatusImpl" >
+		<property name="customerBD" >
+			<ref bean="fstxCustomerBD" />
+		</property>
+	</bean>
+
+	<!--EMPLOYEES-->
+	<bean id="employeeDao" parent="abstractGenericDao" >
+		<property name="criteriaBuilder" >
+			<bean class="com.fivesticks.time.employee.EmployeeCriteriaBuilder" singleton="false"/>
+		</property>
+	</bean>
+	
+	<bean id="employeeServiceDelegate" 
+		parent="abstractOwnerKeyValidator"
+		class="com.fivesticks.time.employee.EmployeeServiceDelegateImpl" >
+		<property name="dao" >
+			<ref bean="employeeDao" />
+		</property>
+	</bean>
+		
+	<!--CALENDAR-->
+	<bean id="fstxCalendarDAO" parent="abstractDao"
+		class="com.fivesticks.time.calendar.FstxCalendarDAOImpl" singleton="false" />
+	
+	<bean id="fstxCalendarBD" class="com.fivesticks.time.calendar.FstxCalendarBDImpl" singleton="false" >
+		<property name="fstxCalendarDAO">
+			<ref bean="fstxCalendarDAO" />
+		</property>
+	</bean>
+
+
+	<!--TO DO-->
+	<bean id="toDoDAO" parent="abstractDao" 
+		class="com.fivesticks.time.todo.ToDoDAOImpl" singleton="false" />
+	
+	<bean id="toDoServiceDelegate" class="com.fivesticks.time.todo.ToDoServiceDelegateImpl" singleton="false" >
+		<property name="toDoDAO">
+			<ref bean="toDoDAO" />
+		</property>
+	</bean>
+
+	<!--TO DO Schedule-->
+	<bean id="toDoScheduleDAO" parent="abstractDao" 
+		class="com.fivesticks.time.todo.schedule.ToDoScheduleDAOImpl" singleton="false" />
+	
+	<bean id="toDoScheduleServiceDelegate" class="com.fivesticks.time.todo.schedule.ToDoScheduleServiceDelegateImpl" singleton="false" >
+		<property name="toDoScheduleDAO">
+			<ref bean="toDoScheduleDAO" />
+		</property>
+	</bean>	
+	
+	<bean id="todoQuartzSchedulerCommand" class="com.fivesticks.time.todo.schedule.ToDoQuartzSchedulerCommand" singleton="false" >
+		<property name="toDoScheduleServiceDelegate">
+			<ref bean="toDoScheduleServiceDelegate" />
+		</property>
+		<property name="toDoServiceDelegate">
+			<ref bean="toDoServiceDelegate" />
+		</property>
+	</bean>
+	
+	<bean id="populateQueueFromEmailQuartzCommand" class="com.fivesticks.time.todo.queue.PopulateQueueFromEmailQuartzCommand" singleton="false" >
+		<property name="toDoServiceDelegate">
+			<ref bean="toDoServiceDelegate" />
+		</property>
+	</bean>
+	
+	
+	<!--TO DO Queue-->
+	<bean id="queueServiceDelegate" class="com.fivesticks.time.todo.queue.QueueServiceDelegateImpl" singleton="false" >
+		<property name="toDoServiceDelegate">
+			<ref bean="toDoServiceDelegate" />
+		</property>
+	</bean>
+	
+	
+
+	<!--ACTIVITY TRACKER-->
+	<bean id="fstxActivityDAO" parent="abstractDao"
+		class="com.fivesticks.time.activity.FstxActivityDAOImpl" singleton="false" />
+	
+	<bean id="fstxActivityBD" class="com.fivesticks.time.activity.FstxActivityBDImpl" singleton="false" >
+		<property name="fstxActivityDAO">
+			<ref bean="fstxActivityDAO" />
+		</property>
+	</bean>
+
+	<!--TIME CLOCK-->
+	<bean id="fstxTimeclockDAO" parent="abstractDao" 
+		class="com.fivesticks.time.timeclock.FstxTimeclockDAOImpl" singleton="false" />
+	
+	<bean id="fstxTimeclockBD" class="com.fivesticks.time.timeclock.FstxTimeclockBDImpl" singleton="false" >
+		<property name="fstxTimeclockDAO">
+			<ref bean="fstxTimeclockDAO" />
+		</property>
+	</bean>
+
+
+	<!--SYSTEM SETTINGS-->
+	<bean id="systemSettingsServiceDelegate" class="com.fivesticks.time.settings.SystemSettingsServiceDelegate" singleton="false">
+		<property name="systemSettingsDao">
+			<ref bean="systemSettingsDao" />
+		</property>
+	</bean>
+	
+	<bean id="systemSettingsDao" parent="abstractDao" 
+		class="com.fivesticks.time.settings.SystemSettingsDao" singleton="false" />
+
+
+	<!--CUSTOMER-->
+	<bean id="fstxCustomerDAO" parent="abstractDao"
+		class="com.fivesticks.time.customer.FstxCustomerDAOImpl" singleton="false" />
+
+	<bean id="customerContactDAO" parent="abstractDao" 
+		class="com.fivesticks.time.customer.contact.ContactDAO" singleton="false" />
+
+	<bean id="customerContactServiceDelegate" parent="abstractOwnerKeyValidator"
+		class="com.fivesticks.time.customer.contact.ContactServiceDelegateImpl" singleton="false" >
+		<property name="contactDAO">
+			<ref bean="customerContactDAO" />
+		</property>
+	</bean>	
+		
+	<bean id="fstxCustomerBD" class="com.fivesticks.time.customer.FstxCustomerBDImpl" singleton="false" >
+		<property name="fstxCustomerDAO">
+			<ref bean="fstxCustomerDAO" />
+		</property>
+	</bean>
+
+
+	<!--PROJECT-->
+	<bean id="fstxProjectDAO" 
+		parent="abstractDao"
+		class="com.fivesticks.time.customer.FstxProjectDAOImpl" singleton="false" />
+	
+	<bean id="fstxProjectBD" class="com.fivesticks.time.customer.FstxProjectBDImpl" singleton="false" >
+		<property name="fstxProjectDAO">
+			<ref bean="fstxProjectDAO" />
+		</property>
+	</bean>
+
+	<!--TASK-->
+	<bean id="fstxTaskDAO" parent="abstractDao"
+		class="com.fivesticks.time.customer.FstxTaskDAOImpl" singleton="false" />
+
+	<bean id="fstxTaskBD" class="com.fivesticks.time.customer.FstxTaskBDImpl" singleton="false" >
+		<property name="fstxTaskDAO">
+			<ref bean="fstxTaskDAO" />
+		</property>
+	</bean>
+
+
+	<!--STDLIB USER-->
+	<bean id="userDAO" parent="abstractDao" 
+		class="com.fstx.stdlib.authen.users.UserDAOImpl" singleton="false" >
+		<property name="passwordDigester">
+			<ref bean="passwordDigester" />
+		</property>
+	</bean>
+	
+	<bean id="userGenericDao" parent="abstractGenericDao"  >
+		<property name="criteriaBuilder">
+			<bean class="com.fstx.stdlib.authen.users.UserCriteriaBuilder" 
+				singleton="false"/>
+		</property>
+	</bean>
+	
+	<bean id="userBD" class="com.fstx.stdlib.authen.users.UserBDImpl" singleton="false" >
+		<property name="userDAO">
+			<ref bean="userDAO" />
+		</property>
+		<property name="dao" >
+			<ref bean="userGenericDao" />
+		</property>
+		<property name="passwordDigester">
+			<ref bean="passwordDigester" />
+		</property>
+	</bean>
+
+	<bean id="userServiceDelegate" class="com.fivesticks.time.useradmin.UserServiceDelegateImpl" singleton="false" >
+		<property name="transactionManager">
+			<ref bean="myTransactionManager" />
+		</property>	
+		<property name="userBD">
+			<ref bean="userBD" />
+		</property>
+	</bean>
+	<bean id="useradminDeleteCommand" class="com.fivesticks.time.useradmin.UseradminDeleteCommand" singleton="false" >
+		<property name="transactionManager">
+			<ref bean="myTransactionManager" />
+		</property>	
+	</bean>	
+	
+	<!--STDLIB USER-->
+	<bean id="loginHistoryDAO" parent="abstractDao" 
+		class="com.fstx.stdlib.authen.LoginHistoryDAOImpl" singleton="false" />
+	
+	<bean id="loginHistoryBD" class="com.fstx.stdlib.authen.LoginHistoryBDImpl" singleton="false" >
+		<property name="loginHistoryDAO">
+			<ref bean="loginHistoryDAO" />
+		</property>
+	</bean>
+
+
+	<!--STDLIB GROUP-->
+	<!--
+	<bean id="userGroupDAO" class="com.fstx.stdlib.authen.users.UserGroupDAOImpl" singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="mySessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="userGroupBD" class="com.fstx.stdlib.authen.users.UserGroupBDImpl" singleton="false" >
+		<property name="groupMembershipDAO">
+			<ref bean="groupMembershipDAO" />
+		</property>
+		<property name="userGroupDAO" >
+			<ref bean="userGroupDAO" />
+		</property>
+	</bean>
+	-->
+
+	<!--STDLIB GROUP MEMBERSHIP-->
+	<!--
+	<bean id="groupMembershipDAO" class="com.fstx.stdlib.authen.users.GroupMembershipDAOImpl" singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="mySessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="groupMembershipServiceDelegate" class="com.fstx.stdlib.authen.users.GroupMembershipServiceDelegateImpl" singleton="false">
+		<property name="groupMembershipDAO">
+			<ref bean="groupMembershipDAO" />
+		</property>
+	</bean>	
+	-->
+
+	<!--STDLIB GROUP RIGHTS-->
+	<!--
+	<bean id="groupRightsDAO" class="com.fstx.stdlib.authen.users.GroupRightsDAOImpl" singleton="false" >
+		<property name="sessionFactory">
+			<ref bean="mySessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="groupRightBD" class="com.fstx.stdlib.authen.users.GroupRightBDImpl" singleton="false" >
+		<property name="groupRightsDAO">
+			<ref bean="groupRightsDAO" />
+		</property>
+	</bean>
+	-->
+	
+
+	<!--SYSTEM OWNER -->
+	<bean id="systemOwnerDAO" 
+		parent="abstractDao"
+		class="com.fivesticks.time.systemowner.SystemOwnerDAOImpl" singleton="false" />
+	
+	<bean id="systemOwnerServiceDelegate" class="com.fivesticks.time.systemowner.SystemOwnerServiceDelegateImpl" singleton="false">
+		<property name="systemOwnerDAO">
+			<ref bean="systemOwnerDAO" />
+		</property>
+	</bean>
+
+	<bean id="objectMetricDAO" parent="abstractDao"
+		class="com.fivesticks.time.object.metrics.ObjectMetricDAOImpl" singleton="false" />
+	
+	<bean id="objectMetricServiceDelegate" parent="abstractOwnerKeyValidator"
+		class="com.fivesticks.time.object.metrics.ObjectMetricServiceDelegateImpl" singleton="false">
+		<property name="objectMetricDAO">
+			<ref bean="objectMetricDAO" />
+		</property>
+	</bean>	
+	
+	<bean id="objectCommentDAO" parent="abstractDao"
+		class="com.fivesticks.time.object.comments.ObjectCommentDAOImpl" singleton="false" />
+	
+	<bean id="objectCommentServiceDelegate" parent="abstractOwnerKeyValidator"
+		class="com.fivesticks.time.object.comments.ObjectCommentServiceDelegateImpl" singleton="false">
+		<property name="objectCommentDAO">
+			<ref bean="objectCommentDAO" />
+		</property>
+	</bean>		
+
+
+	<bean id="ownerKeyValidatorAndDecorator" class="com.fivesticks.time.systemowner.util.OwnerKeyValidatorAndDecoratorImpl" />
+
+	<!--ACCOUNT TRANSACTIONS-->
+	<!--
+		RSC 2005-07-17 Replaced
+		-->
+	<!--
+	<bean id="accountTransactionDAO" parent="abstractDao" 
+		class="com.fivesticks.time.account.AccountTransactionDAOImpl" singleton="false" />
+	-->
+	
+	<bean id="accountTransactionDao" parent="abstractGenericDao" >
+		<property name="criteriaBuilder" >
+			<bean class="com.fivesticks.time.account.AccountTransactionCriteriaBuilder" singleton="false"/>
+		</property>
+	</bean>
+		
+	<bean id="accountTransactionServiceDelegate" 
+			class="com.fivesticks.time.account.AccountTransactionServiceDelegateImpl" 
+			singleton="false">
+		<!--
+		<property name="accountTransactionDAO">
+			<ref bean="accountTransactionDAO" />
+		</property>
+		-->
+		<property name="dao" >
+			<ref bean="accountTransactionDao" />
+		</property>
+		<property name="transactionManager" >
+			<ref bean="myTransactionManager" />
+		</property>
+		<property name="ownerKeyValidatorAndDecorator">
+			<ref bean="ownerKeyValidatorAndDecorator" />
+		</property>
+	</bean>	
+
+	<!--
+	RSC 2005-07-01 Refactored Out	
+	<bean id="customerAccountTransactionServiceDelegate" 
+			class="com.fivesticks.time.customer.util.CustomerAccountTransactionServiceDelegateImpl" 
+			singleton="false">
+		<property name="accountTransactionDAO">
+			<ref bean="accountTransactionDAO" />
+		</property>
+		<property name="transactionManager" >
+			<ref bean="myTransactionManager" />
+		</property>
+		<property name="ownerKeyValidatorAndDecorator">
+			<ref bean="ownerKeyValidatorAndDecorator" />
+		</property>
+	</bean>
+	-->
+
+	<bean id="accountActivityServiceDelegate" class="com.fivesticks.time.accountactivity.AccountActivityServiceDelegateImpl" singleton="false" >
+		<property name="fstxActivityDAO">
+			<ref bean="fstxActivityDAO" />
+		</property>
+		<property name="accountTransactionDAO">
+			<ref bean="accountTransactionDAO" />
+		</property>
+		
+	</bean>
+	
+	<!--
+	RSC 2005-07-01
+	<bean id="employeeAccountTransactionServiceDelegate" 
+			class="com.fivesticks.time.employee.util.EmployeeAccountTransactionServiceDelegateImpl" 
+			singleton="false">
+		<property name="accountTransactionDAO">
+			<ref bean="accountTransactionDAO" />
+		</property>
+		<property name="transactionManager" >
+			<ref bean="myTransactionManager" />
+		</property>
+		<property name="ownerKeyValidatorAndDecorator">
+			<ref bean="ownerKeyValidatorAndDecorator" />
+		</property>
+	</bean>	
+	-->
+
+	<!--EXTERNAL USERS-->
+	<bean id="externalUserDAO" parent="abstractDao" 
+		class="com.fivesticks.time.externaluser.ExternalUserDAOImpl" singleton="false" />
+	
+	<bean id="externalUserServiceDelegate" 
+		parent="abstractOwnerKeyValidator"
+		class="com.fivesticks.time.externaluser.ExternalUserServiceDelegateImpl" singleton="false">
+		<property name="externalUserDAO">
+			<ref bean="externalUserDAO" />
+		</property>
+	</bean>		
+	
+	<!--QUEUED MESSAGES-->
+	<bean id="queuedMessageDAO" parent="abstractDao"
+		class="com.fivesticks.time.queuedmessages.QueuedMessageDAOImpl" singleton="false" />
+	
+	<bean id="queuedMessageServiceDelegate" parent="abstractOwnerKeyValidator"
+		class="com.fivesticks.time.queuedmessages.QueuedMessageServiceDelegateImpl" singleton="false">
+		<property name="queuedMessageDAO">
+			<ref bean="queuedMessageDAO" />
+		</property>
+	</bean>	
+	
+	<bean id="queuedMessageSender" class="com.fivesticks.time.queuedmessages.SendQueuedMessagesCommand" singleton="false">
+		<property name="queuedMessageDAO">
+			<ref bean="queuedMessageDAO" />
+		</property>
+	</bean>
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	  <property name="triggers">
+	    <list>
+	      <ref local="simpleTrigger"/>
+	    </list>
+	  </property>
+	</bean>
+
+	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+	  <property name="jobDetail">
+	    <!-- see the example of method invoking job above -->    
+	    <ref bean="methodInvokingJobDetail"/>
+	  </property>
+	  <property name="startDelay">
+	    <!-- 10 seconds -->
+	    <value>10000</value>
+	  </property>
+	  <property name="repeatInterval">
+	    <!-- repeat every 50 seconds -->
+	    <value>50000</value>
+	  </property>
+	</bean>
+
+	<!--
+	<bean id="methodInvokingJobDetail" 
+	  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject">
+	    	<ref bean="queuedMessageSender"/>
+	    </property>
+	    <property name="targetMethod">
+	    	<value>execute</value>
+    	</property>
+	</bean>		
+	-->
+	
+	<!-- EBAY -->
+	<bean id="ebayItemDao" parent="abstractDao" 
+		class="com.fivesticks.time.ebay.EbayItemDAOImpl" />
+	
+	<bean id="ebayItemServiceDelegate" parent="abstractOwnerKeyValidator" 
+		class="com.fivesticks.time.ebay.EbayItemServiceDelegateImpl" singleton="false">
+		<property name="ebayItemDAOImpl">
+			<ref bean="ebayItemDao" />
+		</property>
+	</bean>	
+	
+	<bean id="ebayItemImageDAO" parent="abstractDao" 
+		class="com.fivesticks.time.ebay.EbayItemImageDAOImpl" />
+	
+	<bean id="ebayItemImageServiceDelegate" parent="abstractOwnerKeyValidator" class="com.fivesticks.time.ebay.EbayItemImageServiceDelegateImpl" singleton="false">
+		<property name="ebayItemImageDAOImpl">
+			<ref bean="ebayItemImageDAO" />
+		</property>
+	</bean>		
+	
+	<bean id="ebayItemShippingDAO" parent="abstractDao"
+		class="com.fivesticks.time.ebay.ItemShippingDAOImpl" />
+		
+	<bean id="ebayItemShippingServiceDelegate" parent="abstractOwnerKeyValidator"
+		class="com.fivesticks.time.ebay.ItemShippingServiceDelegateImpl" >
+		<property name="itemShippingDAO">
+			<ref bean="ebayItemShippingDAO" />
+		</property>
+	</bean>
+	
+	<!-- EBAY SETUP -->
+	<!-- BOXES -->
+	<!-- Reid 2005-06-20
+	<bean id="ebaySetupBoxDao" parent="abstractDao" 
+		class="com.fivesticks.time.ebay.setup.boxes.BoxDAOImpl" />
+	-->
+	
+	<bean id="ebaySetupBoxDao" parent="abstractGenericDao"  >
+		<property name="criteriaBuilder">
+			<bean class="com.fivesticks.time.ebay.setup.boxes.BoxCriteriaBuilder" 
+				singleton="false"/>
+		</property>
+	</bean>
+	
+	<bean id="ebaySetupBoxServiceDelegate" parent="abstractOwnerKeyValidator" 
+		class="com.fivesticks.time.ebay.setup.boxes.BoxServiceDelegateImpl" >
+		<property name="dao">
+			<ref bean="ebaySetupBoxDao" />
+		</property>	
+	</bean>
+	
+	<!-- FORMS -->
+	<bean id="ebaySetupFormsDao" parent="abstractGenericDao"  >
+		<property name="criteriaBuilder">
+			<bean class="com.fivesticks.time.ebay.setup.forms.EbayFormCriteriaBuilder" 
+				singleton="false"/>
+		</property>
+	</bean>
+	
+	<bean id="ebayFormServiceDelegate" parent="abstractOwnerKeyValidator" 
+		class="com.fivesticks.time.ebay.setup.forms.EbayFormServiceDelegateImpl" >
+		<property name="dao">
+			<ref bean="ebaySetupFormsDao" />
+		</property>	
+	</bean>	
+
+	<!-- COMMISSION -->
+	<bean id="commissionDao" parent="abstractGenericDao"  >
+		<property name="criteriaBuilder">
+			<bean class="com.fivesticks.time.ebay.setup.commission.SimpleCommissionCriteriaBuilder" 
+				singleton="false"/>
+		</property>
+	</bean>
+	
+	<bean id="simpleCommissionServiceDelegate" parent="abstractOwnerKeyValidator" 
+		class="com.fivesticks.time.ebay.setup.commission.SimpleCommissionServiceDelegateImpl" >
+		<property name="dao">
+			<ref bean="commissionDao" />
+		</property>	
+	</bean>		
+	
+
+</beans>
+
